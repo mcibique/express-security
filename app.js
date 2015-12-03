@@ -4,13 +4,8 @@ var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
-var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var helmet = require('helmet');
-var session = require('express-session');
-var csrf = require('csurf');
-
-var routes = require('./routes');
 
 var app = express();
 
@@ -33,15 +28,6 @@ app.use(helmet.hidePoweredBy());
 app.use(helmet.ieNoOpen());
 app.use(helmet.noSniff());
 app.use(helmet.noCache());
-app.use(cookieParser('notagoodsecret'));
-app.use(session({
-  name: 'session',
-  resave: false,
-  rolling: true,
-  saveUninitialized: true,
-  secret: "notagoodsecret",
-  cookie: { httpOnly: true, secure: true, maxAge: 3600000 }
-}));
 app.use(helmet.csp({
   defaultSrc: ["'self'"],
   scriptSrc: ["'self'", "'unsafe-inline'"],
@@ -49,28 +35,22 @@ app.use(helmet.csp({
   baseUri: ["'self'"],
   frameAncestors: ["'none'"]
 }));
-app.use(csrf());
+// public folder
 app.use(express.static(path.join(__dirname, 'public')));
-
-app.use(function (req, res, next) {
-  if (req.originalUrl.indexOf('/login') === 0) {
-    next();
-  } else {
-    if (!req.signedCookies.auth) {
-      res.redirect(303, '/login');
-    } else {
-      res.locals.username = req.signedCookies.auth;
-      next();
-    }
-  }
-});
-
+// cookies
+app.use(require('./middlewares/cookies'));
+// authentication
+app.use(require('./middlewares/auth'));
+// session
+app.use(require('./middlewares/session'));
+// CSRF
+app.use(require('./middlewares/csrf'));
 // global variables
 app.locals.moment = require('moment');
 // request variables
 app.use(require('./middlewares/locals'));
 // routes
-app.use('/', routes);
+app.use('/', require('./routes'));
 // catch 404 and forward to error handler
 app.use(require('./middlewares/errors/404'));
 // error handlers
