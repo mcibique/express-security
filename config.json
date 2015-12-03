@@ -1,3 +1,4 @@
 {
-  "secret": "notagoodsecret"
+  "secret": "notagoodsecret",
+  "sessionExpiration": 3600000
 }

@@ -1,5 +1,8 @@
-var express = require('express');
-var router = express.Router();
+'use strict';
+
+let express = require('express');
+let router = express.Router();
+let config = require('../config.json');
 
 /* GET login page. */
 router.get('/', function(req, res, next) {
@@ -11,7 +14,7 @@ router.post('/', function(req, res, next) {
     path: '/',
     httpOnly: true,
     secure: true,
-    maxAge: 3600000,
+    maxAge: config.sessionExpiration,
     signed: true
   });
   req.session.regenerate(function () {

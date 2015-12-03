@@ -2,4 +2,6 @@
 
 let csrf = require('csurf');
 
-module.exports = csrf();
+module.exports = csrf({
+  cookie: false
+});

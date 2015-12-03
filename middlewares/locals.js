@@ -6,6 +6,7 @@ module.exports = function initLocals(req, res, next) {
     // value is required by layout.jade
     res.locals.lastSignedIn = req.session.lastSignedIn;
     // prefill csrfToken from session (we don't use cookies for CSRF)
+    // value is required by each form tag
     res.locals.csrfToken = req.csrfToken();
   }
   next();

@@ -13,6 +13,6 @@ module.exports = session({
   cookie: {
     httpOnly: true,
     secure: true,
-    maxAge: 3600000
+    maxAge: config.sessionExpiration
   }
 });
