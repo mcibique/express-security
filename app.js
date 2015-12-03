@@ -8,7 +8,7 @@ var helmet = require('helmet');
 var session = require('express-session');
 var csrf = require('csurf');
 
-var routes = require('./routes/index');
+var home = require('./routes/home');
 var login = require('./routes/login');
 var logout = require('./routes/logout');
 var user = require('./routes/user');
@@ -76,7 +76,7 @@ app.use(function (req, res, next) {
 
 app.locals.moment = require('moment');
 
-app.use('/', routes);
+app.use('/', home);
 app.use('/login', login);
 app.use('/logout', logout);
 app.use('/user', user);
