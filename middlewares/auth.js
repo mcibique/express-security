@@ -1,5 +1,7 @@
 'use strict';
 
+const config = require('../config.json');
+
 module.exports = function authenticateRequest(req, res, next) {
   // if it's request for /login page allow request to continue.
   if (req.originalUrl.indexOf('/login') === 0) {
@@ -13,6 +15,14 @@ module.exports = function authenticateRequest(req, res, next) {
     } else {
       // authorized request, set locals with current username
       res.locals.username = username;
+      // touch the cookie
+      res.cookie('auth', username, {
+        path: '/',
+        httpOnly: true,
+        secure: true,
+        maxAge: config.sessionExpiration,
+        signed: true
+      });
       next();
     }
   }
