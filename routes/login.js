@@ -10,11 +10,11 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/', function(req, res, next) {
-  res.cookie('auth', req.body.username, {
-    path: '/',
+  res.cookie(config.authentication.cookieName, req.body.username, {
+    path: config.authentication.path,
     httpOnly: true,
     secure: true,
-    maxAge: config.sessionExpiration,
+    maxAge: config.session.expiration,
     signed: true
   });
   req.session.regenerate(function () {

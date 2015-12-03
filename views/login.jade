@@ -3,7 +3,7 @@ extends layout
 block content
   h1= Login
   p Please sign in
-  form(action="login", method="post")
+  form(action="login", method="post", autocomplete="off")
     input(type="hidden", name="_csrf", value=csrfToken)
     p
       input(type="text", name="username")

@@ -16,11 +16,11 @@ module.exports = function authenticateRequest(req, res, next) {
       // authorized request, set locals with current username
       res.locals.username = username;
       // touch the cookie
-      res.cookie('auth', username, {
-        path: '/',
+      res.cookie(config.authentication.cookieName, username, {
+        path: config.authentication.path,
         httpOnly: true,
         secure: true,
-        maxAge: config.sessionExpiration,
+        maxAge: config.authentication.expiration,
         signed: true
       });
       next();

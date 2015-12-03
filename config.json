@@ -1,4 +1,13 @@
 {
   "secret": "notagoodsecret",
-  "sessionExpiration": 1200000
+  "session": {
+    "cookieName": "session",
+    "expiration": 1200000,
+    "path": "/"
+  },
+  "authentication": {
+    "cookieName": "auth",
+    "expiration": 1200000,
+    "path": "/"
+  }
 }

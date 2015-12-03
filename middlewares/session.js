@@ -5,7 +5,7 @@ let session = require('express-session');
 const config = require('../config.json');
 
 module.exports = session({
-  name: 'session',
+  name: config.session.cookieName,
   resave: false,
   rolling: true,
   saveUninitialized: true,
@@ -13,6 +13,6 @@ module.exports = session({
   cookie: {
     httpOnly: true,
     secure: true,
-    maxAge: config.sessionExpiration
+    maxAge: config.session.expiration
   }
 });

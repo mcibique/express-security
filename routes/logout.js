@@ -2,11 +2,12 @@
 
 let express = require('express');
 let router = express.Router();
+const config = require('../config.json');
 
 /* GET logout page. */
 router.get('/', function(req, res, next) {
-  res.cookie('auth', null, {
-    path: '/',
+  res.cookie(config.authentication.cookieName, null, {
+    path: config.authentication.path,
     httpOnly: true,
     secure: true,
     maxAge: -1
