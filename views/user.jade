@@ -1,0 +1,12 @@
+extends layout
+
+block content
+  h1 #{username}
+  h2 Session:
+  pre #{JSON.stringify(sessionValues, null, ' ')}
+
+  h2 Cookies:
+  pre #{JSON.stringify(cookieValues, null, ' ')}
+
+  h2 Signed cookies:
+  pre #{JSON.stringify(signedCookieValues, null, ' ')}

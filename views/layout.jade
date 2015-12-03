@@ -1,0 +1,13 @@
+doctype html
+html
+  head
+    title= title
+    link(rel='stylesheet', href='/stylesheets/style.css')
+  body
+    if username
+      header
+        div User:
+          a(href="/user") #{username}
+          span Last signed in: #{moment(lastSignedIn).fromNow()}
+          a(href="/logout") Sign out
+    block content
