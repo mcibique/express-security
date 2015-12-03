@@ -8,10 +8,7 @@ var helmet = require('helmet');
 var session = require('express-session');
 var csrf = require('csurf');
 
-var home = require('./routes/home');
-var login = require('./routes/login');
-var logout = require('./routes/logout');
-var user = require('./routes/user');
+var routes = require('./routes');
 
 var app = express();
 
@@ -53,7 +50,7 @@ app.use(helmet.csp({
 app.use(csrf());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', function (req, res, next) {
+app.use(function (req, res, next) {
   if (req.originalUrl.indexOf('/login') === 0) {
     next();
   } else {
@@ -74,12 +71,9 @@ app.use(function (req, res, next) {
   next();
 });
 
-app.locals.moment = require('moment');
+app.use('/', routes);
 
-app.use('/', home);
-app.use('/login', login);
-app.use('/logout', logout);
-app.use('/user', user);
+app.locals.moment = require('moment');
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
