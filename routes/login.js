@@ -31,7 +31,7 @@ router.post('/', function(req, res, next) {
   req.session.regenerate(() => {
     req.session.lastSignedIn = new Date();
     var returnUrl = req.query.returnUrl;
-    if (returnUrl.indexOf('/') === 0) {
+    if (returnUrl && returnUrl.indexOf('/') === 0) {
       // allow redirects to local URLs only, avoid redirects to https://localhost:5000/login/?returnUrl=https%3A%2F%2Fwww.google.com%2F or any other suspicious site
       res.redirect(returnUrl);
     } else {

@@ -40,9 +40,9 @@ app.use(require('./middlewares/auth'));
 app.use(require('./middlewares/session'));
 // CSRF
 app.use(require('./middlewares/csrf'));
-// global letiables
+// global variables
 app.locals.moment = require('moment');
-// request letiables
+// request variables
 app.use(require('./middlewares/locals'));
 // routes
 app.use('/', require('./routes'));
