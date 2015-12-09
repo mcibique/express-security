@@ -13,6 +13,8 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 // logger
 app.use(require('./middlewares/logger'));
+// gzip, deflate compression
+app.use(require('./middlewares/compression'));
 // assets folder and caching
 app.use(express.static(path.join(__dirname, 'public'), {
   index: false,
