@@ -1,3 +1,4 @@
 certificates
 node_modules
 logs
+config.dev.json
