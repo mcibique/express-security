@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 
+'use strict';
+
 /**
  * Module dependencies.
  */
@@ -28,13 +30,11 @@ const credentials = {
 /**
  * Create HTTP server.
  */
-
 let server = http.createServer(credentials, app);
 
 /**
  * Listen on provided port, on all network interfaces.
  */
-
 server.listen(port);
 server.on('error', onError);
 server.on('listening', onListening);
