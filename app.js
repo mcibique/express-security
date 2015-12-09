@@ -3,6 +3,7 @@
 let express = require('express');
 let path = require('path');
 let bodyParser = require('body-parser');
+let ms = require('ms');
 
 const isDev = require('./helpers/debug');
 const app = express();
@@ -12,12 +13,21 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 // logger
 app.use(require('./middlewares/logger'));
+// assets folder and caching
+app.use(express.static(path.join(__dirname, 'public'), {
+  index: false,
+  etag: true,
+  lastModified: true,
+  maxAge: ms('365 days'),
+  redirect: false,
+  dotfiles: 'ignore'
+}));
 // JSON body
 app.use(bodyParser.json());
 // application/x-www-form-urlencoded body
 app.use(bodyParser.urlencoded({ extended: false }));
-// public folder
-app.use(express.static(path.join(__dirname, 'public')));
+// caching
+require('./middlewares/caching')(app);
 // security - helmet
 require('./middlewares/security')(app);
 // cookies

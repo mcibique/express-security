@@ -2,12 +2,12 @@
   "secret": "notagoodsecret",
   "session": {
     "cookieName": "session",
-    "expiration": 1200000,
+    "expiration": "20m",
     "path": "/"
   },
   "authentication": {
     "cookieName": "auth",
-    "expiration": 1200000,
+    "expiration": "20m",
     "path": "/"
   }
 }

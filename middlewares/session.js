@@ -1,6 +1,7 @@
 'use strict';
 
 let session = require('express-session');
+let ms = require('ms');
 
 const config = require('../helpers/config');
 
@@ -13,6 +14,6 @@ module.exports = session({
   cookie: {
     httpOnly: true,
     secure: true,
-    maxAge: config.session.expiration
+    maxAge: ms(config.session.expiration)
   }
 });

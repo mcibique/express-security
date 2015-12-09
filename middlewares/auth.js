@@ -1,9 +1,11 @@
 'use strict';
 
+let ms = require('ms');
+
 const config = require('../helpers/config');
 
 module.exports = function authenticateRequest(req, res, next) {
-  // if it's request for /login page or /logout allow request to continue.
+  // if it's request for /login page or /logout then allow request to continue.
   if (req.originalUrl.indexOf('/login') === 0 || req.originalUrl.indexOf('/logout') === 0) {
     next();
   } else {
@@ -22,7 +24,7 @@ module.exports = function authenticateRequest(req, res, next) {
         path: config.authentication.path,
         httpOnly: true,
         secure: true,
-        maxAge: config.authentication.expiration,
+        maxAge: ms(config.authentication.expiration),
         signed: true
       });
       next();

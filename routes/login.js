@@ -1,5 +1,6 @@
 'use strict';
 
+let ms = require('ms');
 let express = require('express');
 let router = express.Router();
 const config = require('../helpers/config');
@@ -23,7 +24,7 @@ router.post('/', function(req, res, next) {
     path: config.authentication.path,
     httpOnly: true,
     secure: true,
-    maxAge: config.session.expiration,
+    maxAge: ms(config.session.expiration),
     signed: true
   });
   // regenerate session because of https://www.owasp.org/index.php/Session_fixation
