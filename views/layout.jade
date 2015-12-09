@@ -7,7 +7,7 @@ html
     if username
       header
         div User:
-          a(href="/user") #{username}
+          a(href="/user/") #{username}
           span Last signed in: #{moment(lastSignedIn).fromNow()}
-          a(href="/logout") Sign out
+          a(href="/logout/") Sign out
     block content
