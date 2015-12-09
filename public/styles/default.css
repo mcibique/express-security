@@ -1,0 +1,35 @@
+html {
+  font: 62.5% "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+body {
+  padding: 5rem;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+a {
+  color: #00B7FF;
+}
+
+form p {
+  font-size: 1.6rem;
+}
+
+form label {
+  display: block;
+  font-size: 1.4rem;
+}
+
+header .user-info {
+  line-height: 3rem;
+  font-size: 1.6rem;
+  text-align: right;
+}
+
+header .user-name,
+header .last-signed-in {
+  margin-right: 1rem;
+}

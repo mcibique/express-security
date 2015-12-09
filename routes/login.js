@@ -10,8 +10,16 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/', function(req, res, next) {
+  const username = req.body.username;
+  if (!username) {
+    return res.render('login', {
+      errors: {
+        username: 'Please enter user name.'
+      }
+    });
+  }
   // https://www.owasp.org/index.php/Session_Management_Cheat_Sheet
-  res.cookie(config.authentication.cookieName, req.body.username, {
+  res.cookie(config.authentication.cookieName, username, {
     path: config.authentication.path,
     httpOnly: true,
     secure: true,
@@ -22,7 +30,6 @@ router.post('/', function(req, res, next) {
   req.session.regenerate(() => {
     req.session.lastSignedIn = new Date();
     var returnUrl = req.query.returnUrl;
-    console.log('returnUrl', returnUrl);
     if (returnUrl.indexOf('/') === 0) {
       // allow redirects to local URLs only, avoid redirects to https://localhost:5000/login/?returnUrl=https%3A%2F%2Fwww.google.com%2F or any other suspicious site
       res.redirect(returnUrl);

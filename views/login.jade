@@ -1,13 +1,19 @@
 extends layout
 
 block content
-  h1= Login
-  p Please sign in
+  h1 Login
   form(method="post", autocomplete="off")
+    p Please sign in. Any user and password are accepted.
     input(type="hidden", name="_csrf", value=csrfToken)
     p
-      input(type="text", name="username")
+      label(for="username") User name:
+      input(type="text", id="username", name="username")
+      if (errors && errors.username)
+        span.error-message=errors.username
     p
-      input(type="password", name="password")
+      label(for="password") Password:
+      input(type="password", id="password", name="password")
+      if (errors && errors.password)
+        span.error-message=errors.password
     p
       button(type="submit") Sign in
