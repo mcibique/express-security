@@ -1,6 +1,6 @@
 'use strict';
 
-const config = require('../config.json');
+const config = require('../helpers/config');
 
 module.exports = function authenticateRequest(req, res, next) {
   // if it's request for /login page allow request to continue.

@@ -1,0 +1,18 @@
+{
+  "restartable": "rs",
+  "ignore": [
+    ".git",
+    "certificates",
+    "logs",
+    "node_modules/*",
+    "nodemon.json",
+    "package.json"
+  ],
+  "verbose": true,
+  "env": {
+    "PORT": 5000,
+    "NODE_ENV": "development",
+    "DEBUG": "express:application,server"
+  },
+  "ext": "js json"
+}

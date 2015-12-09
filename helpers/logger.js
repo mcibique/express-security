@@ -30,6 +30,11 @@ module.exports = new winston.Logger({
     })
   ],
   exceptionHandlers: [
+    new winston.transports.Console({
+      level: 'error',
+      json: false,
+      colorize: true,
+    }),
     new winston.transports.File({
       filename: 'logs/exceptions.log',
       json: false,

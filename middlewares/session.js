@@ -2,7 +2,7 @@
 
 let session = require('express-session');
 
-const config = require('../config.json');
+const config = require('../helpers/config');
 
 module.exports = session({
   name: config.session.cookieName,

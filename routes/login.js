@@ -2,7 +2,7 @@
 
 let express = require('express');
 let router = express.Router();
-let config = require('../config.json');
+const config = require('../helpers/config');
 
 /* GET login page. */
 router.get('/', function(req, res, next) {

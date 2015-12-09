@@ -2,7 +2,7 @@
 
 let express = require('express');
 let router = express.Router();
-const config = require('../config.json');
+const config = require('../helpers/config');
 
 /* GET logout page. */
 router.get('/', function(req, res, next) {
