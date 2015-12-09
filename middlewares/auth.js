@@ -8,7 +8,7 @@ module.exports = function authenticateRequest(req, res, next) {
     next();
   } else {
     // otherwise check cookie
-    let username = req.signedCookies.auth;
+    let username = req.signedCookies[config.authentication.cookieName];
     if (!username) {
       // unauthorized request
       res.redirect(303, '/login');

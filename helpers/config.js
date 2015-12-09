@@ -16,7 +16,7 @@ let defaultConfig = require('../config.json')
 if (isDev && fs.existsSync(devConfigPath)) {
   let devConfig = require(devConfigPath);
   config = extend(true, {}, defaultConfig, devConfig);
-  debug('Configuration:', config);
+  debug('using', config);
 } else {
   config = defaultConfig;
 }
