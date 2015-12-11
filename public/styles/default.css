@@ -14,6 +14,10 @@ a {
   color: #00B7FF;
 }
 
+pre {
+  font-size: 1.4rem;
+}
+
 form p {
   font-size: 1.6rem;
 }

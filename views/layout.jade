@@ -7,11 +7,11 @@ html(lang="en")
     link(rel='stylesheet', href='/styles/normalize.css')
     link(rel='stylesheet', href='/styles/default.css')
   body
-    if username
+    if user
       header
         div.user-info
           span.user-name User:
-            a(href="/user/") #{username}
-          span.last-signed-in Last signed in: #{moment(lastSignedIn).fromNow()}
+            a(href="/user/") #{user.username}
+          span.last-signed-in Last signed in: #{moment(user.lastSignedIn).fromNow()}
           a(href="/logout/") Sign out
     block content

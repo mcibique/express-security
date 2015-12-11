@@ -34,10 +34,10 @@ require('./middlewares/caching')(app);
 require('./middlewares/security')(app);
 // cookies
 app.use(require('./middlewares/cookies'));
-// authentication
-app.use(require('./middlewares/auth'));
 // session
 app.use(require('./middlewares/session'));
+// authentication
+app.use(require('./middlewares/auth'));
 // CSRF
 app.use(require('./middlewares/csrf'));
 // global variables

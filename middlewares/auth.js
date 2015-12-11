@@ -1,32 +1,30 @@
 'use strict';
 
-let ms = require('ms');
+function allowAnonymousAccess(req) {
+  const url = req.originalUrl;
+  // allow /login and /logout to be accessible for users without being authenticated
+  return url.indexOf('/login') === 0 || url.indexOf('/logout') === 0;
+}
 
-const config = require('../helpers/config');
+function getCurrentUserName(req) {
+  return req.session && req.session.user && req.session.user.username;
+}
+
+function getReturnUrl(req) {
+  return encodeURIComponent(req.originalUrl || '');
+}
 
 module.exports = function authenticateRequest(req, res, next) {
-  // if it's request for /login page or /logout then allow request to continue.
-  if (req.originalUrl.indexOf('/login') === 0 || req.originalUrl.indexOf('/logout') === 0) {
+  if (allowAnonymousAccess(req)) {
     next();
   } else {
-    // otherwise check cookie
-    let username = req.signedCookies[config.authentication.cookieName];
+    let username = getCurrentUserName(req);
     if (!username) {
-      // unauthorized request
-      // build redirect URL:
-      const returnUrl = encodeURIComponent(req.originalUrl);
+      // unauthenticated request
+      const returnUrl = getReturnUrl(req);
       res.redirect(303, `/login/?returnUrl=${returnUrl}`);
     } else {
-      // authorized request, set locals with current username
-      res.locals.username = username;
-      // touch the cookie
-      res.cookie(config.authentication.cookieName, username, {
-        path: config.authentication.path,
-        httpOnly: true,
-        secure: true,
-        maxAge: ms(config.authentication.expiration),
-        signed: true
-      });
+      // authenticated request, continue
       next();
     }
   }
