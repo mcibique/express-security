@@ -11,6 +11,8 @@ const app = express();
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
+// global variables
+app.locals.moment = require('moment');
 // logger
 app.use(require('./middlewares/logger'));
 // gzip, deflate compression
@@ -40,12 +42,12 @@ app.use(require('./middlewares/session'));
 app.use(require('./middlewares/auth'));
 // CSRF
 app.use(require('./middlewares/csrf'));
-// global variables
-app.locals.moment = require('moment');
 // request variables
 app.use(require('./middlewares/locals'));
 // routes
 app.use('/', require('./routes'));
+// catch CSRF and authorization errors
+app.use(require('./middlewares/errors/403'));
 // catch 404 and forward to error handler
 app.use(require('./middlewares/errors/404'));
 // error handlers
