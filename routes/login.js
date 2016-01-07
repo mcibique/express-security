@@ -2,6 +2,7 @@
 
 let express = require('express');
 let router = express.Router();
+let urls = require('../helpers/url');
 
 router.get('/', function(req, res, next) {
   const returnUrl = getReturnUrlFromQuery(req);
@@ -38,7 +39,7 @@ router.post('/', function(req, res, next) {
 
 function getReturnUrlFromQuery(req) {
   const returnUrl = req.query.returnUrl;
-  if (returnUrl && returnUrl.indexOf('/') === 0) {
+  if (returnUrl && urls.isLocalUrl(returnUrl)) {
     // allow redirects to local URLs only, avoid redirects to https://localhost:5000/login/?returnUrl=https%3A%2F%2Fwhatever.com%2F or any other suspicious site
     return returnUrl;
   } else {
