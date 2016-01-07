@@ -4,6 +4,7 @@
     ".git",
     "certificates",
     "logs",
+    "tests",
     "node_modules/*",
     "nodemon.json",
     "package.json"
