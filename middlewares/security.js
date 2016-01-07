@@ -1,6 +1,9 @@
 'use strict';
 
 let helmet = require('helmet');
+let ms = require('ms');
+
+const config = require('../helpers/config');
 
 module.exports = function initializeSecurity(app) {
   // X-Frame-Options: https://github.com/helmetjs/frameguard
@@ -10,7 +13,8 @@ module.exports = function initializeSecurity(app) {
   // Strict-Transport-Security: https://github.com/helmetjs/hsts
   app.use(helmet.hsts({
     maxAge: 10886400000,
-    includeSubdomains: true
+    includeSubdomains: true,
+    preload: true
   }));
   // X-Powered-By: http://expressjs.com/en/4x/api.html#app.settings.table
   app.disable('x-powered-by');
@@ -25,5 +29,13 @@ module.exports = function initializeSecurity(app) {
     styleSrc: ["'self'", "'unsafe-inline'"],
     baseUri: ["'self'"],
     frameAncestors: ["'none'"]
+  }));
+  // Public-Key-Pins: https://github.com/helmetjs/hpkp
+  app.use(helmet.publicKeyPins({
+    maxAge: ms(config.hpkp.maxAge),
+    sha256s: config.hpkp.sha256s,
+    includeSubdomains: true,
+    reportUri: config.hpkp.reportUri,
+    reportOnly: false
   }));
 };

@@ -92,4 +92,21 @@ describe('server', () => {
       cb();
     });
   });
+
+  it('should have "Public-Key-Pins" header for text/html', (cb) => {
+    request.get({
+      url: baseUrl
+    }, (error, response) => {
+      expect(response.statusCode).toBe(200);
+      const pinsValue = response.headers['public-key-pins'];
+      expect(pinsValue).toBeDefined();
+      let containsPins = pinsValue.indexOf('pin-sha256=') >= 0;
+      expect(containsPins).toBe(true);
+      let containsMaxAge = pinsValue.indexOf('max-age=') >= 0;
+      expect(containsMaxAge).toBe(true);
+      let containsReportUri = pinsValue.indexOf('report-uri=') >= 0;
+      expect(containsReportUri).toBe(true);
+      cb();
+    });
+  });
 });

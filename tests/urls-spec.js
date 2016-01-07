@@ -20,13 +20,13 @@ describe('URL helper tests', () => {
   ]
 
   function testExternalUrl(url) {
-    it('Should mark url ' + url + ' as external.', () => {
+    it('should mark url ' + url + ' as external.', () => {
       expect(urls.isLocalUrl(url)).toBe(false);
     });
   }
 
   function testLocalUrl(url) {
-    it('Should mark url ' + url + ' as local.', () => {
+    it('should mark url ' + url + ' as local.', () => {
       expect(urls.isLocalUrl(url)).toBe(true);
     });
   }
