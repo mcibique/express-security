@@ -12,7 +12,7 @@ module.exports = function initializeSecurity(app) {
   app.use(helmet.xssFilter());
   // Strict-Transport-Security: https://github.com/helmetjs/hsts
   app.use(helmet.hsts({
-    maxAge: 10886400000,
+    maxAge: ms(config.hsts.maxAge),
     includeSubdomains: true,
     preload: true
   }));
@@ -28,7 +28,9 @@ module.exports = function initializeSecurity(app) {
     scriptSrc: ["'self'", "'unsafe-inline'"],
     styleSrc: ["'self'", "'unsafe-inline'"],
     baseUri: ["'self'"],
-    frameAncestors: ["'none'"]
+    frameAncestors: ["'none'"],
+    reportUri: config.csp.reportUri,
+    reportOnly: false
   }));
   // Public-Key-Pins: https://github.com/helmetjs/hpkp
   app.use(helmet.publicKeyPins({
