@@ -6,9 +6,9 @@ let logger = require('../helpers/logger');
 const isDev = require('../helpers/debug');
 
 let stream = {
-  write: function(message, encoding){
+  write(message /* , encoding */) {
     logger.info(message.slice(0, -1));
   }
 };
 
-module.exports = morgan(isDev ? 'common' : 'combined', { stream: stream });
+module.exports = morgan(isDev ? 'common' : 'combined', { stream });

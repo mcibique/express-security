@@ -16,7 +16,7 @@ function getReturnUrl(req) {
 
 module.exports = function authenticateRequest(req, res, next) {
   if (allowAnonymousAccess(req)) {
-    next();
+    return next();
   } else {
     let username = getCurrentUserName(req);
     if (!username) {
@@ -25,7 +25,7 @@ module.exports = function authenticateRequest(req, res, next) {
       res.redirect(303, `/login/?returnUrl=${returnUrl}`);
     } else {
       // authenticated request, continue
-      next();
+      return next();
     }
   }
-}
+};

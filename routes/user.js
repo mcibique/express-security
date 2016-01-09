@@ -3,8 +3,7 @@
 let express = require('express');
 let router = express.Router();
 
-/* GET user's profile. */
-router.get('/', function(req, res, next) {
+router.get('/', (req, res) => {
   res.render('user', {
     sessionValues: req.session,
     cookieValues: req.cookies,

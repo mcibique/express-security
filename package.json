@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "start": "nodemon ./bin/www",
-    "test": "jasmine-node ./tests"
+    "test": "jasmine-node ./tests",
+    "lint": "eslint ."
   },
   "dependencies": {
     "body-parser": "~1.14.1",
@@ -23,6 +24,7 @@
     "winston": "^2.1.1"
   },
   "devDependencies": {
+    "babel-eslint": "^4.1.6",
     "jasmine-node": "^1.14.5",
     "request": "^2.67.0"
   }

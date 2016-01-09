@@ -2,16 +2,16 @@
 
 module.exports = function handle403(err, req, res, next) {
   if (!err) {
-    next();
+    return next();
   } else if (err.code !== 'EBADCSRFTOKEN') {
-    next(err);
+    return next(err);
   } else {
-    req.session.regenerate((err) => {
-      if (err) {
-        next(err);
+    req.session.regenerate((error) => {
+      if (error) {
+        return next(error);
       } else {
         res.redirect(303, req.originalUrl);
       }
-    })
+    });
   }
 };

@@ -10,14 +10,14 @@ module.exports = new winston.Logger({
     new winston.transports.Console({
       level: isDev ? 'silly' : 'error',
       json: false,
-      colorize: true,
+      colorize: true
     }),
     new winston.transports.File({
       name: '1',
       filename: 'logs/web.log',
       level: isDev ? 'silly' : 'info',
       json: false,
-      maxsize: 5242880, //5MB
+      maxsize: 5242880, // 5MB
       maxFiles: -1,
       colorize: false,
       eol: os.eol,
@@ -33,7 +33,7 @@ module.exports = new winston.Logger({
     new winston.transports.Console({
       level: 'error',
       json: false,
-      colorize: true,
+      colorize: true
     }),
     new winston.transports.File({
       filename: 'logs/exceptions.log',

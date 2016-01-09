@@ -4,9 +4,10 @@ let express = require('express');
 let router = express.Router();
 let urls = require('../helpers/url');
 
-router.get('/', function(req, res, next) {
+router.get('/', (req, res) => {
   const returnUrl = getReturnUrlFromQuery(req);
-  // in case that somebody tries to set returnUrl manually to "/login/?returnUrl=http%3A%2F%2Fwhatever.com", reload login with '/' in returnUrl
+  // in case that somebody tries to set returnUrl manually to "/login/?returnUrl=http%3A%2F%2Fwhatever.com", reload
+  // login with '/' in returnUrl
   if (req.query.returnUrl && returnUrl !== req.query.returnUrl) {
     // using 302 because server rejects to continue.
     return res.redirect(302, `/login/?returnUrl=${encodeURIComponent(returnUrl)}`);
@@ -14,7 +15,7 @@ router.get('/', function(req, res, next) {
   res.render('login');
 });
 
-router.post('/', function(req, res, next) {
+router.post('/', (req, res, next) => {
   const username = req.body.username;
   if (!username) {
     return res.render('login', {
@@ -40,7 +41,8 @@ router.post('/', function(req, res, next) {
 function getReturnUrlFromQuery(req) {
   const returnUrl = req.query.returnUrl;
   if (returnUrl && urls.isLocalUrl(returnUrl)) {
-    // allow redirects to local URLs only, avoid redirects to https://localhost:5000/login/?returnUrl=https%3A%2F%2Fwhatever.com%2F or any other suspicious site
+    // allow redirects to local URLs only, avoid redirects to
+    // https://localhost:5000/login/?returnUrl=https%3A%2F%2Fwhatever.com%2F or any other suspicious site
     return returnUrl;
   } else {
     return '/';

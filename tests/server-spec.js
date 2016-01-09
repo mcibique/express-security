@@ -4,7 +4,6 @@ const baseUrl = 'https://localhost:5000/';
 let request = require('request');
 
 describe('server', () => {
-
   it('should serve /', (cb) => {
     request.get({
       url: baseUrl,

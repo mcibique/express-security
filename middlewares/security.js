@@ -23,6 +23,7 @@ module.exports = function initializeSecurity(app) {
   // X-Content-Type-Options: https://github.com/helmetjs/dont-sniff-mimetype
   app.use(helmet.noSniff());
   // Content-Security-Policy: https://github.com/helmetjs/csp
+  /* eslint quotes: 0 */
   app.use(helmet.csp({
     defaultSrc: ["'self'"],
     scriptSrc: ["'self'", "'unsafe-inline'"],

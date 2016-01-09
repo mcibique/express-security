@@ -4,7 +4,6 @@ const baseUrl = 'https://localhost:5000';
 let request = require('request');
 
 describe('server', () => {
-
   it('should have returnUrl when redirecting to login', (cb) => {
     request.get({
       url: `${baseUrl}/user/?id=1`,
