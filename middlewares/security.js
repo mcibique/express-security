@@ -25,12 +25,15 @@ module.exports = function initializeSecurity(app) {
   // Content-Security-Policy: https://github.com/helmetjs/csp
   /* eslint quotes: 0 */
   app.use(helmet.csp({
-    defaultSrc: ["'self'"],
-    scriptSrc: ["'self'", "'unsafe-inline'"],
-    styleSrc: ["'self'", "'unsafe-inline'"],
-    baseUri: ["'self'"],
-    frameAncestors: ["'none'"],
-    reportUri: config.csp.reportUri,
+    directives: {
+      defaultSrc: ["'self'"],
+      scriptSrc: ["'self'", "'unsafe-inline'"],
+      styleSrc: ["'self'", "'unsafe-inline'"],
+      baseUri: ["'self'"],
+      frameAncestors: ["'none'"],
+      reportUri: config.csp.reportUri
+    },
+    setAllHeaders: false,
     reportOnly: false
   }));
   // Public-Key-Pins: https://github.com/helmetjs/hpkp
@@ -41,4 +44,6 @@ module.exports = function initializeSecurity(app) {
     reportUri: config.hpkp.reportUri,
     reportOnly: false
   }));
+  // X-DNS-Prefetch-Control: https://github.com/helmetjs/dns-prefetch-control
+  app.use(helmet.dnsPrefetchControl({ allow: false }));
 };

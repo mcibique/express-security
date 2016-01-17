@@ -30,9 +30,9 @@ describe('server', () => {
       url: baseUrl
     }, (error, response) => {
       expect(response.statusCode).toBe(200);
-      expect(response.headers['content-security-policy']).toBe('base-uri \'self\'; default-src \'self\'; frame-' +
-        'ancestors \'none\'; report-uri https://report-uri.io/report/expresssecuritytest; script-src \'self\' ' +
-        '\'unsafe-inline\'; style-src \'self\' \'unsafe-inline\'');
+      expect(response.headers['content-security-policy']).toBe('default-src \'self\'; script-src \'self\' ' +
+        '\'unsafe-inline\'; style-src \'self\' \'unsafe-inline\'; base-uri \'self\'; frame-ancestors \'none\'; ' +
+        'report-uri https://report-uri.io/report/expresssecuritytest');
       cb();
     });
   });
@@ -43,6 +43,16 @@ describe('server', () => {
     }, (error, response) => {
       expect(response.statusCode).toBe(200);
       expect(response.headers['content-security-policy']).not.toBeDefined();
+      cb();
+    });
+  });
+
+  it('should have DNS prefetching turned off for text/html', (cb) => {
+    request.get({
+      url: baseUrl
+    }, (error, response) => {
+      expect(response.statusCode).toBe(200);
+      expect(response.headers['x-dns-prefetch-control']).toBe('off');
       cb();
     });
   });
