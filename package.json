@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "nodemon ./bin/www",
-    "test": "jasmine-node ./tests",
+    "test": "jasmine-node ./tests --color --verbose --captureExceptions",
     "lint": "eslint ."
   },
   "dependencies": {

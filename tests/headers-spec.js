@@ -9,6 +9,9 @@ describe('server', () => {
     request.get({
       url: baseUrl
     }, (error, response) => {
+      if (error) {
+        return cb(error);
+      }
       expect(response.statusCode).toBe(200);
       expect(response.headers['x-frame-options']).toBe('DENY');
       cb();
@@ -19,6 +22,9 @@ describe('server', () => {
     request.get({
       url: `${baseUrl}/styles/default.css`
     }, (error, response) => {
+      if (error) {
+        return cb(error);
+      }
       expect(response.statusCode).toBe(200);
       expect(response.headers['x-frame-options']).not.toBeDefined();
       cb();
@@ -29,6 +35,9 @@ describe('server', () => {
     request.get({
       url: baseUrl
     }, (error, response) => {
+      if (error) {
+        return cb(error);
+      }
       expect(response.statusCode).toBe(200);
       expect(response.headers['content-security-policy']).toBe('default-src \'self\'; script-src \'self\' ' +
         '\'unsafe-inline\'; style-src \'self\' \'unsafe-inline\'; base-uri \'self\'; frame-ancestors \'none\'; ' +
@@ -41,6 +50,9 @@ describe('server', () => {
     request.get({
       url: `${baseUrl}/styles/default.css`
     }, (error, response) => {
+      if (error) {
+        return cb(error);
+      }
       expect(response.statusCode).toBe(200);
       expect(response.headers['content-security-policy']).not.toBeDefined();
       cb();
@@ -51,6 +63,9 @@ describe('server', () => {
     request.get({
       url: baseUrl
     }, (error, response) => {
+      if (error) {
+        return cb(error);
+      }
       expect(response.statusCode).toBe(200);
       expect(response.headers['x-dns-prefetch-control']).toBe('off');
       cb();
@@ -61,6 +76,9 @@ describe('server', () => {
     request.get({
       url: baseUrl
     }, (error, response) => {
+      if (error) {
+        return cb(error);
+      }
       expect(response.statusCode).toBe(200);
       expect(response.headers['cache-control']).toBe('no-store, no-cache, must-revalidate, proxy-revalidate');
       expect(response.headers['surrogate-control']).toBe('no-store');
@@ -75,6 +93,9 @@ describe('server', () => {
     request.get({
       url: `${baseUrl}/styles/default.css`
     }, (error, response) => {
+      if (error) {
+        return cb(error);
+      }
       expect(response.statusCode).toBe(200);
       expect(response.headers['cache-control']).toBe('public, max-age=31536000');
       expect(response.headers['surrogate-control']).not.toBeDefined();
@@ -87,6 +108,9 @@ describe('server', () => {
     request.get({
       url: `${baseUrl}/styles/default.css`
     }, (error, response) => {
+      if (error) {
+        return cb(error);
+      }
       expect(response.statusCode).toBe(200);
       let lastModifiedDate = new Date(fs.statSync('public/styles/default.css').mtime).toGMTString();
       expect(response.headers['last-modified']).toBe(lastModifiedDate);
@@ -98,6 +122,9 @@ describe('server', () => {
     request.get({
       url: `${baseUrl}/styles/default.css`
     }, (error, response) => {
+      if (error) {
+        return cb(error);
+      }
       expect(response.statusCode).toBe(200);
       expect(response.headers.etag).toBeDefined();
       cb();
@@ -108,6 +135,9 @@ describe('server', () => {
     request.get({
       url: baseUrl
     }, (error, response) => {
+      if (error) {
+        return cb(error);
+      }
       expect(response.statusCode).toBe(200);
       const pinsValue = response.headers['public-key-pins'];
       expect(pinsValue).toBeDefined();

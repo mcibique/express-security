@@ -9,6 +9,9 @@ describe('server', () => {
       url: baseUrl,
       followRedirect: false
     }, (error, response) => {
+      if (error) {
+        return cb(error);
+      }
       expect(error).toBeFalsy();
       expect(response.statusCode).not.toBeGreaterThan(400);
       cb();
@@ -20,6 +23,9 @@ describe('server', () => {
       url: baseUrl,
       followRedirect: false
     }, (error, response) => {
+      if (error) {
+        return cb(error);
+      }
       expect(response.statusCode).toBe(303);
       expect(response.headers.location).toBe(`/login/?returnUrl=${encodeURIComponent('/')}`);
       cb();
