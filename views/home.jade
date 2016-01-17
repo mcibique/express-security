@@ -1,4 +1,13 @@
 extends layout
 
+block initialize
+  - var title = "Home";
+
 block content
   h1 Welcome
+
+block scripts
+  script.
+    'use strict';
+    const message = 'Inline script is running.';
+    console.log(message);

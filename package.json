@@ -5,7 +5,7 @@
   "scripts": {
     "start": "nodemon ./bin/www",
     "test": "jasmine-node ./tests --color --verbose --captureExceptions",
-    "lint": "eslint ."
+    "lint": "eslint . --ext .js,.jade"
   },
   "dependencies": {
     "body-parser": "~1.14.2",
@@ -26,6 +26,7 @@
   "devDependencies": {
     "babel-eslint": "^4.1.6",
     "eslint": "^1.10.3",
+    "eslint-plugin-jade": "^0.1.2",
     "jasmine-node": "^1.14.5",
     "request": "^2.67.0"
   }

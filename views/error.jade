@@ -1,5 +1,8 @@
 extends layout
 
+block initialize
+  - var title = "Error";
+
 block content
   h1= message
   h2= error.status

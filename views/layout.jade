@@ -1,9 +1,11 @@
+block initialize
+
 doctype html
 html(lang="en")
   head
     meta(http-equiv="X-UA-Compatible", content="IE=edge")
     meta(name="viewport", content="width=device-width, initial-scale=1.0")
-    title= title
+    title #{title}
     link(rel='stylesheet', href='/styles/normalize.css')
     link(rel='stylesheet', href='/styles/default.css')
   body
@@ -15,3 +17,4 @@ html(lang="en")
           span.last-signed-in Last signed in: #{moment(user.lastSignedIn).fromNow()}
           a(href="/logout/") Sign out
     block content
+    block scripts

@@ -1,6 +1,13 @@
 {
   "parser": "babel-eslint",
-  "plugins": [],
+  "plugins": [
+    "jade"
+  ],
+  "env": {
+    "es6": true,
+    "node": true,
+    "jasmine": true
+  },
   "rules": {
     "no-alert": 2,
     "no-array-constructor": 2,
@@ -221,14 +228,5 @@
     "wrap-iife": 2,
     "wrap-regex": 2,
     "yoda": [2, "never"]
-  },
-  "globals": {
-    "angular": false,
-    "module": false
-  },
-  "env": {
-    "es6": true,
-    "node": true,
-    "jasmine": true
   }
 }
