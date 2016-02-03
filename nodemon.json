@@ -6,6 +6,7 @@
     "logs",
     "tests",
     "node_modules/*",
+    "public",
     "nodemon.json",
     "package.json"
   ],

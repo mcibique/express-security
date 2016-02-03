@@ -5,12 +5,17 @@ let router = express.Router();
 let urls = require('../helpers/url');
 
 router.get('/', (req, res) => {
+  if (req.session.user) {
+    res.redirect(303, '/');
+    return;
+  }
   const returnUrl = getReturnUrlFromQuery(req);
   // in case that somebody tries to set returnUrl manually to "/login/?returnUrl=http%3A%2F%2Fwhatever.com", reload
   // login with '/' in returnUrl
   if (req.query.returnUrl && returnUrl !== req.query.returnUrl) {
     // using 302 because server rejects to continue.
-    return res.redirect(302, `/login/?returnUrl=${encodeURIComponent(returnUrl)}`);
+    res.redirect(302, `/login/?returnUrl=${encodeURIComponent(returnUrl)}`);
+    return;
   }
   res.render('login');
 });

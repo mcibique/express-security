@@ -27,7 +27,8 @@ form label {
   font-size: 1.4rem;
 }
 
-header .user-info {
+header .user-info,
+header #email-status {
   line-height: 3rem;
   font-size: 1.6rem;
   text-align: right;
@@ -36,4 +37,16 @@ header .user-info {
 header .user-name,
 header .last-signed-in {
   margin-right: 1rem;
+}
+
+header #email-status.not-loaded {
+  display: none;
+}
+
+header #email-status .unread {
+  margin-left: 10px;
+}
+
+header #email-status .unread.has-new-email {
+  font-weight: bold;
 }

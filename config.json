@@ -18,5 +18,8 @@
     "cookieName": "session",
     "expiration": "20m",
     "path": "/"
+  },
+  "sockets": {
+    "domain": "localhost"
   }
 }

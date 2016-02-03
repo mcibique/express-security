@@ -30,6 +30,7 @@ module.exports = function initializeSecurity(app) {
       scriptSrc: ["'self'", "'unsafe-inline'"],
       styleSrc: ["'self'", "'unsafe-inline'"],
       baseUri: ["'self'"],
+      connectSrc: ["'self'", 'wss:'],
       frameAncestors: ["'none'"],
       reportUri: config.csp.reportUri
     },

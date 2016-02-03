@@ -21,6 +21,8 @@
     "moment": "^2.11.1",
     "morgan": "~1.6.1",
     "ms": "^0.7.1",
+    "socket.io": "^1.4.5",
+    "url": "^0.11.0",
     "winston": "^2.1.1"
   },
   "devDependencies": {

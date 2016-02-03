@@ -16,5 +16,13 @@ html(lang="en")
             a(href="/user/") #{user.username}
           span.last-signed-in Last signed in: #{moment(user.lastSignedIn).fromNow()}
           a(href="/logout/") Sign out
+        div#email-status.not-loaded
+          span Email:
+          span.unread 0
+          span.delimiter /
+          span.total 0
     block content
+    if user
+      script(src='/scripts/vendor/socket.io.js')
+      script(src='/scripts/email-notifications.js')
     block scripts
