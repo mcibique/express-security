@@ -2,11 +2,12 @@
   "restartable": "rs",
   "ignore": [
     ".git",
-    "certificates",
-    "logs",
-    "tests",
+    "certificates/*",
+    "logs/*",
+    "tests/*",
     "node_modules/*",
-    "public",
+    "public/*",
+    "client/*",
     "nodemon.json",
     "package.json"
   ],

@@ -2,7 +2,7 @@
 
 let urls = require('../helpers/url');
 
-describe('URL helper tests', () => {
+describe('url helper', () => {
   const externalUrls = [
     'http://whatever.com',
     'https://whatever.com',

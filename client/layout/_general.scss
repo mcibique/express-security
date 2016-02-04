@@ -1,0 +1,63 @@
+@import 'variables';
+
+html {
+  font: 62.5% $font-family;
+}
+
+body {
+  background-color: $body-background;
+  color: $font-color;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+:focus {
+  outline: 0.1rem dashed $border-color;
+  outline-offset: 0.1rem;
+}
+
+a {
+  color: $link-color;
+
+  &:hover {
+    color: rgba($link-color, 0.8);
+  }
+}
+
+input {
+  border: 0.1rem solid $border-color;
+  line-height: 2rem;
+  padding: 0.4rem 0.9rem;
+}
+
+button {
+  border: 0.1rem solid $border-color;
+  background-color: rgba($border-color, 0.1);
+  line-height: 2rem;
+  padding: 0.4rem 0.9rem;
+
+  &:focus,
+  &:hover {
+    background-color: rgba($border-color, 0.2);
+  }
+}
+
+input,
+button {
+  border-radius: 0.2rem;
+
+  &:focus {
+    box-shadow: 0 0 0.9rem -0.1rem $shadow-color;
+    outline: none;
+  }
+}
+
+pre {
+  border: 0.1rem solid $border-color;
+  background-color: rgba($border-color, 0.2);
+  font-family: $font-family-monospace;
+  font-size: 1.4rem;
+  padding: 0.2rem;
+}

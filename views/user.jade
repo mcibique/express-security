@@ -4,8 +4,12 @@ block initialize
   - var title = "User profile";
 
 block content
-  h1 #{username}
-  h2 Session:
+  h1 User status
+
+  h2 User name:
+  pre #{user.username}
+
+  h2 Session: 
   pre #{JSON.stringify(sessionValues, null, ' ')}
 
   h2 Cookies:

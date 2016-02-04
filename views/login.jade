@@ -5,12 +5,12 @@ block initialize
 
 block content
   h1 Login
-  form(method="post", autocomplete="off")
+  form(method="post", autocomplete="off", novalidate)
     p Please sign in. Any user and password are accepted.
     input(type="hidden", name="_csrf", value=csrfToken)
     p
       label(for="username") User name:
-      input(type="text", id="username", name="username")
+      input(type="text", id="username", name="username", autofocus)
       if (errors && errors.username)
         span.error-message=errors.username
     p

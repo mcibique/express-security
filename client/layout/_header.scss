@@ -1,0 +1,77 @@
+@import 'variables';
+
+header {
+  $rows-height: 3 * 3rem;
+  $header-height: $rows-height + 5rem + 1rem;
+
+  background-color: $header-background;
+  color: $header-color;
+  height: $header-height;
+  padding: 5rem 0 1rem;
+
+  a {
+    color: $header-link-color;
+
+    &:hover {
+      color: rgba($header-link-color, 0.8);
+    }
+  }
+
+  .app-logo {
+    @extend %header-container;
+    position: relative;
+    top: -2rem;
+  }
+
+  .app-logo-text {
+    bottom: 0;
+    color: $header-color;
+    display: inline-block;
+    font-size: 6rem;
+    height: $rows-height;
+    line-height: $rows-height;
+    position: absolute;
+    text-decoration: none;
+    top: 0;
+  }
+
+  %header-container {
+    margin: 0 auto;
+    max-width: $container-max-width;
+  }
+
+  %header-row {
+    @extend %header-container;
+    font-size: 1.6rem;
+    line-height: 3rem;
+    text-align: right;
+  }
+
+  .user-info {
+    @extend %header-row;
+  }
+
+  .user-name {
+    margin-right: 1rem;
+  }
+
+  .sign-out {
+    @extend %header-row;
+  }
+
+  .email-status {
+    @extend %header-row;
+
+    &.not-loaded {
+      display: none;
+    }
+
+    .unread {
+      margin-left: 1rem;
+    }
+
+    .has-new-email {
+      font-weight: bold;
+    }
+  }
+}

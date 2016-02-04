@@ -1,0 +1,7 @@
+@import '../layout/variables';
+
+.sample-component {
+  &.active {
+    background-color: $active-component-background;
+  }
+}

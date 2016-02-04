@@ -1,4 +1,6 @@
-certificates
-node_modules
-logs
+certificates/
+node_modules/
+logs/
+public/**/*.min.*
+public/**/*.map
 config.dev.json

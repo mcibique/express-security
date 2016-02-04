@@ -6,7 +6,9 @@
   "env": {
     "es6": true,
     "node": true,
-    "jasmine": true
+    "browser": true,
+    "jasmine": true,
+    "jquery": true
   },
   "rules": {
     "no-alert": 2,
@@ -164,7 +166,7 @@
     "handle-callback-err": 2,
     "id-length": [2, {
       "properties": "never",
-      "exceptions": ["i", "j"]
+      "exceptions": ["i", "j", "$"]
     }],
     "indent": [2, 2],
     "init-declarations": 0,
@@ -220,7 +222,7 @@
       "nonwords": false
     }],
     "spaced-comment": 2,
-    "strict": [2, "global"],
+    "strict": 0,
     "use-isnan": 2,
     "valid-jsdoc": 2,
     "valid-typeof": 2,

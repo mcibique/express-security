@@ -6,23 +6,26 @@ html(lang="en")
     meta(http-equiv="X-UA-Compatible", content="IE=edge")
     meta(name="viewport", content="width=device-width, initial-scale=1.0")
     title #{title}
-    link(rel='stylesheet', href='/styles/normalize.css')
-    link(rel='stylesheet', href='/styles/default.css')
+    link(rel='stylesheet', href='/styles/app.min.css')
   body
-    if user
-      header
+    header
+      div.app-logo
+        a(href="/", class="app-logo-text") App Logo
+      if user
         div.user-info
-          span.user-name User:
+          span.user-name User: 
             a(href="/user/") #{user.username}
           span.last-signed-in Last signed in: #{moment(user.lastSignedIn).fromNow()}
+        div.sign-out
           a(href="/logout/") Sign out
-        div#email-status.not-loaded
+        div.email-status.not-loaded
           span Email:
           span.unread 0
           span.delimiter /
           span.total 0
-    block content
+    main
+      block content
     if user
-      script(src='/scripts/vendor/socket.io.js')
-      script(src='/scripts/email-notifications.js')
+      script(src='/scripts/vendor.min.js')
+      script(src='/scripts/app.min.js')
     block scripts

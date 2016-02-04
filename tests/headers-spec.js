@@ -1,10 +1,12 @@
 'use strict';
 
 const baseUrl = 'https://localhost:5000';
+const jsSample = `${baseUrl}/scripts/app.min.js`;
+const cssSample = `${baseUrl}/styles/app.min.css`;
 let request = require('request');
 let fs = require('fs');
 
-describe('server', () => {
+describe('headers', () => {
   it('should have x-frame-options set to deny for text/html', (cb) => {
     request.get({
       url: baseUrl
@@ -20,7 +22,7 @@ describe('server', () => {
 
   it('should not have x-frame-options set for text/css', (cb) => {
     request.get({
-      url: `${baseUrl}/styles/default.css`
+      url: cssSample
     }, (error, response) => {
       if (error) {
         return cb(error);
@@ -33,7 +35,7 @@ describe('server', () => {
 
   it('should not have x-frame-options set for application/javascript', (cb) => {
     request.get({
-      url: `${baseUrl}/scripts/email-notifications.js`
+      url: jsSample
     }, (error, response) => {
       if (error) {
         return cb(error);
@@ -61,7 +63,7 @@ describe('server', () => {
 
   it('should not have CSP set for text/css', (cb) => {
     request.get({
-      url: `${baseUrl}/styles/default.css`
+      url: cssSample
     }, (error, response) => {
       if (error) {
         return cb(error);
@@ -74,7 +76,7 @@ describe('server', () => {
 
   it('should not have CSP set for application/javascript', (cb) => {
     request.get({
-      url: `${baseUrl}/scripts/email-notifications.js`
+      url: jsSample
     }, (error, response) => {
       if (error) {
         return cb(error);
@@ -117,7 +119,7 @@ describe('server', () => {
 
   it('should have turned cache on for text/css', (cb) => {
     request.get({
-      url: `${baseUrl}/styles/default.css`
+      url: cssSample
     }, (error, response) => {
       if (error) {
         return cb(error);
@@ -132,7 +134,7 @@ describe('server', () => {
 
   it('should have turned cache on for application/javascript', (cb) => {
     request.get({
-      url: `${baseUrl}/scripts/email-notifications.js`
+      url: jsSample
     }, (error, response) => {
       if (error) {
         return cb(error);
@@ -147,13 +149,13 @@ describe('server', () => {
 
   it('should have "Last-Modified" header for text/css', (cb) => {
     request.get({
-      url: `${baseUrl}/styles/default.css`
+      url: cssSample
     }, (error, response) => {
       if (error) {
         return cb(error);
       }
       expect(response.statusCode).toBe(200);
-      let lastModifiedDate = new Date(fs.statSync('public/styles/default.css').mtime).toGMTString();
+      let lastModifiedDate = new Date(fs.statSync('public/styles/app.min.css').mtime).toGMTString();
       expect(response.headers['last-modified']).toBe(lastModifiedDate);
       cb();
     });
@@ -161,13 +163,13 @@ describe('server', () => {
 
   it('should have "Last-Modified" header for application/javascript', (cb) => {
     request.get({
-      url: `${baseUrl}/scripts/email-notifications.js`
+      url: jsSample
     }, (error, response) => {
       if (error) {
         return cb(error);
       }
       expect(response.statusCode).toBe(200);
-      let lastModifiedDate = new Date(fs.statSync('public/scripts/email-notifications.js').mtime).toGMTString();
+      let lastModifiedDate = new Date(fs.statSync('public/scripts/app.min.js').mtime).toGMTString();
       expect(response.headers['last-modified']).toBe(lastModifiedDate);
       cb();
     });
@@ -175,7 +177,7 @@ describe('server', () => {
 
   it('should have "ETag" header for text/css', (cb) => {
     request.get({
-      url: `${baseUrl}/styles/default.css`
+      url: cssSample
     }, (error, response) => {
       if (error) {
         return cb(error);
@@ -188,7 +190,7 @@ describe('server', () => {
 
   it('should have "ETag" header for application/javascript', (cb) => {
     request.get({
-      url: `${baseUrl}/scripts/email-notifications.js`
+      url: jsSample
     }, (error, response) => {
       if (error) {
         return cb(error);

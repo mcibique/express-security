@@ -1,0 +1,15 @@
+form {
+  p {
+    font-size: 1.6rem;
+  }
+
+  label {
+    display: block;
+    font-size: 1.4rem;
+  }
+
+  .error-message {
+    margin-left: 1rem;
+    color: $error-color;
+  }
+}
