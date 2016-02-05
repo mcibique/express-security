@@ -22,3 +22,6 @@ My nodejs + express security playground.
 4. Custom errors (4XX, 5XX)
 5. Configuration + Environment
 6. Nodemon
+7. Webpack + babel
+8. Unit tests
+9. Functional tests

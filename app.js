@@ -4,6 +4,7 @@ let express = require('express');
 let path = require('path');
 let bodyParser = require('body-parser');
 let ms = require('ms');
+let staticAsset = require('static-asset');
 
 const isDev = require('./helpers/debug');
 const app = express();
@@ -26,6 +27,8 @@ app.use(express.static(path.join(__dirname, 'public'), {
   redirect: false,
   dotfiles: 'ignore'
 }));
+// assets folder fingerprint
+app.use(staticAsset(path.join(__dirname, 'public')));
 // JSON body
 app.use(bodyParser.json());
 // application/x-www-form-urlencoded body

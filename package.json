@@ -27,6 +27,7 @@
     "normalize-scss": "^4.0.3",
     "socket.io": "^1.4.5",
     "socket.io-client": "^1.4.5",
+    "static-asset": "^0.6.0",
     "url": "^0.11.0",
     "winston": "^2.1.1"
   },

@@ -6,7 +6,7 @@ html(lang="en")
     meta(http-equiv="X-UA-Compatible", content="IE=edge")
     meta(name="viewport", content="width=device-width, initial-scale=1.0")
     title #{title}
-    link(rel='stylesheet', href='/styles/app.min.css')
+    link(rel='stylesheet', href=assetFingerprint('/styles/app.min.css'))
   body
     header
       div.app-logo
@@ -26,6 +26,6 @@ html(lang="en")
     main
       block content
     if user
-      script(src='/scripts/vendor.min.js')
-      script(src='/scripts/app.min.js')
+      script(src=assetFingerprint('/scripts/vendor.min.js'))
+      script(src=assetFingerprint('/scripts/app.min.js'))
     block scripts
