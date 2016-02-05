@@ -1,6 +1,6 @@
 'use strict';
 
-const baseUrl = 'https://localhost:5000/';
+const baseUrl = 'https://localhost:5000';
 let request = require('request');
 
 describe('server', () => {
@@ -14,6 +14,20 @@ describe('server', () => {
       }
       expect(error).toBeFalsy();
       expect(response.statusCode).not.toBeGreaterThan(400);
+      cb();
+    });
+  });
+
+  it('should serve favicon', (cb) => {
+    request.get({
+      url: `${baseUrl}/favicon.ico`,
+      followRedirect: false
+    }, (error, response) => {
+      if (error) {
+        return cb(error);
+      }
+      expect(error).toBeFalsy();
+      expect(response.statusCode).toBe(200);
       cb();
     });
   });

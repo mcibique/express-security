@@ -13,4 +13,7 @@ $header-color: #dcff89;
 $header-link-color: #d7ffff;
 $active-component-background: #f0e68c;
 
+$body-min-width: 320px;
 $container-max-width: 1024px;
+$container-max-content-width: 1000px;
+$container-padding: ($container-max-width - $container-max-content-width) / 2;

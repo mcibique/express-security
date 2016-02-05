@@ -3,4 +3,15 @@
 main {
   margin: 0 auto;
   max-width: $container-max-width;
+  padding: 0 $container-padding;
+}
+
+.full-page-logo {
+  display: block;
+  margin: 15rem auto 0;
+  text-align: center;
+
+  &.grounded {
+    opacity: 0.2;
+  }
 }

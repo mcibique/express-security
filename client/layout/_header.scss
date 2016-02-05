@@ -17,13 +17,13 @@ header {
     }
   }
 
-  .app-logo {
+  .app-logo-wrapper {
     @extend %header-container;
     position: relative;
     top: -2rem;
   }
 
-  .app-logo-text {
+  .app-logo-link {
     bottom: 0;
     color: $header-color;
     display: inline-block;
@@ -35,9 +35,26 @@ header {
     top: 0;
   }
 
+  .app-logo,
+  .app-logo-text {
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  .app-logo {
+    height: $rows-height;
+    text-indent: -9999rem;
+    width: $rows-height;
+  }
+
+  .app-logo-text {
+    margin-left: 1rem;
+  }
+
   %header-container {
     margin: 0 auto;
     max-width: $container-max-width;
+    padding: 0 $container-padding;
   }
 
   %header-row {

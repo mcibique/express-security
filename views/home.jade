@@ -1,10 +1,11 @@
 extends layout
 
 block initialize
-  - var title = "Home";
+  - var title = 'Home';
 
 block content
   h1 Welcome
+  img(class='full-page-logo grounded', src=assetFingerprint('/images/express-security-logo.png'), alt='App logo', width='300', height='300')
 
 block scripts
   script.

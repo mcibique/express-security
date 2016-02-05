@@ -1,22 +1,22 @@
 extends layout
 
 block initialize
-  - var title = "Login";
+  - var title = 'Login';
 
 block content
   h1 Login
-  form(method="post", autocomplete="off", novalidate)
+  form(method='post', autocomplete='off', novalidate)
     p Please sign in. Any user and password are accepted.
-    input(type="hidden", name="_csrf", value=csrfToken)
+    input(type='hidden', name='_csrf', value=csrfToken)
     p
-      label(for="username") User name:
-      input(type="text", id="username", name="username", autofocus)
+      label(for='username') User name:
+      input(type='text', id='username', name='username', autofocus)
       if (errors && errors.username)
         span.error-message=errors.username
     p
-      label(for="password") Password:
-      input(type="password", id="password", name="password")
+      label(for='password') Password:
+      input(type='password', id='password', name='password')
       if (errors && errors.password)
         span.error-message=errors.password
     p
-      button(type="submit") Sign in
+      button(type='submit') Sign in

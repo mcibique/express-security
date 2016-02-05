@@ -5,6 +5,7 @@ let path = require('path');
 let bodyParser = require('body-parser');
 let ms = require('ms');
 let staticAsset = require('static-asset');
+let favicon = require('serve-favicon');
 
 const isDev = require('./helpers/debug');
 const app = express();
@@ -14,6 +15,8 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 // global variables
 app.locals.moment = require('moment');
+// favicon
+app.use(favicon(__dirname + '/public/favicon.ico'));
 // logger
 app.use(require('./middlewares/logger'));
 // gzip, deflate compression

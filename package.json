@@ -25,6 +25,7 @@
     "morgan": "^1.6.1",
     "ms": "^0.7.1",
     "normalize-scss": "^4.0.3",
+    "serve-favicon": "^2.3.0",
     "socket.io": "^1.4.5",
     "socket.io-client": "^1.4.5",
     "static-asset": "^0.6.0",

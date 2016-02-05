@@ -1,23 +1,26 @@
 block initialize
 
 doctype html
-html(lang="en")
+html(lang='en')
   head
-    meta(http-equiv="X-UA-Compatible", content="IE=edge")
-    meta(name="viewport", content="width=device-width, initial-scale=1.0")
-    title #{title}
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    include ./favicons.jade
+    title #{'ES - ' + title}
     link(rel='stylesheet', href=assetFingerprint('/styles/app.min.css'))
   body
     header
-      div.app-logo
-        a(href="/", class="app-logo-text") App Logo
+      div.app-logo-wrapper
+        a(href='/', class='app-logo-link')
+          img(class='app-logo', src=assetFingerprint('/images/express-security-logo.png'), alt='App logo', width='90', height='90')
+          span.app-logo-text App Logo
       if user
         div.user-info
           span.user-name User: 
-            a(href="/user/") #{user.username}
+            a(href='/user/') #{user.username}
           span.last-signed-in Last signed in: #{moment(user.lastSignedIn).fromNow()}
         div.sign-out
-          a(href="/logout/") Sign out
+          a(href='/logout/') Sign out
         div.email-status.not-loaded
           span Email:
           span.unread 0
