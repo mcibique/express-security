@@ -1,6 +1,7 @@
 certificates/
 node_modules/
 logs/
+public/images/**/*
 public/**/*.min.*
 public/**/*.map
 config.dev.json
