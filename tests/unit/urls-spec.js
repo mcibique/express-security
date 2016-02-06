@@ -1,6 +1,6 @@
 'use strict';
 
-let urls = require('../helpers/url');
+let urls = require('../../helpers/url');
 
 describe('url helper', () => {
   const externalUrls = [

@@ -1,6 +1,6 @@
 'use strict';
 
-let portHelper = require('../helpers/port');
+let portHelper = require('../../helpers/port');
 
 describe('port helper tests', () => {
   it('should accept any positive number', () => {

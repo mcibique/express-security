@@ -1,21 +1,18 @@
 'use strict';
 
 const baseUrl = 'https://localhost:5000';
-const jsSample = `${baseUrl}/scripts/app.min.js`;
-const cssSample = `${baseUrl}/styles/app.min.css`;
-const imageSample = `${baseUrl}/images/express-security-logo.png`;
 
 const staticAsssets = [{
   mime: 'text/css',
-  url: cssSample,
+  url: `${baseUrl}/styles/app.min.css`,
   serverPath: 'public/styles/app.min.css'
 }, {
   mime: 'application/javascript',
-  url: jsSample,
+  url: `${baseUrl}/scripts/app.min.js`,
   serverPath: 'public/scripts/app.min.js'
 }, {
   mime: 'image/png',
-  url: imageSample,
+  url: `${baseUrl}/images/express-security-logo.png`,
   serverPath: 'public/images/express-security-logo.png'
 }];
 

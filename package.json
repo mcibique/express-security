@@ -3,11 +3,21 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon ./bin/www",
-    "test": "jasmine-node ./tests --color --verbose --captureExceptions",
+    "build": "npm-run-all -s build:*",
+    "build:client": "webpack --progress --colors -p",
+
     "lint": "eslint . --ext .js,.jade",
-    "watch-client": "webpack --progress --colors --watch",
-    "build-client": "webpack --progress --colors -p"
+    "lint:tests": "eslint ./tests --ext .js",
+
+    "start": "node ./bin/start.js",
+
+    "test": "npm-run-all -s test:*",
+    "test:unit": "jasmine-node ./tests/unit --color --verbose --captureExceptions",
+    "test:e2e": "jasmine-node ./tests/e2e --color --verbose --captureExceptions",
+
+    "watch": "npm-run-all -p watch:*",
+    "watch:server": "nodemon ./bin/start.js",
+    "watch:client": "webpack --progress --colors --watch"
   },
   "dependencies": {
     "body-parser": "^1.14.2",
@@ -46,6 +56,7 @@
     "extract-text-webpack-plugin": "^1.0.1",
     "jasmine-node": "^1.14.5",
     "node-sass": "^3.4.2",
+    "npm-run-all": "^1.5.1",
     "request": "^2.67.0",
     "sass-loader": "^3.1.2",
     "style-loader": "^0.13.0",
