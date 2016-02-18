@@ -32,7 +32,7 @@ describe('gzip', () => {
     });
   });
 
-  it(`should not gzip image/png`, (cb) => {
+  it('should not gzip image/png', (cb) => {
     request.get({
       url: `${baseUrl}/images/express-security-logo.png`,
       gzip: true
