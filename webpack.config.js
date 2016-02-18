@@ -1,5 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
+const autoprefixer = require('autoprefixer');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const isDebug = process.argv.indexOf('-p') < 0;
@@ -36,7 +37,7 @@ module.exports = {
         loader: 'babel'
       }, {
         test: /\.scss$/,
-        loader: ExtractTextPlugin.extract('style', 'css!sass')
+        loader: ExtractTextPlugin.extract('style', 'css!postcss!sass')
       }
     ]
   },
@@ -45,5 +46,9 @@ module.exports = {
       path.resolve(__dirname, './node_modules/normalize-scss/sass'),
       path.resolve(__dirname, './node_modules/support-for/sass')
     ]
-  }
+  },
+  postcss: [autoprefixer({
+    browsers: ['last 2 versions', 'ie >= 8', 'ff >= 2'],
+    cascade: false
+  })]
 };
