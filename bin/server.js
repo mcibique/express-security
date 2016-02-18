@@ -2,7 +2,7 @@
 
 let app = require('../app.js');
 let logger = require('../helpers/logger');
-let http = require('https');
+let http = require('spdy');
 let fs = require('fs');
 
 const key = fs.readFileSync('certificates/server.key', 'utf8');
