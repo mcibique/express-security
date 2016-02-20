@@ -6,7 +6,7 @@ const baseUrl = 'https://localhost:5000';
 const loginUrl = `${baseUrl}/login/`;
 
 describe('csrf', () => {
-  it('should return back to login when token is not present', (cb) => {
+  it('should return back to login when token is not present', cb => {
     request.post({
       url: loginUrl,
       form: {
@@ -23,7 +23,7 @@ describe('csrf', () => {
     });
   });
 
-  it('should return back to login when token is wrong', (cb) => {
+  it('should return back to login when token is wrong', cb => {
     request.post({
       url: loginUrl,
       form: {

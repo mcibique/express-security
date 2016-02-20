@@ -1,7 +1,6 @@
 import './main.scss';
-
-import $ from 'jquery';
 import './components/sample-component';
+import $ from 'jquery';
 import initializeEmailSockets from './services/email-notifications';
 
 $(() => {

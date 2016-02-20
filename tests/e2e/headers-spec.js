@@ -20,7 +20,7 @@ let request = require('request');
 let fs = require('fs');
 
 describe('headers', () => {
-  it('should have x-frame-options set to deny for text/html', (cb) => {
+  it('should have x-frame-options set to deny for text/html', cb => {
     request.get({
       url: baseUrl
     }, (error, response) => {
@@ -33,8 +33,8 @@ describe('headers', () => {
     });
   });
 
-  staticAsssets.forEach((asset) => {
-    it(`should not have x-frame-options set for ${asset.mime}`, (cb) => {
+  staticAsssets.forEach(asset => {
+    it(`should not have x-frame-options set for ${asset.mime}`, cb => {
       request.get({
         url: asset.url
       }, (error, response) => {
@@ -48,7 +48,7 @@ describe('headers', () => {
     });
   });
 
-  it('should have CSP set for text/html', (cb) => {
+  it('should have CSP set for text/html', cb => {
     request.get({
       url: baseUrl
     }, (error, response) => {
@@ -63,8 +63,8 @@ describe('headers', () => {
     });
   });
 
-  staticAsssets.forEach((asset) => {
-    it(`should not have CSP set for ${asset.mime}`, (cb) => {
+  staticAsssets.forEach(asset => {
+    it(`should not have CSP set for ${asset.mime}`, cb => {
       request.get({
         url: asset.url
       }, (error, response) => {
@@ -78,7 +78,7 @@ describe('headers', () => {
     });
   });
 
-  it('should have DNS prefetching turned off for text/html', (cb) => {
+  it('should have DNS prefetching turned off for text/html', cb => {
     request.get({
       url: baseUrl
     }, (error, response) => {
@@ -91,7 +91,7 @@ describe('headers', () => {
     });
   });
 
-  it('should have turned cache off for text/html', (cb) => {
+  it('should have turned cache off for text/html', cb => {
     request.get({
       url: baseUrl
     }, (error, response) => {
@@ -108,8 +108,8 @@ describe('headers', () => {
     });
   });
 
-  staticAsssets.forEach((asset) => {
-    it(`should have turned cache on for ${asset.mime}`, (cb) => {
+  staticAsssets.forEach(asset => {
+    it(`should have turned cache on for ${asset.mime}`, cb => {
       request.get({
         url: asset.url
       }, (error, response) => {
@@ -125,8 +125,8 @@ describe('headers', () => {
     });
   });
 
-  staticAsssets.forEach((asset) => {
-    it(`should have "Last-Modified" header set for ${asset.mime}`, (cb) => {
+  staticAsssets.forEach(asset => {
+    it(`should have "Last-Modified" header set for ${asset.mime}`, cb => {
       request.get({
         url: asset.url
       }, (error, response) => {
@@ -141,8 +141,8 @@ describe('headers', () => {
     });
   });
 
-  staticAsssets.forEach((asset) => {
-    it(`should have "ETag" header set for ${asset.mime}`, (cb) => {
+  staticAsssets.forEach(asset => {
+    it(`should have "ETag" header set for ${asset.mime}`, cb => {
       request.get({
         url: asset.url
       }, (error, response) => {
@@ -156,7 +156,7 @@ describe('headers', () => {
     });
   });
 
-  it('should have "Public-Key-Pins" header for text/html', (cb) => {
+  it('should have "Public-Key-Pins" header for text/html', cb => {
     request.get({
       url: baseUrl
     }, (error, response) => {

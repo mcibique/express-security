@@ -4,7 +4,7 @@ const baseUrl = 'https://localhost:5000';
 let request = require('request');
 
 describe('return url', () => {
-  it('should have returnUrl when redirecting to login', (cb) => {
+  it('should have returnUrl when redirecting to login', cb => {
     request.get({
       url: `${baseUrl}/user/?id=1`,
       followRedirect: false
@@ -18,7 +18,7 @@ describe('return url', () => {
     });
   });
 
-  it('should not allow absolute URLs in returnUrl query', (cb) => {
+  it('should not allow absolute URLs in returnUrl query', cb => {
     const targetSite = 'http://whatever.com';
     request.get({
       url: `${baseUrl}/login?returnUrl=${encodeURIComponent(targetSite)}`,

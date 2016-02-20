@@ -6,7 +6,7 @@ module.exports = function handle403(err, req, res, next) {
   } else if (err.code !== 'EBADCSRFTOKEN') {
     return next(err);
   } else {
-    req.session.regenerate((error) => {
+    req.session.regenerate(error => {
       if (error) {
         return next(error);
       } else {

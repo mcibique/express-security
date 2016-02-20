@@ -11,7 +11,7 @@ const config = require('./config');
 const redisConfig = extend({}, config.caching.redis, { store: redisStore });
 const redisCache = cacheManager.caching(redisConfig);
 
-redisCache.store.events.on('redisError', (error) => {
+redisCache.store.events.on('redisError', error => {
   logger.error(error);
 });
 

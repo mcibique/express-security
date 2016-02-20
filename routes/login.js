@@ -30,7 +30,7 @@ router.post('/', (req, res, next) => {
     });
   }
   // regenerate session because of https://www.owasp.org/index.php/Session_fixation
-  req.session.regenerate((err) => {
+  req.session.regenerate(err => {
     if (err) {
       return next(err);
     }

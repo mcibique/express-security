@@ -4,7 +4,7 @@ const baseUrl = 'https://localhost:5000';
 let request = require('request');
 
 describe('server', () => {
-  it('should serve /', (cb) => {
+  it('should serve /', cb => {
     request.get({
       url: baseUrl,
       followRedirect: false
@@ -18,7 +18,7 @@ describe('server', () => {
     });
   });
 
-  it('should serve favicon', (cb) => {
+  it('should serve favicon', cb => {
     request.get({
       url: `${baseUrl}/favicon.ico`,
       followRedirect: false
@@ -32,7 +32,7 @@ describe('server', () => {
     });
   });
 
-  it('should redirect unauthorized requests to /login url', (cb) => {
+  it('should redirect unauthorized requests to /login url', cb => {
     request.get({
       url: baseUrl,
       followRedirect: false

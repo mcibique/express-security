@@ -16,8 +16,8 @@ const staticAsssets = [{
 let request = require('request');
 
 describe('gzip', () => {
-  staticAsssets.forEach((asset) => {
-    it(`should gzip ${asset.mime}`, (cb) => {
+  staticAsssets.forEach(asset => {
+    it(`should gzip ${asset.mime}`, cb => {
       request.get({
         url: asset.url,
         gzip: true
@@ -32,7 +32,7 @@ describe('gzip', () => {
     });
   });
 
-  it('should not gzip image/png', (cb) => {
+  it('should not gzip image/png', cb => {
     request.get({
       url: `${baseUrl}/images/express-security-logo.png`,
       gzip: true

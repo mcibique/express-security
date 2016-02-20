@@ -4,7 +4,7 @@ const baseUrl = 'https://localhost:5000';
 let request = require('request');
 
 describe('session', () => {
-  it('should get session cookie with first request', (cb) => {
+  it('should get session cookie with first request', cb => {
     const cookies = request.jar();
     request.get({
       url: baseUrl,
@@ -27,7 +27,7 @@ describe('session', () => {
     });
   });
 
-  it('should have turned the secure and httpOnly flags on', (cb) => {
+  it('should have turned the secure and httpOnly flags on', cb => {
     const cookies = request.jar();
     request.get({
       url: baseUrl,
@@ -48,7 +48,7 @@ describe('session', () => {
     });
   });
 
-  it('should keep the same session cookie between two requests', (cb) => {
+  it('should keep the same session cookie between two requests', cb => {
     const cookies = request.jar();
     request.get({
       url: baseUrl,
@@ -85,7 +85,7 @@ describe('session', () => {
     });
   });
 
-  it('should keep renew session cookie between two requests', (cb) => {
+  it('should keep renew session cookie between two requests', cb => {
     const cookies = request.jar();
     request.get({
       url: baseUrl,

@@ -1,5 +1,5 @@
-import io from 'socket.io-client';
 import $ from 'jquery';
+import io from 'socket.io-client';
 
 function initialize() {
   const socket = io.connect('/emails/', {
@@ -10,7 +10,7 @@ function initialize() {
     .on('connect', () => {
       console.log('Connected to /emails/ server.');
     })
-    .on('email-status', (data) => {
+    .on('email-status', data => {
       console.log('New email status received:', data);
       let $emailStatusElement = $('header .email-status');
       $emailStatusElement.removeClass('not-loaded');
