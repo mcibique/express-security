@@ -18,6 +18,8 @@
   },
   "dependencies": {
     "body-parser": "^1.15.0",
+    "cache-manager": "^1.4.0",
+    "cache-manager-redis": "^0.2.2",
     "compression": "^1.6.1",
     "connect-redis": "^3.0.2",
     "cookie-parser": "^1.4.1",

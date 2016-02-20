@@ -1,0 +1,10 @@
+extends layout
+
+block initialize
+  - var title = 'Cache';
+
+block content
+  h1 Cache info
+  
+  h2 someCachedData:
+  pre #{JSON.stringify(someCachedData, null, ' ')}
