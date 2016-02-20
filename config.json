@@ -12,6 +12,7 @@
       "auth_pass": "-QXKXeU3&pG2FGNDFak2&zEf-m2WG_b*&8$&f!p@?HNnTsJgGRqUHewaZJE^t=8LY^TUA^?VvH*9qTCZyB3X2gLGKcjtKLL-vkGWm!&v7Bs#vceYcbJeek6$M7-*5v8vW7^$g?g=hQ$DEweVEav-7t7^4E+s!%^fGWGmC5SPwRe@t%^JAwKXNsd=yuV4?AVEEArN^6Y7A7Kz^4CFt4yx8bqBXcWc7HL!S8jSr-jR^!jR?Ra#^tB8r6s3-U@JBT6-"
     }
   },
+  "cluster": "auto",
   "csp": {
     "reportUri": "https://report-uri.io/report/expresssecuritytest"
   },
