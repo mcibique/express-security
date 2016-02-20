@@ -13,11 +13,11 @@ if (config.session.redis) {
 } else if (isDebug) {
   store = new session.MemoryStore();
 } else {
-  throw 'Unable to configure session store.';
+  throw new Error('Unable to configure session store.');
 }
 
 module.exports = session({
-  store: store,
+  store,
   name: config.session.cookieName,
   resave: false,
   rolling: true,
