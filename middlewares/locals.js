@@ -1,5 +1,7 @@
 'use strict';
 
+const isDebug = require('../helpers/debug');
+
 module.exports = function initLocals(req, res, next) {
   if (req.session) {
     // allow current user being accessible in all views.
@@ -8,5 +10,7 @@ module.exports = function initLocals(req, res, next) {
     // value is required by each form tag
     res.locals.csrfToken = req.csrfToken();
   }
+  // set debug mode
+  res.locals.isDebug = isDebug;
   next();
 };
