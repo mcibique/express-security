@@ -16,7 +16,7 @@ function initialize() {
       $emailStatusElement.removeClass('not-loaded');
 
       let $unreadElement = $emailStatusElement.find('.unread');
-      $unreadElement.text(data.unread || 0).toggleClass('has-new-email', data.unread);
+      $unreadElement.text(data.unread || 0).toggleClass('has-new-email', !!data.unread);
 
       let $totalElement = $emailStatusElement.find('.total');
       $totalElement.text(data.total || 0);

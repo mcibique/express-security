@@ -3,6 +3,8 @@
 let io = require('socket.io');
 let url = require('url');
 let logger = require('../helpers/logger');
+let session = require('../middlewares/session-io');
+let auth = require('../middlewares/session-io');
 let emailSockets = require('../sockets/email');
 const config = require('../helpers/config');
 
@@ -14,6 +16,14 @@ function initializeSecurity(sockets, port) {
   });
   logger.info(`Sockets origins set to ${allowedOrigin}.`);
   sockets.origins(allowedOrigin);
+}
+
+function intializeSession(sockets) {
+  sockets.use(session);
+}
+
+function initializeAuthorization(sockets) {
+  sockets.use(auth);
 }
 
 function initializeListeners(sockets) {
@@ -28,6 +38,8 @@ function attachToServer(server, port) {
   });
 
   initializeSecurity(sockets, port);
+  intializeSession(sockets);
+  initializeAuthorization(sockets);
   initializeListeners(sockets);
 }
 

@@ -5,19 +5,21 @@ My nodejs + express security and performance playground (boilerplate).
 
 1. Cookie auth (secure, http-only)
 2. Signed session + sliding expiration
-2. CSRF
+2. Cross-Site Request Forgery (CSRF)
+3. Cross-Site WebSocket Hijacking (CSWSH)
+9. Content-Security-Policy
+5. Strict-Transport-Security (HSTS)
+10. Public-Key-Pins
 3. X-Frame-Options
 4. X-XSS-Protection
-5. Strict-Transport-Security (HSTS)
 6. X-Powered-By
 7. X-Download-Options
 8. X-Content-Type-Options
-9. Content-Security-Policy
-10. Public-Key-Pins
 
 ## Performance
 
 1. Client caching + e-tags
+2. Client assets minification
 2. GZIP
 3. Imagemin
 4. Node cluster
@@ -28,7 +30,7 @@ My nodejs + express security and performance playground (boilerplate).
 
 1. HTTPS
 1. Redis store (session, caching)
-1. Web sockets (socket.io)
+1. Web sockets (socket.io, cookies authentication, shared session)
 3. Logging (winston -> Console, FileSystem)
 4. Custom errors (4XX, 5XX)
 5. Configuration + Environment (config.json + config.dev.json)
