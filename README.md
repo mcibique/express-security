@@ -30,7 +30,7 @@ My nodejs + express security and performance playground (boilerplate).
 
 1. HTTPS
 1. Redis store (session, caching)
-1. Web sockets (socket.io, cookies authentication, shared session)
+1. Web sockets (socket.io, cookies authentication, shared session, redis store)
 3. Logging (winston -> Console, FileSystem)
 4. Custom errors (4XX, 5XX)
 5. Configuration + Environment (config.json + config.dev.json)
