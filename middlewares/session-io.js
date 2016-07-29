@@ -1,9 +1,9 @@
 'use strict';
 
-let ioSession = require("express-socket.io-session");
+let ioSession = require('express-socket.io-session');
 
 let session = require('../middlewares/session');
-let cookies = require('../middlewares/cookies')
+let cookies = require('../middlewares/cookies');
 
 module.exports = ioSession(session, cookies, {
   autoSave: true

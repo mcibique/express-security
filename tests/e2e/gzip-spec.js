@@ -18,7 +18,7 @@ let request = require('request');
 describe('gzip', () => {
   staticAsssets.forEach(asset => {
     describe(`when gzip is enabled for the ${asset.mime}`, () => {
-      it(`should have gzip in response headers`, cb => {
+      it('should have gzip in response headers', cb => {
         request.get({
           url: asset.url,
           gzip: true
@@ -33,7 +33,7 @@ describe('gzip', () => {
       });
 
       if (asset.mime !== 'text/html') {
-        it(`should use weak etags`, cb => {
+        it('should use weak etags', cb => {
           request.get({
             url: asset.url,
             gzip: true
@@ -42,7 +42,7 @@ describe('gzip', () => {
               return cb(error);
             }
             expect(response.statusCode).toBe(200);
-            expect(response.headers['etag']).toMatch('^W/.+');
+            expect(response.headers.etag).toMatch('^W/.+');
             cb();
           });
         });
@@ -50,7 +50,7 @@ describe('gzip', () => {
     });
   });
 
-  describe('when gzip is enabled', cb => {
+  describe('when gzip is enabled', () => {
     it('should not gzip image/png', cb => {
       request.get({
         url: `${baseUrl}/images/express-security-logo.png`,

@@ -43,7 +43,7 @@ let lastFameEmailData = {
 
 function emitFakeEmailData(clients) {
   let clientNames = Object.keys(clients);
-  let clientName = clientNames[Math.floor(Math.random()*clientNames.length)];
+  let clientName = clientNames[Math.floor(Math.random() * clientNames.length)];
   let client = clients[clientName];
   if (!client) {
     return;

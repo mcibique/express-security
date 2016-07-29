@@ -32,8 +32,8 @@ module.exports = function initializeSecurity(app) {
   app.use(helmet.contentSecurityPolicy({
     directives: {
       defaultSrc: ["'self'"],
-      scriptSrc: ["'self'", (req, res) => "'nonce-" + res.locals.nonce + "'"],
-      styleSrc: ["'self'", (req, res) => "'nonce-" + res.locals.nonce + "'"],
+      scriptSrc: ["'self'", (req, res) => `'nonce-${res.locals.nonce}'`],
+      styleSrc: ["'self'", (req, res) => `'nonce-${res.locals.nonce}'`],
       baseUri: ["'self'"],
       connectSrc: ["'self'", 'wss:'],
       frameAncestors: ["'none'"],

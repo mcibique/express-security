@@ -1,6 +1,5 @@
 'use strict';
 
-const config = require('../helpers/config');
 const useCluster = require('../helpers/cluster');
 const logger = require('../helpers/logger');
 
