@@ -14,7 +14,7 @@ block content
   img(class='full-page-logo grounded', src=assetFingerprint('/images/express-security-logo.png'), alt='App logo', width='300', height='300')
 
 block scripts
-  script.
+  script(nonce=nonce).
     'use strict';
     const message = 'Inline script is running.';
     console.log(message);

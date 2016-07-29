@@ -56,8 +56,8 @@ describe('headers', () => {
         return cb(error);
       }
       expect(response.statusCode).toBe(200);
-      expect(response.headers['content-security-policy']).toBe('default-src \'self\'; script-src \'self\' ' +
-        '\'unsafe-inline\'; style-src \'self\' \'unsafe-inline\'; base-uri \'self\'; connect-src \'self\' wss:; ' +
+      expect(response.headers['content-security-policy']).toMatch('default-src \'self\'; script-src \'self\' ' +
+        '\'nonce-[a-f0-9-]{36}\'; style-src \'self\' \'nonce-[a-f0-9-]{36}\'; base-uri \'self\'; connect-src \'self\' wss:; ' +
         'frame-ancestors \'none\'; report-uri https://report-uri.io/report/expresssecuritytest');
       cb();
     });
