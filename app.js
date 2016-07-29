@@ -3,12 +3,11 @@
 let express = require('express');
 let path = require('path');
 let bodyParser = require('body-parser');
-let ms = require('ms');
-let staticAsset = require('static-asset');
 let favicon = require('serve-favicon');
 
 const isDev = require('./helpers/debug');
 const app = express();
+const publicFolder = path.join(__dirname, 'public');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -16,22 +15,13 @@ app.set('view engine', 'jade');
 // global variables
 app.locals.moment = require('moment');
 // favicon
-app.use(favicon(path.join(__dirname, 'public/favicon.ico')));
+app.use(favicon(path.join(publicFolder, 'favicon.ico')));
 // logger
 app.use(require('./middlewares/logger'));
 // gzip, deflate compression
 app.use(require('./middlewares/compression'));
 // assets folder and caching
-app.use(express.static(path.join(__dirname, 'public'), {
-  index: false,
-  etag: true,
-  lastModified: true,
-  maxAge: ms('365 days'),
-  redirect: false,
-  dotfiles: 'ignore'
-}));
-// assets folder fingerprint
-app.use(staticAsset(path.join(__dirname, 'public')));
+require('./middlewares/assets')(app, publicFolder);
 // JSON body
 app.use(bodyParser.json());
 // application/x-www-form-urlencoded body
