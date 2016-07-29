@@ -7,7 +7,7 @@ const config = require('../helpers/config');
 
 module.exports = function initializeSecurity(app) {
   // X-Frame-Options: https://github.com/helmetjs/frameguard
-  app.use(helmet.frameguard('deny'));
+  app.use(helmet.frameguard({ action: 'deny' }));
   // X-XSS-Protection: https://github.com/helmetjs/x-xss-protection
   app.use(helmet.xssFilter());
   // Strict-Transport-Security: https://github.com/helmetjs/hsts
@@ -24,7 +24,7 @@ module.exports = function initializeSecurity(app) {
   app.use(helmet.noSniff());
   // Content-Security-Policy: https://github.com/helmetjs/csp
   /* eslint quotes: 0 */
-  app.use(helmet.csp({
+  app.use(helmet.contentSecurityPolicy({
     directives: {
       defaultSrc: ["'self'"],
       scriptSrc: ["'self'", "'unsafe-inline'"],
@@ -38,7 +38,7 @@ module.exports = function initializeSecurity(app) {
     reportOnly: false
   }));
   // Public-Key-Pins: https://github.com/helmetjs/hpkp
-  app.use(helmet.publicKeyPins({
+  app.use(helmet.hpkp({
     maxAge: ms(config.hpkp.maxAge),
     sha256s: config.hpkp.sha256s,
     includeSubdomains: true,
