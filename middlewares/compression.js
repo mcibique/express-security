@@ -2,6 +2,8 @@
 
 let compression = require('compression');
 
+const config = require('../helpers/config');
+
 module.exports = compression({
-  threshold: 0
+  threshold: config.compression.threshold
 });

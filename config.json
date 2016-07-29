@@ -13,6 +13,9 @@
     }
   },
   "cluster": "auto",
+  "compression": {
+    "threshold": "1kb"
+  },
   "csp": {
     "reportUri": "https://report-uri.io/report/expresssecuritytest"
   },

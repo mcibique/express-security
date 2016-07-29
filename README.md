@@ -7,9 +7,9 @@ My nodejs + express security and performance playground (boilerplate).
 2. Signed session + sliding expiration
 2. Cross-Site Request Forgery (CSRF)
 3. Cross-Site WebSocket Hijacking (CSWSH)
-9. Content-Security-Policy
+9. Content-Security-Policy (CSP, nonce)
 5. Strict-Transport-Security (HSTS)
-10. Public-Key-Pins
+10. Public-Key-Pins (HPKP)
 3. X-Frame-Options
 4. X-XSS-Protection
 6. X-Powered-By
@@ -18,13 +18,13 @@ My nodejs + express security and performance playground (boilerplate).
 
 ## Performance
 
-1. Client caching + e-tags
+6. HTTP2
+1. Client caching (cache-control, e-tags, expires, last-modified, cache busting)
 2. Client assets minification
 2. GZIP
 3. Imagemin
 4. Node cluster
 5. Memory and redis caching
-6. HTTP2
 
 ## Others
 
