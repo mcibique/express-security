@@ -85,7 +85,7 @@ describe('session', () => {
     });
   });
 
-  it('should keep renew session cookie between two requests', cb => {
+  it('should keep renewing the session cookie between two requests', cb => {
     const cookies = request.jar();
     request.get({
       url: baseUrl,
