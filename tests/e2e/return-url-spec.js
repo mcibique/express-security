@@ -20,7 +20,7 @@ describe('return url', () => {
     });
   });
 
-  describe('when returnUrl absolute URL', () => {
+  describe('when returnUrl is absolute URL', () => {
     it('should replace it with default returnUrl', cb => {
       const targetSite = 'http://whatever.com';
       request.get({

@@ -48,77 +48,54 @@ describe('session', () => {
     });
   });
 
-  it('should keep the same session cookie between two requests', cb => {
-    const cookies = request.jar();
-    request.get({
-      url: baseUrl,
-      jar: cookies,
-      followRedirect: true
-    }, (firstError, firstResponse) => {
-      if (firstError) {
-        return cb(firstError);
-      }
-      expect(firstResponse.statusCode).toBe(200);
+  describe('cookie between two request', function () {
+    let firstSessionCookie;
+    let secondSessionCookie;
 
-      let firstResponseCookies = cookies.getCookies(baseUrl);
-      let firstSessionCookie = firstResponseCookies.filter(cookie => cookie.key === 'session')[0];
-      expect(firstSessionCookie).toBeDefined();
-
-      // 2nd request
+    beforeEach(function (cb) {
+      const cookies = request.jar();
       request.get({
         url: baseUrl,
         jar: cookies,
         followRedirect: true
-      }, (secondError, secondResponse) => {
-        if (secondError) {
-          return cb(secondError);
+      }, (firstError, firstResponse) => {
+        if (firstError) {
+          return cb(firstError);
         }
-        expect(secondResponse.statusCode).toBe(200);
+        let firstResponseCookies = cookies.getCookies(baseUrl);
+        firstSessionCookie = firstResponseCookies.filter(cookie => cookie.key === 'session')[0];
 
-        let secondResponseCookies = cookies.getCookies(baseUrl);
-        let secondSessionCookie = secondResponseCookies.filter(cookie => cookie.key === 'session')[0];
-        expect(secondSessionCookie).toBeDefined();
-        expect(firstSessionCookie.value).toBe(secondSessionCookie.value);
+        // 2nd request
+        request.get({
+          url: baseUrl,
+          jar: cookies,
+          followRedirect: true
+        }, (secondError, secondResponse) => {
+          if (secondError) {
+            return cb(secondError);
+          }
+          let secondResponseCookies = cookies.getCookies(baseUrl);
+          secondSessionCookie = secondResponseCookies.filter(cookie => cookie.key === 'session')[0];
 
-        cb();
+          cb();
+        });
       });
     });
-  });
 
-  it('should keep renewing the session cookie between two requests', cb => {
-    const cookies = request.jar();
-    request.get({
-      url: baseUrl,
-      jar: cookies,
-      followRedirect: true
-    }, (firstError, firstResponse) => {
-      if (firstError) {
-        return cb(firstError);
-      }
-      expect(firstResponse.statusCode).toBe(200);
-
-      let firstResponseCookies = cookies.getCookies(baseUrl);
-      let firstSessionCookie = firstResponseCookies.filter(cookie => cookie.key === 'session')[0];
+    it('should keep the same session cookie between two requests', () => {
       expect(firstSessionCookie).toBeDefined();
+      expect(secondSessionCookie).toBeDefined();
+      expect(firstSessionCookie.value).toBeDefined();
+      expect(secondSessionCookie.value).toBeDefined();
+      expect(firstSessionCookie.value).toBe(secondSessionCookie.value);
+    });
 
-      // 2nd request
-      request.get({
-        url: baseUrl,
-        jar: cookies,
-        followRedirect: true
-      }, (secondError, secondResponse) => {
-        if (secondError) {
-          return cb(secondError);
-        }
-        expect(secondResponse.statusCode).toBe(200);
-
-        let secondResponseCookies = cookies.getCookies(baseUrl);
-        let secondSessionCookie = secondResponseCookies.filter(cookie => cookie.key === 'session')[0];
-        expect(secondSessionCookie).toBeDefined();
-        expect(firstSessionCookie.expires).not.toBe(secondSessionCookie.expires);
-
-        cb();
-      });
+    it('should keep renewing the session cookie between two requests', () => {
+      expect(firstSessionCookie).toBeDefined();
+      expect(secondSessionCookie).toBeDefined();
+      expect(firstSessionCookie.expires).toBeDefined();
+      expect(secondSessionCookie.expires).toBeDefined();
+      expect(firstSessionCookie.expires).not.toBe(secondSessionCookie.expires);
     });
   });
 });
