@@ -12,7 +12,6 @@ describe('server', () => {
       if (error) {
         return cb(error);
       }
-      expect(error).toBeFalsy();
       expect(response.statusCode).not.toBeGreaterThan(400);
       cb();
     });
@@ -26,7 +25,6 @@ describe('server', () => {
       if (error) {
         return cb(error);
       }
-      expect(error).toBeFalsy();
       expect(response.statusCode).toBe(200);
       cb();
     });
