@@ -3,7 +3,7 @@
 function allowAnonymousAccess(req) {
   const url = req.originalUrl;
   // allow /login and /logout to be accessible for users without being authenticated
-  return url.indexOf('/login') === 0 || url.indexOf('/logout') === 0;
+  return url.startsWith('/login') || url.startsWith('/logout');
 }
 
 function getCurrentUserName(req) {
