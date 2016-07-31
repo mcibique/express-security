@@ -48,17 +48,17 @@ describe('session', () => {
     });
   });
 
-  describe('cookie between two request', function () {
+  describe('cookie between two request', () => {
     let firstSessionCookie;
     let secondSessionCookie;
 
-    beforeEach(function (cb) {
+    beforeEach(cb => {
       const cookies = request.jar();
       request.get({
         url: baseUrl,
         jar: cookies,
         followRedirect: true
-      }, (firstError, firstResponse) => {
+      }, firstError => {
         if (firstError) {
           return cb(firstError);
         }
@@ -70,7 +70,7 @@ describe('session', () => {
           url: baseUrl,
           jar: cookies,
           followRedirect: true
-        }, (secondError, secondResponse) => {
+        }, secondError => {
           if (secondError) {
             return cb(secondError);
           }

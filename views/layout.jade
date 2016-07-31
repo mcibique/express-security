@@ -7,12 +7,12 @@ html(lang='en')
     meta(name='viewport', content='width=device-width, initial-scale=1.0')
     include ./favicons.jade
     title #{'ES - ' + title}
-    link(rel='stylesheet', href=assetFingerprint('/styles/app.min.css'))
+    link(rel='stylesheet', href=asset('styles/app.min.css'))
   body
     header
       div.app-logo-wrapper
         a(href='/', class='app-logo-link')
-          img(class='app-logo', src=assetFingerprint('/images/express-security-logo.png'), alt='App logo', width='90', height='90')
+          img(class='app-logo', src=asset('images/express-security-logo.png'), alt='App logo', width='90', height='90')
           span.app-logo-text App Logo
       if user
         div.user-info
@@ -29,6 +29,6 @@ html(lang='en')
     main
       block content
     if user
-      script(src=assetFingerprint('/scripts/vendor.min.js'))
-      script(src=assetFingerprint('/scripts/app.min.js'))
+      script(src=asset('scripts/vendor.min.js'))
+      script(src=asset('scripts/app.min.js'))
     block scripts

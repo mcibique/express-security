@@ -7,53 +7,19 @@ const staticAsssets = [{
   url: baseUrl
 }, {
   mime: 'text/css',
-  url: `${baseUrl}/styles/app.min.css`
+  url: `${baseUrl}/assets/styles/app.min.css`
 }, {
   mime: 'application/javascript',
-  url: `${baseUrl}/scripts/app.min.js`
+  url: `${baseUrl}/assets/scripts/app.min.js`
 }];
 
 let request = require('request');
 
 describe('gzip', () => {
-  staticAsssets.forEach(asset => {
-    describe(`when gzip is enabled for the ${asset.mime}`, () => {
-      it('should have gzip in response headers', cb => {
-        request.get({
-          url: asset.url,
-          gzip: true
-        }, (error, response) => {
-          if (error) {
-            return cb(error);
-          }
-          expect(response.statusCode).toBe(200);
-          expect(response.headers['content-encoding']).toBe('gzip');
-          cb();
-        });
-      });
-
-      if (asset.mime !== 'text/html') {
-        it('should use weak etags', cb => {
-          request.get({
-            url: asset.url,
-            gzip: true
-          }, (error, response) => {
-            if (error) {
-              return cb(error);
-            }
-            expect(response.statusCode).toBe(200);
-            expect(response.headers.etag).toMatch('^W/.+');
-            cb();
-          });
-        });
-      }
-    });
-  });
-
-  describe('when gzip is enabled', () => {
+  describe('when is enabled', () => {
     it('should not gzip image/png', cb => {
       request.get({
-        url: `${baseUrl}/images/express-security-logo.png`,
+        url: `${baseUrl}/assets/images/express-security-logo.png`,
         gzip: true
       }, (error, response) => {
         if (error) {
@@ -62,6 +28,40 @@ describe('gzip', () => {
         expect(response.statusCode).toBe(200);
         expect(response.headers['content-encoding']).toBeUndefined();
         cb();
+      });
+    });
+
+    staticAsssets.forEach(asset => {
+      describe(`for the ${asset.mime}`, () => {
+        it('should have encoding in response headers', cb => {
+          request.get({
+            url: asset.url,
+            gzip: true
+          }, (error, response) => {
+            if (error) {
+              return cb(error);
+            }
+            expect(response.statusCode).toBe(200);
+            expect(response.headers['content-encoding']).toBe('gzip');
+            cb();
+          });
+        });
+
+        if (asset.mime !== 'text/html') {
+          it('should use weak etags', cb => {
+            request.get({
+              url: asset.url,
+              gzip: true
+            }, (error, response) => {
+              if (error) {
+                return cb(error);
+              }
+              expect(response.statusCode).toBe(200);
+              expect(response.headers.etag).toMatch('^W/.+');
+              cb();
+            });
+          });
+        }
       });
     });
   });

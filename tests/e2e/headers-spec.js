@@ -4,15 +4,15 @@ const baseUrl = 'https://localhost:5000';
 
 const staticAsssets = [{
   mime: 'text/css',
-  url: `${baseUrl}/styles/app.min.css`,
+  url: `${baseUrl}/assets/styles/app.min.css`,
   serverPath: 'public/styles/app.min.css'
 }, {
   mime: 'application/javascript',
-  url: `${baseUrl}/scripts/app.min.js`,
+  url: `${baseUrl}/assets/scripts/app.min.js`,
   serverPath: 'public/scripts/app.min.js'
 }, {
   mime: 'image/png',
-  url: `${baseUrl}/images/express-security-logo.png`,
+  url: `${baseUrl}/assets/images/express-security-logo.png`,
   serverPath: 'public/images/express-security-logo.png'
 }];
 

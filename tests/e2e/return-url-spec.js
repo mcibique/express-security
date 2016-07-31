@@ -18,21 +18,21 @@ describe('return url', () => {
         cb();
       });
     });
-  });
 
-  describe('when returnUrl is absolute URL', () => {
-    it('should replace it with default returnUrl', cb => {
-      const targetSite = 'http://whatever.com';
-      request.get({
-        url: `${baseUrl}/login?returnUrl=${encodeURIComponent(targetSite)}`,
-        followRedirect: false
-      }, (error, response) => {
-        if (error) {
-          return cb(error);
-        }
-        expect(response.statusCode).toBe(302);
-        expect(response.headers.location).toBe(`/login/?returnUrl=${encodeURIComponent('/')}`);
-        cb();
+    describe('and returnUrl is absolute URL', () => {
+      it('should replace it with default returnUrl', cb => {
+        const targetSite = 'http://whatever.com';
+        request.get({
+          url: `${baseUrl}/login?returnUrl=${encodeURIComponent(targetSite)}`,
+          followRedirect: false
+        }, (error, response) => {
+          if (error) {
+            return cb(error);
+          }
+          expect(response.statusCode).toBe(302);
+          expect(response.headers.location).toBe(`/login/?returnUrl=${encodeURIComponent('/')}`);
+          cb();
+        });
       });
     });
   });
