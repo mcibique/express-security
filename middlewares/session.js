@@ -26,6 +26,7 @@ module.exports = session({
   cookie: {
     httpOnly: true,
     secure: true,
-    maxAge: ms(config.session.expiration)
+    maxAge: ms(config.session.expiration),
+    sameSite: true
   }
 });

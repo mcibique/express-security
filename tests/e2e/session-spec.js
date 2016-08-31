@@ -27,7 +27,7 @@ describe('session', () => {
     });
   });
 
-  it('should have turned the secure and httpOnly flags on', cb => {
+  it('should have turned the secure, httpOnly and hostOnly flags on', cb => {
     const cookies = request.jar();
     request.get({
       url: baseUrl,
@@ -43,6 +43,7 @@ describe('session', () => {
       let sessionCookie = responseCookies.filter(cookie => cookie.key === 'session')[0];
       expect(sessionCookie.httpOnly).toBe(true);
       expect(sessionCookie.secure).toBe(true);
+      expect(sessionCookie.hostOnly).toBe(true);
 
       cb();
     });
