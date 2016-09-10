@@ -38,7 +38,7 @@ My nodejs + express security and performance playground (boilerplate).
 7. Webpack + babel + SASS + postcss + autoprefixer
 8. Unit tests
 9. E2E tests
-9. ESLint 2 (linting server, client, tests and jade templates)
+9. ESLint 2 (linting server, client, tests and pug templates)
 9. npm scripts (npm-run-all, client tasks, server tasks)
 9. http://realfavicongenerator.net/
-9. JADE view engine
+9. Pug view engine
