@@ -1,3 +1,5 @@
+'use strict';
+
 let express = require('express');
 let staticAsset = require('static-asset');
 let ms = require('ms');
