@@ -1,9 +1,9 @@
 # express security playground
 My nodejs + express security and performance playground (boilerplate).
 
-## OWASP
+## Security
 
-1. Cookie auth (secure, http-only)
+1. Cookie auth (secure, http-only, sameSite)
 2. Signed session + sliding expiration
 2. Cross-Site Request Forgery (CSRF)
 3. Cross-Site WebSocket Hijacking (CSWSH)
