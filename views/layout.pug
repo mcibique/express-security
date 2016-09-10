@@ -5,7 +5,7 @@ html(lang='en')
   head
     meta(http-equiv='X-UA-Compatible', content='IE=edge')
     meta(name='viewport', content='width=device-width, initial-scale=1.0')
-    include ./favicons.jade
+    include ./favicons.pug
     title #{'ES - ' + title}
     link(rel='stylesheet', href=asset('styles/app.min.css'))
   body
@@ -16,7 +16,7 @@ html(lang='en')
           span.app-logo-text App Logo
       if user
         div.user-info
-          span.user-name User: 
+          span.user-name User:
             a(href='/user/') #{user.username}
           span.last-signed-in Last signed in: #{moment(user.lastSignedIn).fromNow()}
         div.sign-out
