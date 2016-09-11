@@ -22,7 +22,7 @@ module.exports = function staticInit(app, publicFolder) {
     if (error) {
       if (error.statusCode === 404) {
         // do not leak any file system info to user.
-        res.send(404, 'Not Found');
+        res.status(404).send('Not Found');
       } else {
         return next(error);
       }
