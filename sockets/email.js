@@ -5,19 +5,20 @@ let session = require('../middlewares/session-io');
 let auth = require('../middlewares/auth-io');
 
 function saveClient(clients, username, clientId, socket) {
-  let client = clients[username];
+  let client = clients.get(username);
   if (!client) {
-    clients[username] = client = {};
+    client = new Map();
+    clients.set(username, client);
   }
-  client[clientId] = socket;
+  client.set(clientId, socket);
 }
 
 function removeClient(clients, username, clientId) {
-  let client = clients[username];
+  let client = clients.get(username);
   if (client) {
-    delete client[clientId];
-    if (Object.keys(client).length === 0) {
-      delete clients[username];
+    client.delete(clientId);
+    if (client.size === 0) {
+      clients.delete(username);
     }
   }
 }
@@ -41,21 +42,29 @@ let lastFameEmailData = {
   total: 1421
 };
 
+function pickRandomConnectedClient(clients) {
+  if (clients.size === 0) {
+    return null;
+  }
+  let client = null;
+  let randomIndex = Math.floor(Math.random() * clients.size);
+  let currentIndex = 0;
+  let iterator = clients.values();
+  while (currentIndex <= randomIndex) {
+    client = iterator.next().value;
+    currentIndex++;
+  }
+  return client;
+}
+
 function emitFakeEmailData(clients) {
-  let clientNames = Object.keys(clients);
-  let clientName = clientNames[Math.floor(Math.random() * clientNames.length)];
-  let client = clients[clientName];
+  let client = pickRandomConnectedClient(clients);
   if (!client) {
     return;
   }
 
-  for (let key in client) {
-    if (client.hasOwnProperty(key)) {
-      let socket = client[key];
-      if (socket) {
-        socket.emit('email-status', lastFameEmailData);
-      }
-    }
+  for (let socket of client.values()) {
+    socket.emit('email-status', lastFameEmailData);
   }
 
   lastFameEmailData.unread += 1;
@@ -63,7 +72,7 @@ function emitFakeEmailData(clients) {
 }
 
 function init(sockets) {
-  const clients = {};
+  const clients = new Map();
 
   sockets
     .of('/emails/')
