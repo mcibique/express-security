@@ -70,7 +70,9 @@
     "linebreak-style": [2, "windows"],
     "no-multi-spaces": 2,
     "no-multi-str": 2,
-    "no-multiple-empty-lines": [2, { "max": 2 }],
+    "no-multiple-empty-lines": [2, {
+      "max": 2
+    }],
     "no-native-reassign": 2,
     "no-negated-condition": 0,
     "no-negated-in-lhs": 2,
@@ -141,7 +143,9 @@
     "block-spacing": 2,
     "brace-style": 2,
     "callback-return": 2,
-    "camelcase": [2, { "properties": "never" }],
+    "camelcase": [2, {
+      "properties": "never"
+    }],
     "comma-dangle": 2,
     "comma-spacing": 2,
     "comma-style": 2,
@@ -153,11 +157,15 @@
     "curly": 2,
     "default-case": 2,
     "dot-location": [2, "property"],
-    "dot-notation": [2, { "allowKeywords": true }],
+    "dot-notation": [2, {
+      "allowKeywords": true
+    }],
     "eol-last": 2,
     "eqeqeq": 2,
     "func-names": 2,
-    "func-style": [2, "declaration"],
+    "func-style": [2, "declaration", {
+      "allowArrowFunctions": true
+    }],
     "generator-star-spacing": 2,
     "global-require": 0,
     "guard-for-in": 2,
@@ -166,7 +174,9 @@
       "properties": "never",
       "exceptions": ["i", "j", "$"]
     }],
-    "indent": [2, 2, { "SwitchCase": 1 }],
+    "indent": [2, 2, {
+      "SwitchCase": 1
+    }],
     "init-declarations": 0,
     "jsx-quotes": 2,
     "key-spacing": 2,
@@ -177,7 +187,9 @@
     "max-nested-callbacks": [1, 4],
     "max-params": [1, 5],
     "max-statements": [1, 20],
-    "new-cap": [2, { "capIsNewExceptions": ["Router"] }],
+    "new-cap": [2, {
+      "capIsNewExceptions": ["Router"]
+    }],
     "new-parens": 2,
     "newline-after-var": 0,
     "newline-per-chained-call": 0,
@@ -188,7 +200,9 @@
     "operator-assignment": [2, "always"],
     "operator-linebreak": 2,
     "padded-blocks": [2, "never"],
-    "prefer-arrow-callback": [2, { "allowNamedFunctions": true }],
+    "prefer-arrow-callback": [2, {
+      "allowNamedFunctions": true
+    }],
     "prefer-const": 0,
     "prefer-reflect": 0,
     "prefer-rest-params": 2,

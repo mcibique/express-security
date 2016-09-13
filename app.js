@@ -30,6 +30,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 require('./middlewares/caching')(app);
 // security - helmet
 require('./middlewares/security')(app);
+// rate limits
+require('./middlewares/limits')(app);
 // cookies
 app.use(require('./middlewares/cookies'));
 // session

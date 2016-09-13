@@ -15,6 +15,7 @@ My nodejs + express security and performance playground (boilerplate).
 6. X-Powered-By
 7. X-Download-Options
 8. X-Content-Type-Options
+9. Rate limits (number of requests per second)
 
 ## Performance
 
