@@ -3,6 +3,8 @@
 let express = require('express');
 let router = express.Router();
 let urls = require('../helpers/url');
+let rateLimiters = require('../helpers/rate-limiters');
+let ms = require('ms');
 
 router.get('/', (req, res) => {
   if (req.session.user) {
@@ -20,7 +22,7 @@ router.get('/', (req, res) => {
   res.render('login');
 });
 
-router.post('/', (req, res, next) => {
+router.post('/', getUsernameRateLimiter(), (req, res, next) => {
   const username = req.body.username;
   if (!username) {
     return res.render('login', {
@@ -52,6 +54,14 @@ function getReturnUrlFromQuery(req) {
   } else {
     return '/';
   }
+}
+
+function getUsernameRateLimiter() {
+  // limits maximum 5 requests per 1 minute for the same username.
+  let max = 5;
+  let duration = ms('1m');
+  let keyGenerator = req => req.body.username;
+  return rateLimiters.getLimiterFor('login-by-username-', max, duration, keyGenerator);
 }
 
 module.exports = router;
