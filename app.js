@@ -18,8 +18,8 @@ app.locals.moment = require('moment');
 app.use(favicon(path.join(publicFolder, 'favicon.ico')));
 // logger
 app.use(require('./middlewares/logger'));
-// gzip, deflate compression
-app.use(require('./middlewares/compression'));
+// gzip, brotli compression; pre-compressed-assets
+require('./middlewares/compression')(app, publicFolder);
 // assets folder and caching
 require('./middlewares/assets')(app, publicFolder);
 // JSON body
