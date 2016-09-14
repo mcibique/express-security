@@ -186,7 +186,7 @@
     "max-len": [2, 120],
     "max-nested-callbacks": [1, 4],
     "max-params": [1, 5],
-    "max-statements": [1, 20],
+    "max-statements": [1, 25],
     "new-cap": [2, {
       "capIsNewExceptions": ["Router"]
     }],

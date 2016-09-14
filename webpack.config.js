@@ -1,7 +1,9 @@
-const path = require('path');
-const webpack = require('webpack');
-const autoprefixer = require('autoprefixer');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+let path = require('path');
+let webpack = require('webpack');
+let autoprefixer = require('autoprefixer');
+let ExtractTextPlugin = require('extract-text-webpack-plugin');
+let CompressionPlugin = require('compression-webpack-plugin');
+let BrotliPlugin = require('brotli-webpack-plugin');
 
 const isDebug = process.argv.indexOf('-p') < 0;
 
@@ -21,11 +23,24 @@ module.exports = {
     }),
     new ExtractTextPlugin('../styles/[name].min.css'),
     new webpack.optimize.OccurenceOrderPlugin(),
-    new webpack.optimize.CommonsChunkPlugin(/* chunkName */'vendor', /* filename */'vendor.min.js'),
+    new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.min.js'),
     new webpack.optimize.UglifyJsPlugin({
       compress: {
         warnings: false
       }
+    }),
+    new CompressionPlugin({
+      asset: '[path].gz[query]',
+      algorithm: 'gzip',
+      test: /\.(js|css|html|svg)$/,
+      threshold: 1024,
+      minRatio: 0.9
+    }),
+    new BrotliPlugin({
+      asset: '[path].br[query]',
+      test: /\.(js|css|html|svg)$/,
+      threshold: 1024,
+      minRatio: 0.9
     })
   ],
   devtool: 'source-map',
@@ -48,7 +63,7 @@ module.exports = {
     ]
   },
   postcss: [autoprefixer({
-    browsers: ['last 2 versions', 'ie >= 8', 'ff >= 2'],
+    browsers: ['last 2 versions', 'ie >= 9', 'ff >= 2'],
     cascade: false
   })]
 };
