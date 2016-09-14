@@ -23,6 +23,7 @@ My nodejs + express security and performance playground (boilerplate).
 1. Client caching (cache-control, e-tags, expires, last-modified, cache busting)
 2. Client assets minification
 2. GZIP
+3. Precompressed assets (Brotli and Gzip support)
 3. Imagemin
 4. Node cluster
 5. Memory and redis caching
