@@ -10,6 +10,7 @@ let home = require('./home');
 let login = require('./login');
 let logout = require('./logout');
 let session = require('./session');
+let security = require('./security');
 let user = require('./user');
 
 router.use('/', home);
@@ -19,6 +20,7 @@ router.use('/user', user);
 
 if (isDebug) {
   router.use('/cache', cache);
+  router.use('/security', security);
   router.use('/session', session);
 }
 

@@ -1,0 +1,13 @@
+extends ../layout
+
+block initialize
+  - var title = 'Home';
+
+block content
+  h1 Referrer policy
+  nav
+    ul
+      li
+        a(href='https://www.w3.org/TR/referrer-policy/#referrer-policies', target='_blank') Spec
+      li
+        a(href='http://caniuse.com/#feat=referrer-policy', target='_blank') Supports

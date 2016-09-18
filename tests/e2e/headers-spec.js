@@ -177,7 +177,7 @@ describe('headers', () => {
           return cb(error);
         }
         expect(response.statusCode).toBe(200);
-        const pinsValue = response.headers['public-key-pins'];
+        let pinsValue = response.headers['public-key-pins'];
         expect(pinsValue).toBeDefined();
         let containsPins = pinsValue.indexOf('pin-sha256=') >= 0;
         expect(containsPins).toBe(true);
@@ -186,6 +186,36 @@ describe('headers', () => {
         let containsReportUri = pinsValue.indexOf('report-uri=') >= 0;
         expect(containsReportUri).toBe(true);
         cb();
+      });
+    });
+  });
+
+  describe('referrer-policy', () => {
+    it('should have "referrer-policy" header set for text/html', cb => {
+      request.get({
+        url: baseUrl
+      }, (error, response) => {
+        if (error) {
+          return cb(error);
+        }
+        expect(response.statusCode).toBe(200);
+        expect(response.headers['referrer-policy']).toBe('same-origin');
+        cb();
+      });
+    });
+
+    staticAsssets.forEach(asset => {
+      it(`should not have "referrer-policy" header set for ${asset.mime}`, cb => {
+        request.get({
+          url: asset.url
+        }, (error, response) => {
+          if (error) {
+            return cb(error);
+          }
+          expect(response.statusCode).toBe(200);
+          expect(response.headers['referrer-policy']).not.toBeDefined();
+          cb();
+        });
       });
     });
   });
