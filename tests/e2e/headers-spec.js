@@ -20,8 +20,42 @@ let request = require('request');
 let fs = require('fs');
 
 describe('headers', () => {
+  describe('hsts', () => {
+    it('should have "strict-transport-security" header set for text/html', cb => {
+      request.get({
+        url: baseUrl
+      }, (error, response) => {
+        if (error) {
+          return cb(error);
+        }
+        expect(response.statusCode).toBe(200);
+        let hsts = response.headers['strict-transport-security'];
+        expect(hsts).toBeDefined();
+        expect(hsts.includes('max-age=')).toBe(true);
+        expect(hsts.includes('includeSubDomains')).toBe(true);
+        expect(hsts.includes('preload')).toBe(true);
+        cb();
+      });
+    });
+
+    staticAsssets.forEach(asset => {
+      it(`should not have "strict-transport-security" header set for ${asset.mime}`, cb => {
+        request.get({
+          url: asset.url
+        }, (error, response) => {
+          if (error) {
+            return cb(error);
+          }
+          expect(response.statusCode).toBe(200);
+          expect(response.headers['strict-transport-security']).not.toBeDefined();
+          cb();
+        });
+      });
+    });
+  });
+
   describe('x-frame-options', () => {
-    it('should have x-frame-options set to deny for text/html', cb => {
+    it('should have "x-frame-options" header set to deny for text/html', cb => {
       request.get({
         url: baseUrl
       }, (error, response) => {
@@ -35,7 +69,7 @@ describe('headers', () => {
     });
 
     staticAsssets.forEach(asset => {
-      it(`should not have x-frame-options set for ${asset.mime}`, cb => {
+      it(`should not have "x-frame-options" header set for ${asset.mime}`, cb => {
         request.get({
           url: asset.url
         }, (error, response) => {
@@ -51,7 +85,7 @@ describe('headers', () => {
   });
 
   describe('csp', () => {
-    it('should have CSP set for text/html', cb => {
+    it('should have "CSP" header set for text/html', cb => {
       request.get({
         url: baseUrl
       }, (error, response) => {
@@ -67,7 +101,7 @@ describe('headers', () => {
     });
 
     staticAsssets.forEach(asset => {
-      it(`should not have CSP set for ${asset.mime}`, cb => {
+      it(`should not have "CSP" header set for ${asset.mime}`, cb => {
         request.get({
           url: asset.url
         }, (error, response) => {
@@ -179,13 +213,26 @@ describe('headers', () => {
         expect(response.statusCode).toBe(200);
         let pinsValue = response.headers['public-key-pins'];
         expect(pinsValue).toBeDefined();
-        let containsPins = pinsValue.indexOf('pin-sha256=') >= 0;
-        expect(containsPins).toBe(true);
-        let containsMaxAge = pinsValue.indexOf('max-age=') >= 0;
-        expect(containsMaxAge).toBe(true);
-        let containsReportUri = pinsValue.indexOf('report-uri=') >= 0;
-        expect(containsReportUri).toBe(true);
+        expect(pinsValue.includes('pin-sha256=')).toBe(true);
+        expect(pinsValue.includes('max-age=')).toBe(true);
+        expect(pinsValue.includes('report-uri=')).toBe(true);
+        expect(pinsValue.includes('includeSubDomains')).toBe(true);
         cb();
+      });
+    });
+
+    staticAsssets.forEach(asset => {
+      it(`should not have "Public-Key-Pins" header set for ${asset.mime}`, cb => {
+        request.get({
+          url: asset.url
+        }, (error, response) => {
+          if (error) {
+            return cb(error);
+          }
+          expect(response.statusCode).toBe(200);
+          expect(response.headers['public-key-pins']).not.toBeDefined();
+          cb();
+        });
       });
     });
   });
