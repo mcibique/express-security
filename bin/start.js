@@ -21,7 +21,7 @@ function startWorker() {
   let sockets = require('./sockets');
   let portHelper = require('../helpers/port');
 
-  const port = portHelper.normalize(process.env.PORT || '3000');
+  const port = portHelper.normalize(process.env.PORT || '8443');
 
   sockets.attachToServer(server, port);
   server.listen(port);
