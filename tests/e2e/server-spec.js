@@ -31,7 +31,7 @@ describe('server', () => {
         if (error) {
           return cb(error);
         }
-        expect(response.statusCode).not.toBeGreaterThan(400);
+        expect(response.statusCode).toBeLessThan(400);
         cb();
       });
     });

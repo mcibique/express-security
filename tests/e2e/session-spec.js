@@ -5,7 +5,7 @@ let request = require('request');
 
 describe('session', () => {
   it('should get session cookie with first request', cb => {
-    const cookies = request.jar();
+    let cookies = request.jar();
     request.get({
       url: baseUrl,
       jar: cookies,
@@ -19,33 +19,45 @@ describe('session', () => {
       let responseCookies = cookies.getCookies(baseUrl);
       expect(responseCookies).toBeDefined();
 
-      let filtered = responseCookies.filter(cookie => cookie.key === 'session');
-      expect(filtered.length).toBe(1);
-      expect(filtered[0].value).toBeDefined();
+      let filtered = responseCookies.find(cookie => cookie.key === 'session');
+      expect(filtered).toBeDefined();
 
       cb();
     });
   });
 
-  it('should have turned the secure, httpOnly and hostOnly flags on', cb => {
-    const cookies = request.jar();
-    request.get({
-      url: baseUrl,
-      jar: cookies,
-      followRedirect: true
-    }, (error, response) => {
-      if (error) {
-        return cb(error);
-      }
-      expect(response.statusCode).toBe(200);
+  describe('cookie flags', () => {
+    let sessionCookie;
 
-      let responseCookies = cookies.getCookies(baseUrl);
-      let sessionCookie = responseCookies.filter(cookie => cookie.key === 'session')[0];
-      expect(sessionCookie.httpOnly).toBe(true);
+    beforeEach(cb => {
+      let cookies = request.jar();
+      request.get({
+        url: baseUrl,
+        jar: cookies,
+        followRedirect: true
+      }, (error, response) => {
+        if (error) {
+          return cb(error);
+        }
+        expect(response.statusCode).toBe(200);
+
+        let responseCookies = cookies.getCookies(baseUrl);
+        sessionCookie = responseCookies.find(cookie => cookie.key === 'session');
+
+        cb();
+      });
+    });
+
+    it('should have turned Secure flag on', () => {
       expect(sessionCookie.secure).toBe(true);
-      expect(sessionCookie.hostOnly).toBe(true);
+    });
 
-      cb();
+    it('should have turned HttpOnly flag on', () => {
+      expect(sessionCookie.httpOnly).toBe(true);
+    });
+
+    it('should have turned HostOnly flag on', () => {
+      expect(sessionCookie.hostOnly).toBe(true);
     });
   });
 
@@ -54,7 +66,7 @@ describe('session', () => {
     let secondSessionCookie;
 
     beforeEach(cb => {
-      const cookies = request.jar();
+      let cookies = request.jar();
       request.get({
         url: baseUrl,
         jar: cookies,
@@ -64,7 +76,7 @@ describe('session', () => {
           return cb(firstError);
         }
         let firstResponseCookies = cookies.getCookies(baseUrl);
-        firstSessionCookie = firstResponseCookies.filter(cookie => cookie.key === 'session')[0];
+        firstSessionCookie = firstResponseCookies.find(cookie => cookie.key === 'session');
 
         // 2nd request
         request.get({
@@ -76,7 +88,7 @@ describe('session', () => {
             return cb(secondError);
           }
           let secondResponseCookies = cookies.getCookies(baseUrl);
-          secondSessionCookie = secondResponseCookies.filter(cookie => cookie.key === 'session')[0];
+          secondSessionCookie = secondResponseCookies.find(cookie => cookie.key === 'session');
 
           cb();
         });

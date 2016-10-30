@@ -27,39 +27,43 @@ describe('gzip', () => {
         }
         expect(response.statusCode).toBe(200);
         expect(response.headers['content-encoding']).toBeUndefined();
+        expect(response.headers['content-length']).toBeDefined();
         cb();
       });
     });
 
     staticAsssets.forEach(asset => {
       describe(`for the ${asset.mime}`, () => {
-        it('should have encoding in response headers', cb => {
+        let response;
+
+        beforeEach(cb => {
           request.get({
             url: asset.url,
             gzip: true
-          }, (error, response) => {
+          }, (error, assetResponse) => {
             if (error) {
               return cb(error);
             }
-            expect(response.statusCode).toBe(200);
-            expect(response.headers['content-encoding']).toBe('gzip');
+
+            response = assetResponse;
             cb();
           });
         });
 
+        it('should have encoding in response headers', () => {
+          expect(response.statusCode).toBe(200);
+          expect(response.headers['content-encoding']).toBe('gzip');
+        });
+
         if (asset.mime !== 'text/html') {
-          it('should use weak etags', cb => {
-            request.get({
-              url: asset.url,
-              gzip: true
-            }, (error, response) => {
-              if (error) {
-                return cb(error);
-              }
-              expect(response.statusCode).toBe(200);
-              expect(response.headers.etag).toMatch('^W/.+');
-              cb();
-            });
+          it('should use weak etags', () => {
+            expect(response.statusCode).toBe(200);
+            expect(response.headers.etag).toMatch('^W/.+');
+          });
+
+          it('should have content length header', () => {
+            expect(response.statusCode).toBe(200);
+            expect(response.headers['content-length']).toBeDefined();
           });
         }
       });
