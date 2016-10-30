@@ -13,7 +13,7 @@ module.exports = function initializeSecurity(app) {
   app.use(helmet.xssFilter());
   // Strict-Transport-Security: https://github.com/helmetjs/hsts
   app.use(helmet.hsts({
-    maxAge: ms(config.hsts.maxAge),
+    maxAge: ms(config.hsts.maxAge) / 1000,
     includeSubdomains: true,
     preload: true
   }));
@@ -45,7 +45,7 @@ module.exports = function initializeSecurity(app) {
   }));
   // Public-Key-Pins: https://github.com/helmetjs/hpkp
   app.use(helmet.hpkp({
-    maxAge: ms(config.hpkp.maxAge),
+    maxAge: ms(config.hpkp.maxAge) / 1000,
     sha256s: config.hpkp.sha256s,
     includeSubdomains: true,
     reportUri: config.hpkp.reportUri,
