@@ -246,7 +246,7 @@ describe('headers', () => {
           return cb(error);
         }
         expect(response.statusCode).toBe(200);
-        expect(response.headers['referrer-policy']).toBe('same-origin');
+        expect(response.headers['referrer-policy']).toBe('no-referrer');
         cb();
       });
     });

@@ -54,5 +54,5 @@ module.exports = function initializeSecurity(app) {
   // X-DNS-Prefetch-Control: https://github.com/helmetjs/dns-prefetch-control
   app.use(helmet.dnsPrefetchControl({ allow: false }));
   // https://github.com/helmetjs/referrer-policy
-  app.use(helmet.referrerPolicy({ policy: 'same-origin' }));
+  app.use(helmet.referrerPolicy({ policy: 'no-referrer' }));
 };
