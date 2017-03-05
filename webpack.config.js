@@ -22,13 +22,7 @@ module.exports = {
       'process.env.NODE_ENV': isDebug ? '"development"' : '"production"'
     }),
     new ExtractTextPlugin('../styles/[name].min.css'),
-    new webpack.optimize.OccurenceOrderPlugin(),
-    new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.min.js'),
-    new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        warnings: false
-      }
-    }),
+    new webpack.optimize.CommonsChunkPlugin({ name: 'vendor', filename: 'vendor.min.js' }),
     new CompressionPlugin({
       asset: '[path].gz[query]',
       algorithm: 'gzip',
@@ -45,25 +39,39 @@ module.exports = {
   ],
   devtool: 'source-map',
   module: {
-    loaders: [
-      {
-        test: /\.js$/,
-        exclude: /node_modules/,
-        loader: 'babel'
-      }, {
-        test: /\.scss$/,
-        loader: ExtractTextPlugin.extract('style', 'css!postcss!sass')
-      }
-    ]
-  },
-  sassLoader: {
-    includePaths: [
-      path.resolve(__dirname, './node_modules/normalize-scss/sass'),
-      path.resolve(__dirname, './node_modules/support-for/sass')
-    ]
-  },
-  postcss: [autoprefixer({
-    browsers: ['last 2 versions', 'ie >= 9', 'ff >= 2'],
-    cascade: false
-  })]
+    rules: [{
+      test: /\.js$/,
+      exclude: /node_modules/,
+      loader: 'babel-loader'
+    }, {
+      test: /\.scss$/,
+      loader: ExtractTextPlugin.extract({
+        fallback: 'style-loader',
+        use: [{
+          loader: 'css-loader',
+          options: {
+            sourceMap: true
+          }
+        }, {
+          loader: 'postcss-loader',
+          options: {
+            sourceMap: true,
+            plugins: [autoprefixer({
+              browsers: ['last 2 versions', 'ie >= 9', 'ff >= 2'],
+              cascade: false
+            })]
+          }
+        }, {
+          loader: 'sass-loader',
+          options: {
+            sourceMap: true,
+            includePaths: [
+              path.resolve(__dirname, './node_modules/normalize-scss/sass'),
+              path.resolve(__dirname, './node_modules/support-for/sass')
+            ]
+          }
+        }]
+      })
+    }]
+  }
 };
