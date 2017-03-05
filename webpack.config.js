@@ -14,7 +14,7 @@ module.exports = {
     vendor: ['jquery']
   },
   output: {
-    path: './public/scripts/',
+    path: './server/public/scripts/',
     filename: 'app.min.js'
   },
   plugins: [

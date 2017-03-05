@@ -1,12 +1,13 @@
 'use strict';
 
-let app = require('../app.js');
-let logger = require('../helpers/logger');
+let app = require('./app');
+let logger = require('./helpers/logger');
 let http = require('spdy');
 let fs = require('fs');
+let path = require('path');
 
-const key = fs.readFileSync('certificates/server.key', 'utf8');
-const cert = fs.readFileSync('certificates/server.cert', 'utf8');
+const key = fs.readFileSync(path.join(__dirname, 'certificates/server.key'), 'utf8');
+const cert = fs.readFileSync(path.join(__dirname, 'certificates/server.cert'), 'utf8');
 let server = http.createServer({ key, cert }, app);
 
 server.on('error', onError);

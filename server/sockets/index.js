@@ -8,7 +8,7 @@ let url = require('url');
 let logger = require('../helpers/logger');
 let session = require('../middlewares/session-io');
 let auth = require('../middlewares/session-io');
-let emailSockets = require('../sockets/email');
+let emailSockets = require('./email');
 const useCluster = require('../helpers/cluster');
 const config = require('../helpers/config');
 

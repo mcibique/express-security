@@ -1,7 +1,7 @@
 'use strict';
 
-const useCluster = require('../helpers/cluster');
-const logger = require('../helpers/logger');
+const useCluster = require('./helpers/cluster');
+const logger = require('./helpers/logger');
 
 if (useCluster) {
   let cluster = require('cluster');
@@ -19,7 +19,7 @@ if (useCluster) {
 function startWorker() {
   let server = require('./server');
   let sockets = require('./sockets');
-  let portHelper = require('../helpers/port');
+  let portHelper = require('./helpers/port');
 
   const port = portHelper.normalize(process.env.PORT || '8443');
 

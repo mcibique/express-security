@@ -1,4 +1,17 @@
 {
-  "presets": ["latest", "stage-0"],
-  "plugins": ["transform-runtime"]
+  "env": {
+    "server": {
+      "presets": [
+        ["env", { "targets": { "node": "current" }, "debug": true }],
+        "stage-0"
+      ]
+    },
+    "client": {
+      "presets": [
+        ["env", { "targets": { "browsers": ["last 2 versions", "ie >= 9", "ff >= 2"] }, "debug": true }],
+        "stage-0"
+      ],
+      "plugins": ["transform-runtime"]
+    }
+  }
 }

@@ -2,8 +2,8 @@
 
 let os = require('os');
 
-const config = require('../helpers/config');
-const isDebug = require('../helpers/debug');
+const config = require('./config');
+const isDebug = require('./debug');
 
 let useCluster = false;
 if (config.cluster === 'auto' && !isDebug) {

@@ -5,15 +5,15 @@ const baseUrl = 'https://localhost:5000';
 const staticAsssets = [{
   mime: 'text/css',
   url: `${baseUrl}/assets/styles/app.min.css`,
-  serverPath: 'public/styles/app.min.css'
+  serverPath: 'server/public/styles/app.min.css'
 }, {
   mime: 'application/javascript',
   url: `${baseUrl}/assets/scripts/app.min.js`,
-  serverPath: 'public/scripts/app.min.js'
+  serverPath: 'server/public/scripts/app.min.js'
 }, {
   mime: 'image/png',
   url: `${baseUrl}/assets/images/express-security-logo.png`,
-  serverPath: 'public/images/express-security-logo.png'
+  serverPath: 'server/public/images/express-security-logo.png'
 }];
 
 let request = require('request');

@@ -7,8 +7,8 @@ let debug = require('debug')('config');
 
 const isDev = require('./debug');
 
-const devConfigPath = path.resolve(__dirname, '..', 'config.dev.json');
-const defaultConfigPath = '../config.json';
+const devConfigPath = path.resolve(__dirname, '..', 'config', 'config.dev.json');
+const defaultConfigPath = '../config/config.json';
 let config;
 let defaultConfig = require(defaultConfigPath);
 

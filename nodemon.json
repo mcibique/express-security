@@ -1,13 +1,15 @@
 {
   "restartable": "rs",
+  "exec": "babel-node",
   "ignore": [
     ".git",
-    "certificates/*",
-    "logs/*",
-    "tests/*",
-    "node_modules/*",
-    "public/*",
+    "build/*",
     "client/*",
+    "node_modules/*",
+    "server/certificates/*",
+    "server/logs/*",
+    "server/public/*",
+    "tests/*",
     "nodemon.json",
     "package.json"
   ],
@@ -15,6 +17,7 @@
   "env": {
     "PORT": 5000,
     "NODE_ENV": "development",
+    "BABEL_ENV": "client",
     "DEBUG": "cluster,express:application,socket.io:server,engine:socket,server,config"
   },
   "ext": "js json"
