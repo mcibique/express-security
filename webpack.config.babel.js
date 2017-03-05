@@ -1,17 +1,17 @@
-let path = require('path');
-let webpack = require('webpack');
-let autoprefixer = require('autoprefixer');
-let ExtractTextPlugin = require('extract-text-webpack-plugin');
-let CompressionPlugin = require('compression-webpack-plugin');
-let BrotliPlugin = require('brotli-webpack-plugin');
+import autoprefixer from 'autoprefixer';
+import BrotliPlugin from 'brotli-webpack-plugin';
+import CompressionPlugin from 'compression-webpack-plugin';
+import ExtractTextPlugin from 'extract-text-webpack-plugin';
+import path from 'path';
+import webpack from 'webpack';
 
-const isDebug = process.argv.indexOf('-p') < 0;
+const IS_DEBUG = process.argv.indexOf('-p') < 0;
 
-module.exports = {
+export default {
   cache: true,
   entry: {
     app: './client/main.js',
-    vendor: ['jquery']
+    vendor: ['jquery', 'socket.io-client']
   },
   output: {
     path: './server/public/scripts/',
@@ -19,7 +19,7 @@ module.exports = {
   },
   plugins: [
     new webpack.DefinePlugin({
-      'process.env.NODE_ENV': isDebug ? '"development"' : '"production"'
+      'process.env.NODE_ENV': IS_DEBUG ? '"development"' : '"production"'
     }),
     new ExtractTextPlugin('../styles/[name].min.css'),
     new webpack.optimize.CommonsChunkPlugin({ name: 'vendor', filename: 'vendor.min.js' }),
@@ -56,7 +56,7 @@ module.exports = {
           loader: 'postcss-loader',
           options: {
             sourceMap: true,
-            plugins: [autoprefixer({
+            plugins: () => [autoprefixer({
               browsers: ['last 2 versions', 'ie >= 9', 'ff >= 2'],
               cascade: false
             })]
