@@ -7,10 +7,10 @@ function initialize() {
   });
 
   socket
-    .on('connect', () => {
+    .on('connect', function onEmailsConnected() {
       console.log('Connected to /emails/ server.');
     })
-    .on('email-status', data => {
+    .on('email-status', function onEmailStatusReceived(data) {
       console.log('New email status received:', data);
       let $emailStatusElement = $('header .email-status');
       $emailStatusElement.removeClass('not-loaded');

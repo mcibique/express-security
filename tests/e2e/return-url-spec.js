@@ -1,15 +1,14 @@
-'use strict';
+import request from 'request';
 
-const baseUrl = 'https://localhost:5000';
-let request = require('request');
+const BASE_URL = 'https://localhost:5000';
 
-describe('return url', () => {
-  describe('when redirecting to login', () => {
-    it('should have returnUrl', cb => {
+describe('return url', function () {
+  describe('when redirecting to login', function () {
+    it('should have returnUrl', function (cb) {
       request.get({
-        url: `${baseUrl}/user/?id=1`,
+        url: `${BASE_URL}/user/?id=1`,
         followRedirect: false
-      }, (error, response) => {
+      }, function onReponse(error, response) {
         if (error) {
           return cb(error);
         }
@@ -19,13 +18,13 @@ describe('return url', () => {
       });
     });
 
-    describe('and returnUrl is absolute URL', () => {
-      it('should replace it with default returnUrl', cb => {
+    describe('and returnUrl is absolute URL', function () {
+      it('should replace it with default returnUrl', function (cb) {
         const targetSite = 'http://whatever.com';
         request.get({
-          url: `${baseUrl}/login?returnUrl=${encodeURIComponent(targetSite)}`,
+          url: `${BASE_URL}/login?returnUrl=${encodeURIComponent(targetSite)}`,
           followRedirect: false
-        }, (error, response) => {
+        }, function onReponse(error, response) {
           if (error) {
             return cb(error);
           }

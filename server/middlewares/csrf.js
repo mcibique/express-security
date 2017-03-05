@@ -1,7 +1,5 @@
-'use strict';
+import csrf from 'csurf';
 
-let csrf = require('csurf');
-
-module.exports = csrf({
+export default csrf({
   cookie: false
 });

@@ -1,5 +1,3 @@
-'use strict';
-
 function isLocalUrl(url) {
   if (!url) {
     return false;
@@ -13,6 +11,4 @@ function isLocalUrl(url) {
   return url.indexOf('/') === 0;
 }
 
-module.exports = {
-  isLocalUrl
-};
+export { isLocalUrl };

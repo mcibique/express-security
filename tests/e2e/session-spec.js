@@ -1,22 +1,20 @@
-'use strict';
+import request from 'request';
+const BASE_URL = 'https://localhost:5000';
 
-const baseUrl = 'https://localhost:5000';
-let request = require('request');
-
-describe('session', () => {
-  it('should get session cookie with first request', cb => {
+describe('session', function () {
+  it('should get session cookie with first request', function (cb) {
     let cookies = request.jar();
     request.get({
-      url: baseUrl,
+      url: BASE_URL,
       jar: cookies,
       followRedirect: true
-    }, (error, response) => {
+    }, function onReponse(error, response) {
       if (error) {
         return cb(error);
       }
       expect(response.statusCode).toBe(200);
 
-      let responseCookies = cookies.getCookies(baseUrl);
+      let responseCookies = cookies.getCookies(BASE_URL);
       expect(responseCookies).toBeDefined();
 
       let filtered = responseCookies.find(cookie => cookie.key === 'session');
@@ -26,68 +24,68 @@ describe('session', () => {
     });
   });
 
-  describe('cookie flags', () => {
+  describe('cookie flags', function () {
     let sessionCookie;
 
-    beforeEach(cb => {
+    beforeEach(function (cb) {
       let cookies = request.jar();
       request.get({
-        url: baseUrl,
+        url: BASE_URL,
         jar: cookies,
         followRedirect: true
-      }, (error, response) => {
+      }, function onReponse(error, response) {
         if (error) {
           return cb(error);
         }
         expect(response.statusCode).toBe(200);
 
-        let responseCookies = cookies.getCookies(baseUrl);
+        let responseCookies = cookies.getCookies(BASE_URL);
         sessionCookie = responseCookies.find(cookie => cookie.key === 'session');
 
         cb();
       });
     });
 
-    it('should have turned Secure flag on', () => {
+    it('should have turned Secure flag on', function () {
       expect(sessionCookie.secure).toBe(true);
     });
 
-    it('should have turned HttpOnly flag on', () => {
+    it('should have turned HttpOnly flag on', function () {
       expect(sessionCookie.httpOnly).toBe(true);
     });
 
-    it('should have turned HostOnly flag on', () => {
+    it('should have turned HostOnly flag on', function () {
       expect(sessionCookie.hostOnly).toBe(true);
     });
   });
 
-  describe('cookie between two request', () => {
+  describe('cookie between two request', function () {
     let firstSessionCookie;
     let secondSessionCookie;
 
-    beforeEach(cb => {
+    beforeEach(function (cb) {
       let cookies = request.jar();
       request.get({
-        url: baseUrl,
+        url: BASE_URL,
         jar: cookies,
         followRedirect: true
       }, firstError => {
         if (firstError) {
           return cb(firstError);
         }
-        let firstResponseCookies = cookies.getCookies(baseUrl);
+        let firstResponseCookies = cookies.getCookies(BASE_URL);
         firstSessionCookie = firstResponseCookies.find(cookie => cookie.key === 'session');
 
         // 2nd request
         request.get({
-          url: baseUrl,
+          url: BASE_URL,
           jar: cookies,
           followRedirect: true
         }, secondError => {
           if (secondError) {
             return cb(secondError);
           }
-          let secondResponseCookies = cookies.getCookies(baseUrl);
+          let secondResponseCookies = cookies.getCookies(BASE_URL);
           secondSessionCookie = secondResponseCookies.find(cookie => cookie.key === 'session');
 
           cb();
@@ -95,7 +93,7 @@ describe('session', () => {
       });
     });
 
-    it('should keep the same session cookie between two requests', () => {
+    it('should keep the same session cookie between two requests', function () {
       expect(firstSessionCookie).toBeDefined();
       expect(secondSessionCookie).toBeDefined();
       expect(firstSessionCookie.value).toBeDefined();
@@ -103,7 +101,7 @@ describe('session', () => {
       expect(firstSessionCookie.value).toBe(secondSessionCookie.value);
     });
 
-    it('should keep renewing the session cookie between two requests', () => {
+    it('should keep renewing the session cookie between two requests', function () {
       expect(firstSessionCookie).toBeDefined();
       expect(secondSessionCookie).toBeDefined();
       expect(firstSessionCookie.expires).toBeDefined();

@@ -1,14 +1,11 @@
-'use strict';
+import compression from 'compression';
+import config from '../helpers/config';
+import precompressedAssets from './precompressed-assets';
 
-let compression = require('compression');
-let precompressedAssets = require('./precompressed-assets');
+let precompressedBrotliEnabled = config.compression.precompressedAssets.brotli;
+let precompressedGzipEnabled = config.compression.precompressedAssets.gzip;
 
-const config = require('../helpers/config');
-
-const precompressedBrotliEnabled = config.compression.precompressedAssets.brotli;
-const precompressedGzipEnabled = config.compression.precompressedAssets.gzip;
-
-module.exports = function initCompression(app, publicFolder) {
+export default function initCompression(app, publicFolder) {
   if (precompressedBrotliEnabled || precompressedGzipEnabled) {
     app.use(precompressedAssets(publicFolder));
   }
@@ -16,4 +13,4 @@ module.exports = function initCompression(app, publicFolder) {
   app.use(compression({
     threshold: config.compression.threshold
   }));
-};
+}

@@ -1,30 +1,28 @@
-'use strict';
+import fs from 'fs';
+import request from 'request';
 
-const baseUrl = 'https://localhost:5000';
+const BASE_URL = 'https://localhost:5000';
 
-const staticAsssets = [{
+let staticAsssets = [{
   mime: 'text/css',
-  url: `${baseUrl}/assets/styles/app.min.css`,
+  url: `${BASE_URL}/assets/styles/app.min.css`,
   serverPath: 'server/public/styles/app.min.css'
 }, {
   mime: 'application/javascript',
-  url: `${baseUrl}/assets/scripts/app.min.js`,
+  url: `${BASE_URL}/assets/scripts/app.min.js`,
   serverPath: 'server/public/scripts/app.min.js'
 }, {
   mime: 'image/png',
-  url: `${baseUrl}/assets/images/express-security-logo.png`,
+  url: `${BASE_URL}/assets/images/express-security-logo.png`,
   serverPath: 'server/public/images/express-security-logo.png'
 }];
 
-let request = require('request');
-let fs = require('fs');
-
-describe('headers', () => {
-  describe('hsts', () => {
-    it('should have "strict-transport-security" header set for text/html', cb => {
+describe('headers', function () {
+  describe('hsts', function () {
+    it('should have "strict-transport-security" header set for text/html', function (cb) {
       request.get({
-        url: baseUrl
-      }, (error, response) => {
+        url: BASE_URL
+      }, function onReponse(error, response) {
         if (error) {
           return cb(error);
         }
@@ -38,11 +36,11 @@ describe('headers', () => {
       });
     });
 
-    staticAsssets.forEach(asset => {
-      it(`should not have "strict-transport-security" header set for ${asset.mime}`, cb => {
+    staticAsssets.forEach(function (asset) {
+      it(`should not have "strict-transport-security" header set for ${asset.mime}`, function (cb) {
         request.get({
           url: asset.url
-        }, (error, response) => {
+        }, function onReponse(error, response) {
           if (error) {
             return cb(error);
           }
@@ -54,11 +52,11 @@ describe('headers', () => {
     });
   });
 
-  describe('x-frame-options', () => {
-    it('should have "x-frame-options" header set to deny for text/html', cb => {
+  describe('x-frame-options', function () {
+    it('should have "x-frame-options" header set to deny for text/html', function (cb) {
       request.get({
-        url: baseUrl
-      }, (error, response) => {
+        url: BASE_URL
+      }, function onReponse(error, response) {
         if (error) {
           return cb(error);
         }
@@ -68,11 +66,11 @@ describe('headers', () => {
       });
     });
 
-    staticAsssets.forEach(asset => {
-      it(`should not have "x-frame-options" header set for ${asset.mime}`, cb => {
+    staticAsssets.forEach(function (asset) {
+      it(`should not have "x-frame-options" header set for ${asset.mime}`, function (cb) {
         request.get({
           url: asset.url
-        }, (error, response) => {
+        }, function onReponse(error, response) {
           if (error) {
             return cb(error);
           }
@@ -84,11 +82,11 @@ describe('headers', () => {
     });
   });
 
-  describe('csp', () => {
-    it('should have "CSP" header set for text/html', cb => {
+  describe('csp', function () {
+    it('should have "CSP" header set for text/html', function (cb) {
       request.get({
-        url: baseUrl
-      }, (error, response) => {
+        url: BASE_URL
+      }, function onReponse(error, response) {
         if (error) {
           return cb(error);
         }
@@ -100,11 +98,11 @@ describe('headers', () => {
       });
     });
 
-    staticAsssets.forEach(asset => {
-      it(`should not have "CSP" header set for ${asset.mime}`, cb => {
+    staticAsssets.forEach(function (asset) {
+      it(`should not have "CSP" header set for ${asset.mime}`, function (cb) {
         request.get({
           url: asset.url
-        }, (error, response) => {
+        }, function onReponse(error, response) {
           if (error) {
             return cb(error);
           }
@@ -116,11 +114,11 @@ describe('headers', () => {
     });
   });
 
-  describe('dns prefetching', () => {
-    it('should have DNS prefetching turned off for text/html', cb => {
+  describe('dns prefetching', function () {
+    it('should have DNS prefetching turned off for text/html', function (cb) {
       request.get({
-        url: baseUrl
-      }, (error, response) => {
+        url: BASE_URL
+      }, function onReponse(error, response) {
         if (error) {
           return cb(error);
         }
@@ -131,11 +129,11 @@ describe('headers', () => {
     });
   });
 
-  describe('caching', () => {
-    it('should have turned cache off for text/html', cb => {
+  describe('caching', function () {
+    it('should have turned cache off for text/html', function (cb) {
       request.get({
-        url: baseUrl
-      }, (error, response) => {
+        url: BASE_URL
+      }, function onReponse(error, response) {
         if (error) {
           return cb(error);
         }
@@ -149,11 +147,11 @@ describe('headers', () => {
       });
     });
 
-    staticAsssets.forEach(asset => {
-      it(`should have turned cache on for ${asset.mime}`, cb => {
+    staticAsssets.forEach(function (asset) {
+      it(`should have turned cache on for ${asset.mime}`, function (cb) {
         request.get({
           url: asset.url
-        }, (error, response) => {
+        }, function onReponse(error, response) {
           if (error) {
             return cb(error);
           }
@@ -166,12 +164,12 @@ describe('headers', () => {
       });
     });
 
-    describe('last-modified', () => {
-      staticAsssets.forEach(asset => {
-        it(`should have "Last-Modified" header set for ${asset.mime}`, cb => {
+    describe('last-modified', function () {
+      staticAsssets.forEach(function (asset) {
+        it(`should have "Last-Modified" header set for ${asset.mime}`, function (cb) {
           request.get({
             url: asset.url
-          }, (error, response) => {
+          }, function onReponse(error, response) {
             if (error) {
               return cb(error);
             }
@@ -184,12 +182,12 @@ describe('headers', () => {
       });
     });
 
-    describe('etag', () => {
-      staticAsssets.forEach(asset => {
-        it(`should have "ETag" header set for ${asset.mime}`, cb => {
+    describe('etag', function () {
+      staticAsssets.forEach(function (asset) {
+        it(`should have "ETag" header set for ${asset.mime}`, function (cb) {
           request.get({
             url: asset.url
-          }, (error, response) => {
+          }, function onReponse(error, response) {
             if (error) {
               return cb(error);
             }
@@ -202,11 +200,11 @@ describe('headers', () => {
     });
   });
 
-  describe('public-key-pins', () => {
-    it('should have "Public-Key-Pins" header for text/html', cb => {
+  describe('public-key-pins', function () {
+    it('should have "Public-Key-Pins" header for text/html', function (cb) {
       request.get({
-        url: baseUrl
-      }, (error, response) => {
+        url: BASE_URL
+      }, function onReponse(error, response) {
         if (error) {
           return cb(error);
         }
@@ -221,11 +219,11 @@ describe('headers', () => {
       });
     });
 
-    staticAsssets.forEach(asset => {
-      it(`should not have "Public-Key-Pins" header set for ${asset.mime}`, cb => {
+    staticAsssets.forEach(function (asset) {
+      it(`should not have "Public-Key-Pins" header set for ${asset.mime}`, function (cb) {
         request.get({
           url: asset.url
-        }, (error, response) => {
+        }, function onReponse(error, response) {
           if (error) {
             return cb(error);
           }
@@ -237,11 +235,11 @@ describe('headers', () => {
     });
   });
 
-  describe('referrer-policy', () => {
-    it('should have "referrer-policy" header set for text/html', cb => {
+  describe('referrer-policy', function () {
+    it('should have "referrer-policy" header set for text/html', function (cb) {
       request.get({
-        url: baseUrl
-      }, (error, response) => {
+        url: BASE_URL
+      }, function onReponse(error, response) {
         if (error) {
           return cb(error);
         }
@@ -251,11 +249,11 @@ describe('headers', () => {
       });
     });
 
-    staticAsssets.forEach(asset => {
-      it(`should not have "referrer-policy" header set for ${asset.mime}`, cb => {
+    staticAsssets.forEach(function (asset) {
+      it(`should not have "referrer-policy" header set for ${asset.mime}`, function (cb) {
         request.get({
           url: asset.url
-        }, (error, response) => {
+        }, function onReponse(error, response) {
           if (error) {
             return cb(error);
           }

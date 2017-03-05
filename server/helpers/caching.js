@@ -1,24 +1,21 @@
-'use strict';
-
-let extend = require('extend');
-let cacheManager = require('cache-manager');
-let redisStore = require('cache-manager-redis');
-let logger = require('./logger');
-
-const config = require('./config');
+import cacheManager from 'cache-manager';
+import config from './config';
+import extend from 'extend';
+import logger from './logger';
+import redisStore from 'cache-manager-redis';
 
 // level 2 cache - redis
-const redisConfig = extend({}, config.caching.redis, { store: redisStore });
-const redisCache = cacheManager.caching(redisConfig);
+let redisConfig = extend({}, config.caching.redis, { store: redisStore });
+let redisCache = cacheManager.caching(redisConfig);
 
-redisCache.store.events.on('redisError', error => {
+redisCache.store.events.on('redisError', function onRedisCacheError(error) {
   logger.error(error);
 });
 
 // level 1 cache - memory
-const memoryConfig = extend({}, config.caching.memory, { store: 'memory' });
-const memoryCache = cacheManager.caching(memoryConfig);
+let memoryConfig = extend({}, config.caching.memory, { store: 'memory' });
+let memoryCache = cacheManager.caching(memoryConfig);
 
 // cache hierarchy wrapper
-const multiCache = cacheManager.multiCaching([memoryCache, redisCache]);
-module.exports = multiCache;
+let multiCache = cacheManager.multiCaching([memoryCache, redisCache]);
+export default multiCache;

@@ -1,7 +1,4 @@
-'use strict';
+import config from '../helpers/config';
+import cookieParser from 'cookie-parser';
 
-let cookieParser = require('cookie-parser');
-
-const config = require('../helpers/config');
-
-module.exports = cookieParser(config.secret);
+export default cookieParser(config.secret);

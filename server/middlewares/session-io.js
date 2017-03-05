@@ -1,10 +1,7 @@
-'use strict';
+import cookies from '../middlewares/cookies';
+import ioSession from 'express-socket.io-session';
+import session from '../middlewares/session';
 
-let ioSession = require('express-socket.io-session');
-
-let session = require('../middlewares/session');
-let cookies = require('../middlewares/cookies');
-
-module.exports = ioSession(session, cookies, {
+export default ioSession(session, cookies, {
   autoSave: true
 });

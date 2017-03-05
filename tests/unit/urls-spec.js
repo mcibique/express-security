@@ -1,9 +1,7 @@
-'use strict';
+import { isLocalUrl } from '../../server/helpers/url';
 
-let urls = require('../../helpers/url');
-
-describe('url helper', () => {
-  const externalUrls = [
+describe('url helper', function () {
+  let externalUrls = [
     'http://whatever.com',
     'https://whatever.com',
     '//whatever.com',
@@ -12,21 +10,21 @@ describe('url helper', () => {
     'https://whatever.com:443'
   ];
 
-  const localUrls = [
+  let localUrls = [
     '/',
     '/login',
     '/user?id="1"'
   ];
 
   function testExternalUrl(url) {
-    it(`should mark url ${url} as external.`, () => {
-      expect(urls.isLocalUrl(url)).toBe(false);
+    it(`should mark url ${url} as external.`, function () {
+      expect(isLocalUrl(url)).toBe(false);
     });
   }
 
   function testLocalUrl(url) {
-    it(`should mark url ${url} as local.`, () => {
-      expect(urls.isLocalUrl(url)).toBe(true);
+    it(`should mark url ${url} as local.`, function () {
+      expect(isLocalUrl(url)).toBe(true);
     });
   }
 

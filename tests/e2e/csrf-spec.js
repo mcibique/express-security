@@ -1,20 +1,18 @@
-'use strict';
+import request from 'request';
 
-let request = require('request');
+const BASE_URL = 'https://localhost:5000';
+const LOGIN_URL = `${BASE_URL}/login/`;
 
-const baseUrl = 'https://localhost:5000';
-const loginUrl = `${baseUrl}/login/`;
-
-describe('csrf', () => {
-  describe('when token is not present', () => {
-    it('should return back to login', cb => {
+describe('csrf', function () {
+  describe('when token is not present', function () {
+    it('should return back to login', function (cb) {
       request.post({
-        url: loginUrl,
+        url: LOGIN_URL,
         form: {
           username: 'a',
           password: 'b'
         }
-      }, (error, response) => {
+      }, function onReponse(error, response) {
         if (error) {
           return cb(error);
         }
@@ -25,16 +23,16 @@ describe('csrf', () => {
     });
   });
 
-  describe('when token is wrong', () => {
-    it('should return back to login', cb => {
+  describe('when token is wrong', function () {
+    it('should return back to login', function (cb) {
       request.post({
-        url: loginUrl,
+        url: LOGIN_URL,
         form: {
           username: 'a',
           password: 'b',
           _csrf: 'random invalid token'
         }
-      }, (error, response) => {
+      }, function onReponse(error, response) {
         if (error) {
           return cb(error);
         }

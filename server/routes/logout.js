@@ -1,11 +1,9 @@
-'use strict';
-
-let express = require('express');
+import express from 'express';
 let router = express.Router();
 
 router.get('/', (req, res, next) => {
   // invalidate session: https://www.owasp.org/index.php/Session_Management_Cheat_Sheet
-  req.session.destroy(err => {
+  req.session.destroy(function onSessionDestroyed(err) {
     if (err) {
       return next(err);
     }
@@ -13,4 +11,4 @@ router.get('/', (req, res, next) => {
   });
 });
 
-module.exports = router;
+export default router;

@@ -1,23 +1,23 @@
-'use strict';
+import debug from 'debug';
+import extend from 'extend';
+import fs from 'fs';
+import IS_DEBUG from './debug';
+import path from 'path';
 
-let fs = require('fs');
-let path = require('path');
-let extend = require('extend');
-let debug = require('debug')('config');
+let log = debug('config');
 
-const isDev = require('./debug');
+const DEV_CONFIG_PATH = path.resolve(__dirname, '..', 'config', 'config.dev.json');
+const DEFAULT_CONFIG_PATH = '../config/config.json';
 
-const devConfigPath = path.resolve(__dirname, '..', 'config', 'config.dev.json');
-const defaultConfigPath = '../config/config.json';
 let config;
-let defaultConfig = require(defaultConfigPath);
+let defaultConfig = require(DEFAULT_CONFIG_PATH);
 
-if (isDev && fs.existsSync(devConfigPath)) {
-  let devConfig = require(devConfigPath);
+if (IS_DEBUG && fs.existsSync(DEV_CONFIG_PATH)) {
+  let devConfig = require(DEV_CONFIG_PATH);
   config = extend(true, {}, defaultConfig, devConfig);
-  debug(`using dev config file from ${devConfigPath}`);
+  log(`using dev config file from ${DEV_CONFIG_PATH}`);
 } else {
   config = defaultConfig;
 }
 
-module.exports = config;
+export default config;

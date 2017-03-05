@@ -218,7 +218,7 @@
     "semi": 2,
     "semi-spacing": 2,
     "sort-vars": 2,
-    "sort-imports": 2,
+    "sort-imports": [2, { "ignoreCase": true }],
     "space-before-blocks": 2,
     "space-before-function-paren": [2, {
       "anonymous": "always",

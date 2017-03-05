@@ -1,17 +1,15 @@
-'use strict';
+import config from '../helpers/config';
+import debug from 'debug';
+import find from 'find';
+import mime from 'mime-types';
+import parseUrl from 'parseurl';
+import path from 'path';
 
-let parseUrl = require('parseurl');
-let path = require('path');
-let mime = require('mime-types');
-let find = require('find');
-let debug = require('debug')('precompressed-assets');
+let log = debug('precompressed-assets');
+let precompressedBrotliEnabled = config.compression.precompressedAssets.brotli;
+let precompressedGzipEnabled = config.compression.precompressedAssets.gzip;
 
-const config = require('../helpers/config');
-
-const precompressedBrotliEnabled = config.compression.precompressedAssets.brotli;
-const precompressedGzipEnabled = config.compression.precompressedAssets.gzip;
-
-module.exports = function precompressedAssets(publicFolder) {
+export default function precompressedAssets(publicFolder) {
   let precompressedCache = createCache(publicFolder);
 
   return function precompressedMiddleware(req, res, next) {
@@ -24,7 +22,7 @@ module.exports = function precompressedAssets(publicFolder) {
     let canUseGzip = acceptEncoding.includes('gzip') && precompressedGzipEnabled;
 
     if (!canUseGzip && !canUseBrotli) {
-      debug(`Skipping ${req.url}. Reason: no accept-encoding.`);
+      log(`Skipping ${req.url}. Reason: no accept-encoding.`);
       return next();
     }
 
@@ -34,7 +32,7 @@ module.exports = function precompressedAssets(publicFolder) {
 
     name.orig = parseUrl(req).pathname.replace('/assets/', '/');
     if (!name.orig.match(/\.(html|js|css|svg)$/)) {
-      debug(`Skipping ${req.url}. Reason: regex doesn't match.`);
+      log(`Skipping ${req.url}. Reason: regex doesn't match.`);
       return next();
     }
 
@@ -42,20 +40,20 @@ module.exports = function precompressedAssets(publicFolder) {
     name.full = path.join(publicFolder, name.precompressed);
 
     if (!precompressedCache.has(name.full)) {
-      debug(`Skipping ${req.url}. Reason: cache miss.`);
+      log(`Skipping ${req.url}. Reason: cache miss.`);
       return next();
     }
 
     setHeaders(res, name.orig, encoding);
     req.url = req.url.replace(name.orig, name.precompressed);
-    debug(`Serving ${req.url}.`);
+    log(`Serving ${req.url}.`);
     next();
   };
 
   function createCache(root) {
     let cache = new Set();
     find.fileSync(/\.(gz|br)$/, root).forEach(file => cache.add(file));
-    debug(`Found ${cache.size} precompressed files.`);
+    log(`Found ${cache.size} precompressed files.`);
     return cache;
   }
 
@@ -70,4 +68,4 @@ module.exports = function precompressedAssets(publicFolder) {
     res.setHeader('Content-Encoding', encoding);
     res.setHeader('Vary', 'Accept-Encoding');
   }
-};
+}

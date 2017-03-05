@@ -1,6 +1,4 @@
-'use strict';
-
-function normalize(val) {
+function normalizePort(val) {
   let port = parseInt(val, 10);
 
   if (isNaN(port)) {
@@ -16,4 +14,4 @@ function normalize(val) {
   return false;
 }
 
-module.exports = { normalize };
+export { normalizePort };

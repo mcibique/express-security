@@ -1,10 +1,8 @@
-'use strict';
-
-let express = require('express');
+import express from 'express';
 let router = express.Router();
 
 router.get('/', (req, res) => {
   res.render('user');
 });
 
-module.exports = router;
+export default router;

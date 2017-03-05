@@ -1,13 +1,11 @@
-'use strict';
+import app from './app';
+import fs from 'fs';
+import http from 'spdy';
+import logger from './helpers/logger';
+import path from 'path';
 
-let app = require('./app');
-let logger = require('./helpers/logger');
-let http = require('spdy');
-let fs = require('fs');
-let path = require('path');
-
-const key = fs.readFileSync(path.join(__dirname, 'certificates/server.key'), 'utf8');
-const cert = fs.readFileSync(path.join(__dirname, 'certificates/server.cert'), 'utf8');
+let key = fs.readFileSync(path.join(__dirname, 'certificates/server.key'), 'utf8');
+let cert = fs.readFileSync(path.join(__dirname, 'certificates/server.cert'), 'utf8');
 let server = http.createServer({ key, cert }, app);
 
 server.on('error', onError);
@@ -46,4 +44,4 @@ function onListening() {
   logger.info(`Listening on ${bind}.`);
 }
 
-module.exports = server;
+export default server;

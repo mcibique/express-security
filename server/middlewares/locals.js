@@ -1,10 +1,7 @@
-'use strict';
+import IS_DEBUG from '../helpers/debug';
+import url from 'url';
 
-const isDebug = require('../helpers/debug');
-
-let url = require('url');
-
-module.exports = function initLocals(req, res, next) {
+export default function initLocals(req, res, next) {
   if (req.session) {
     // allow current user being accessible in all views.
     res.locals.user = req.session.user;
@@ -13,7 +10,7 @@ module.exports = function initLocals(req, res, next) {
     res.locals.csrfToken = req.csrfToken();
   }
   // set debug mode
-  res.locals.isDebug = isDebug;
+  res.locals.isDebug = IS_DEBUG;
   // assets fingerprint
   if (res.locals.assetFingerprint) {
     res.locals.asset = path => url.resolve('/assets/', res.locals.assetFingerprint(path));
@@ -21,4 +18,4 @@ module.exports = function initLocals(req, res, next) {
     res.locals.asset = path => path;
   }
   next();
-};
+}

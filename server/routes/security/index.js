@@ -1,8 +1,7 @@
-let express = require('express');
+import express from 'express';
+import referrerPolicy from './referrer-policy';
+
 let router = express.Router();
-
-let referrerPolicy = require('./referrer-policy');
-
 router.use('/referrer-policy', referrerPolicy);
 
-module.exports = router;
+export default router;

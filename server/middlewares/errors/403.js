@@ -1,12 +1,10 @@
-'use strict';
-
-module.exports = function handle403(err, req, res, next) {
+export default function handle403(err, req, res, next) {
   if (!err) {
     return next();
   } else if (err.code !== 'EBADCSRFTOKEN') {
     return next(err);
   } else {
-    req.session.regenerate(error => {
+    req.session.regenerate(function onSessionRegenerateFinished(error) {
       if (error) {
         return next(error);
       } else {
@@ -14,4 +12,4 @@ module.exports = function handle403(err, req, res, next) {
       }
     });
   }
-};
+}

@@ -1,10 +1,8 @@
-'use strict';
-
-module.exports = function authenticateRequest(socket, next) {
+export default function authenticateRequest(socket, next) {
   let session = socket.handshake.session;
   if (session && session.user && session.user.username) {
     return next();
   } else {
     return next(new Error('Unauthorized.'));
   }
-};
+}

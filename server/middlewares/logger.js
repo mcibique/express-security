@@ -1,9 +1,6 @@
-'use strict';
-
-let morgan = require('morgan');
-let logger = require('../helpers/logger');
-
-const isDev = require('../helpers/debug');
+import IS_DEBUG from '../helpers/debug';
+import logger from '../helpers/logger';
+import morgan from 'morgan';
 
 let stream = {
   write(message /* , encoding */) {
@@ -11,4 +8,4 @@ let stream = {
   }
 };
 
-module.exports = morgan(isDev ? 'common' : 'combined', { stream });
+export default morgan(IS_DEBUG ? 'common' : 'combined', { stream });

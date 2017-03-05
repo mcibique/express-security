@@ -1,22 +1,21 @@
-'use strict';
-
-let session = require('express-session');
-let RedisStore = require('connect-redis')(session);
-let ms = require('ms');
-
-const config = require('../helpers/config');
-const isDebug = require('../helpers/debug');
+import config from '../helpers/config';
+import connectRedis from 'connect-redis';
+import IS_DEBUG from '../helpers/debug';
+import ms from 'ms';
+import session from 'express-session';
 
 let store;
+
 if (config.session.redis) {
+  let RedisStore = connectRedis(session);
   store = new RedisStore(config.session.redis);
-} else if (isDebug) {
+} else if (IS_DEBUG) {
   store = new session.MemoryStore();
 } else {
   throw new Error('Unable to configure session store.');
 }
 
-module.exports = session({
+export default session({
   store,
   name: config.session.cookieName,
   resave: false,

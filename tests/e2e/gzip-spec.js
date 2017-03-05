@@ -1,27 +1,25 @@
-'use strict';
+import request from 'request';
 
-const baseUrl = 'https://localhost:5000';
+const BASE_URL = 'https://localhost:5000';
 
-const staticAsssets = [{
+let staticAsssets = [{
   mime: 'text/html',
-  url: baseUrl
+  url: BASE_URL
 }, {
   mime: 'text/css',
-  url: `${baseUrl}/assets/styles/app.min.css`
+  url: `${BASE_URL}/assets/styles/app.min.css`
 }, {
   mime: 'application/javascript',
-  url: `${baseUrl}/assets/scripts/app.min.js`
+  url: `${BASE_URL}/assets/scripts/app.min.js`
 }];
 
-let request = require('request');
-
-describe('gzip', () => {
-  describe('when is enabled', () => {
-    it('should not gzip image/png', cb => {
+describe('gzip', function () {
+  describe('when is enabled', function () {
+    it('should not gzip image/png', function (cb) {
       request.get({
-        url: `${baseUrl}/assets/images/express-security-logo.png`,
+        url: `${BASE_URL}/assets/images/express-security-logo.png`,
         gzip: true
-      }, (error, response) => {
+      }, function onReponse(error, response) {
         if (error) {
           return cb(error);
         }
@@ -32,15 +30,15 @@ describe('gzip', () => {
       });
     });
 
-    staticAsssets.forEach(asset => {
-      describe(`for the ${asset.mime}`, () => {
+    staticAsssets.forEach(function (asset) {
+      describe(`for the ${asset.mime}`, function () {
         let response;
 
-        beforeEach(cb => {
+        beforeEach(function (cb) {
           request.get({
             url: asset.url,
             gzip: true
-          }, (error, assetResponse) => {
+          }, function onReponse(error, assetResponse) {
             if (error) {
               return cb(error);
             }
@@ -50,18 +48,18 @@ describe('gzip', () => {
           });
         });
 
-        it('should have encoding in response headers', () => {
+        it('should have encoding in response headers', function () {
           expect(response.statusCode).toBe(200);
           expect(response.headers['content-encoding']).toBe('gzip');
         });
 
         if (asset.mime !== 'text/html') {
-          it('should use weak etags', () => {
+          it('should use weak etags', function () {
             expect(response.statusCode).toBe(200);
             expect(response.headers.etag).toMatch('^W/.+');
           });
 
-          it('should have content length header', () => {
+          it('should have content length header', function () {
             expect(response.statusCode).toBe(200);
             expect(response.headers['content-length']).toBeDefined();
           });

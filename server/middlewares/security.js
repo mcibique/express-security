@@ -1,12 +1,9 @@
-'use strict';
+import config from '../helpers/config';
+import helmet from 'helmet';
+import ms from 'ms';
+import uuid from 'node-uuid';
 
-let helmet = require('helmet');
-let ms = require('ms');
-let uuid = require('node-uuid');
-
-const config = require('../helpers/config');
-
-module.exports = function initializeSecurity(app) {
+export default function initializeSecurity(app) {
   // X-Frame-Options: https://github.com/helmetjs/frameguard
   app.use(helmet.frameguard({ action: 'deny' }));
   // X-XSS-Protection: https://github.com/helmetjs/x-xss-protection
@@ -55,4 +52,4 @@ module.exports = function initializeSecurity(app) {
   app.use(helmet.dnsPrefetchControl({ allow: false }));
   // https://github.com/helmetjs/referrer-policy
   app.use(helmet.referrerPolicy({ policy: 'no-referrer' }));
-};
+}

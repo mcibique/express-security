@@ -1,8 +1,6 @@
-'use strict';
-
-let logger = require('../helpers/logger');
-let session = require('../middlewares/session-io');
-let auth = require('../middlewares/auth-io');
+import auth from '../middlewares/auth-io';
+import logger from '../helpers/logger';
+import session from '../middlewares/session-io';
 
 function saveClient(clients, username, clientId, socket) {
   let client = clients.get(username);
@@ -24,8 +22,8 @@ function removeClient(clients, username, clientId) {
 }
 
 function onClientConnected(clients, socket) {
-  const username = socket.handshake.session.user.username;
-  const clientId = socket.id;
+  let username = socket.handshake.session.user.username;
+  let clientId = socket.id;
   logger.info(`New client connected to the /emails. Username: ${username}, Socket: ${clientId}`);
   saveClient(clients, username, clientId, socket);
 
@@ -72,7 +70,7 @@ function emitFakeEmailData(clients) {
 }
 
 function init(sockets) {
-  const clients = new Map();
+  let clients = new Map();
 
   sockets
     .of('/emails/')
@@ -83,4 +81,4 @@ function init(sockets) {
   setInterval(emitFakeEmailData.bind(this, clients), 5000);
 }
 
-module.exports = { init };
+export default init;

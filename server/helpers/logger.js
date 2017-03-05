@@ -1,23 +1,22 @@
-'use strict';
+import IS_DEBUG from './debug';
+import os from 'os';
+import path from 'path';
+import winston from 'winston';
 
-let path = require('path');
-let winston = require('winston');
-let os = require('os');
-const isDev = require('./debug');
-const logsFolder = path.join(__dirname, '..', 'logs');
+const LOGS_FOLDER = path.join(__dirname, '..', 'logs');
 
-module.exports = new winston.Logger({
+export default new winston.Logger({
   exitOnError: false,
   transports: [
     new winston.transports.Console({
-      level: isDev ? 'silly' : 'error',
+      level: IS_DEBUG ? 'silly' : 'error',
       json: false,
       colorize: true
     }),
     new winston.transports.File({
       name: '1',
-      filename: path.join(logsFolder, 'web.log'),
-      level: isDev ? 'silly' : 'info',
+      filename: path.join(LOGS_FOLDER, 'web.log'),
+      level: IS_DEBUG ? 'silly' : 'info',
       json: false,
       maxsize: 5242880, // 5MB
       maxFiles: -1,
@@ -27,7 +26,7 @@ module.exports = new winston.Logger({
     }),
     new winston.transports.File({
       name: '2',
-      filename: path.join(logsFolder, 'errors.log'),
+      filename: path.join(LOGS_FOLDER, 'errors.log'),
       level: 'error'
     })
   ],
@@ -38,7 +37,7 @@ module.exports = new winston.Logger({
       colorize: true
     }),
     new winston.transports.File({
-      filename: path.join(logsFolder, 'exceptions.log'),
+      filename: path.join(LOGS_FOLDER, 'exceptions.log'),
       json: false,
       humanReadableUnhandledException: true
     })

@@ -1,10 +1,8 @@
-'use strict';
+import express from 'express';
+import ms from 'ms';
+import staticAsset from 'static-asset';
 
-let express = require('express');
-let staticAsset = require('static-asset');
-let ms = require('ms');
-
-module.exports = function staticInit(app, publicFolder) {
+export default function staticInit(app, publicFolder) {
   // assets folder and caching
   app.use('/assets', express.static(publicFolder, {
     fallthrough: false,
@@ -30,4 +28,4 @@ module.exports = function staticInit(app, publicFolder) {
       return next();
     }
   });
-};
+}

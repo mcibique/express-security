@@ -1,16 +1,14 @@
-'use strict';
-
-let extend = require('extend');
-let redis = require('redis').createClient;
-let redisAdapter = require('socket.io-redis');
-let io = require('socket.io');
-let url = require('url');
-let logger = require('../helpers/logger');
-let session = require('../middlewares/session-io');
-let auth = require('../middlewares/session-io');
-let emailSockets = require('./email');
-const useCluster = require('../helpers/cluster');
-const config = require('../helpers/config');
+import auth from '../middlewares/session-io';
+import config from '../helpers/config';
+import { createClient } from 'redis';
+import emailSockets from './email';
+import extend from 'extend';
+import io from 'socket.io';
+import logger from '../helpers/logger';
+import redisAdapter from 'socket.io-redis';
+import session from '../middlewares/session-io';
+import url from 'url';
+import useCluster from '../helpers/cluster';
 
 function initializeRedisStore(sockets) {
   if (!useCluster) {
@@ -24,8 +22,8 @@ function initializeRedisStore(sockets) {
     return_buffers: true
   });
 
-  let pub = redis(pubOptions);
-  let sub = redis(subOptions);
+  let pub = createClient(pubOptions);
+  let sub = createClient(subOptions);
 
   sockets.adapter(redisAdapter({ pubClient: pub, subClient: sub }));
 }
@@ -49,13 +47,13 @@ function initializeAuthorization(sockets) {
 }
 
 function initializeListeners(sockets) {
-  emailSockets.init(sockets);
+  emailSockets(sockets);
 }
 
 function attachToServer(server, port) {
   logger.info('Attaching socket.io to the server.');
 
-  const sockets = io.listen(server, {
+  let sockets = io.listen(server, {
     path: '/web-sockets/'
   });
 
@@ -66,4 +64,4 @@ function attachToServer(server, port) {
   initializeListeners(sockets);
 }
 
-module.exports = { attachToServer };
+export { attachToServer };

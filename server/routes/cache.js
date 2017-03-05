@@ -1,9 +1,7 @@
-'use strict';
+import cache from '../helpers/caching';
+import express from 'express';
 
-let express = require('express');
 let router = express.Router();
-
-let cache = require('../helpers/caching');
 
 router.get('/', (req, res, next) => {
   function getSomeCachedData(cb) {
@@ -22,4 +20,4 @@ router.get('/', (req, res, next) => {
   });
 });
 
-module.exports = router;
+export default router;

@@ -1,13 +1,12 @@
-'use strict';
-
-const useCluster = require('./helpers/cluster');
-const logger = require('./helpers/logger');
+import cluster from 'cluster';
+import logger from './helpers/logger';
+import { normalizePort } from './helpers/port';
+import useCluster from './helpers/cluster';
 
 if (useCluster) {
-  let cluster = require('cluster');
   if (cluster.isMaster) {
     logger.info(`Running cluster's master. Number of CPUs: ${useCluster}`);
-    forkWorkers(cluster, useCluster);
+    forkWorkers(useCluster);
   } else {
     startWorker();
   }
@@ -17,22 +16,21 @@ if (useCluster) {
 }
 
 function startWorker() {
-  let server = require('./server');
+  let server = require('./server').default;
   let sockets = require('./sockets');
-  let portHelper = require('./helpers/port');
 
-  const port = portHelper.normalize(process.env.PORT || '8443');
+  const PORT = normalizePort(process.env.PORT || '8443');
 
-  sockets.attachToServer(server, port);
-  server.listen(port);
+  sockets.attachToServer(server, PORT);
+  server.listen(PORT);
 }
 
-function forkWorkers(cluster, numberOfCpus) {
+function forkWorkers(numberOfCpus) {
   for (let i = 0; i < numberOfCpus; i++) {
     let worker = cluster.fork();
     logger.info(`Forked new worker: ${worker.id}`);
 
-    worker.on('exit', (code, signal) => {
+    worker.on('exit', function onWorkedExited(code, signal) {
       if (signal) {
         logger.error(`Worker was killed by signal: ${signal}`);
       } else if (code !== 0) {

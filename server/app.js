@@ -1,58 +1,73 @@
-'use strict';
+import assets from './middlewares/assets';
+import auth from './middlewares/auth';
+import bodyParser from 'body-parser';
+import caching from './middlewares/caching';
+import compression from './middlewares/compression';
+import cookies from './middlewares/cookies';
+import csrf from './middlewares/csrf';
+import error403 from './middlewares/errors/403';
+import error404 from './middlewares/errors/404';
+import error500dev from './middlewares/errors/500-dev';
+import error500prod from './middlewares/errors/500-prod';
+import express from 'express';
+import favicon from 'serve-favicon';
+import IS_DEBUG from './helpers/debug';
+import locals from './middlewares/locals';
+import logger from './middlewares/logger';
+import moment from 'moment';
+import path from 'path';
+import rateLimits from './middlewares/limits';
+import routes from './routes';
+import security from './middlewares/security';
+import session from './middlewares/session';
 
-let express = require('express');
-let path = require('path');
-let bodyParser = require('body-parser');
-let favicon = require('serve-favicon');
-
-const isDev = require('./helpers/debug');
-const app = express();
-const publicFolder = path.join(__dirname, 'public');
+const PUBLIC_FOLDER = path.join(__dirname, 'public');
+let app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 // global variables
-app.locals.moment = require('moment');
+app.locals.moment = moment;
 // favicon
-app.use(favicon(path.join(publicFolder, 'favicon.ico')));
+app.use(favicon(path.join(PUBLIC_FOLDER, 'favicon.ico')));
 // logger
-app.use(require('./middlewares/logger'));
+app.use(logger);
 // gzip, brotli compression; pre-compressed-assets
-require('./middlewares/compression')(app, publicFolder);
+compression(app, PUBLIC_FOLDER);
 // assets folder and caching
-require('./middlewares/assets')(app, publicFolder);
+assets(app, PUBLIC_FOLDER);
 // JSON body
 app.use(bodyParser.json());
 // application/x-www-form-urlencoded body
 app.use(bodyParser.urlencoded({ extended: false }));
 // caching
-require('./middlewares/caching')(app);
+caching(app);
 // security - helmet
-require('./middlewares/security')(app);
+security(app);
 // rate limits
-require('./middlewares/limits')(app);
+rateLimits(app);
 // cookies
-app.use(require('./middlewares/cookies'));
+app.use(cookies);
 // session
-app.use(require('./middlewares/session'));
+app.use(session);
 // authentication
-app.use(require('./middlewares/auth'));
+app.use(auth);
 // CSRF
-app.use(require('./middlewares/csrf'));
+app.use(csrf);
 // request variables
-app.use(require('./middlewares/locals'));
+app.use(locals);
 // routes
-app.use('/', require('./routes'));
+app.use('/', routes);
 // catch CSRF and authorization errors
-app.use(require('./middlewares/errors/403'));
+app.use(error403);
 // catch 404 and forward to error handler
-app.use(require('./middlewares/errors/404'));
+app.use(error404);
 // error handlers
-if (isDev) {
-  app.use(require('./middlewares/errors/500-dev'));
+if (IS_DEBUG) {
+  app.use(error500dev);
 } else {
-  app.use(require('./middlewares/errors/500-prod'));
+  app.use(error500prod);
 }
 
-module.exports = app;
+export default app;

@@ -1,33 +1,31 @@
-'use strict';
+import request from 'request';
 
-const baseUrl = 'https://localhost:5000';
+const BASE_URL = 'https://localhost:5000';
 
-const staticAsssets = [{
+let staticAsssets = [{
   mime: 'text/css',
-  url: `${baseUrl}/assets/styles/app.min.css`,
-  wrongUrl: `${baseUrl}/assets/styles/app1.min.css`
+  url: `${BASE_URL}/assets/styles/app.min.css`,
+  wrongUrl: `${BASE_URL}/assets/styles/app1.min.css`
 }, {
   mime: 'application/javascript',
-  url: `${baseUrl}/assets/scripts/app.min.js`,
-  wrongUrl: `${baseUrl}/assets/scripts/app1.min.js`
+  url: `${BASE_URL}/assets/scripts/app.min.js`,
+  wrongUrl: `${BASE_URL}/assets/scripts/app1.min.js`
 }, {
   mime: 'image/png',
-  url: `${baseUrl}/assets/images/express-security-logo.png`,
-  wrongUrl: `${baseUrl}/assets/images/express-security-logo-1.png`
+  url: `${BASE_URL}/assets/images/express-security-logo.png`,
+  wrongUrl: `${BASE_URL}/assets/images/express-security-logo-1.png`
 }, {
   mime: 'favicon',
-  url: `${baseUrl}/favicon.ico`
+  url: `${BASE_URL}/favicon.ico`
 }];
 
-let request = require('request');
-
-describe('server', () => {
-  describe('when serving views', () => {
-    it('should serve /', cb => {
+describe('server', function () {
+  describe('when serving views', function () {
+    it('should serve /', function (cb) {
       request.get({
-        url: baseUrl,
+        url: BASE_URL,
         followRedirect: false
-      }, (error, response) => {
+      }, function onReponse(error, response) {
         if (error) {
           return cb(error);
         }
@@ -36,11 +34,11 @@ describe('server', () => {
       });
     });
 
-    it('should redirect unauthorized requests to /login url', cb => {
+    it('should redirect unauthorized requests to /login url', function (cb) {
       request.get({
-        url: baseUrl,
+        url: BASE_URL,
         followRedirect: false
-      }, (error, response) => {
+      }, function onReponse(error, response) {
         if (error) {
           return cb(error);
         }
@@ -50,11 +48,11 @@ describe('server', () => {
       });
     });
 
-    it('should redirect unknown-url to /login url', cb => {
+    it('should redirect unknown-url to /login url', function (cb) {
       request.get({
-        url: `${baseUrl}/unknown-url`,
+        url: `${BASE_URL}/unknown-url`,
         followRedirect: false
-      }, (error, response) => {
+      }, function onReponse(error, response) {
         if (error) {
           return cb(error);
         }
@@ -65,13 +63,13 @@ describe('server', () => {
     });
   });
 
-  describe('when serving assets', () => {
-    describe('and the file exists', () => {
-      staticAsssets.forEach(asset => {
-        it(`should serve ${asset.mime}`, cb => {
+  describe('when serving assets', function () {
+    describe('and the file exists', function () {
+      staticAsssets.forEach(function (asset) {
+        it(`should serve ${asset.mime}`, function (cb) {
           request.get({
             url: asset.url
-          }, (error, response) => {
+          }, function onReponse(error, response) {
             if (error) {
               return cb(error);
             }
@@ -82,12 +80,12 @@ describe('server', () => {
       });
     });
 
-    describe('and the file doesn\'t exist', () => {
-      staticAsssets.filter(asset => !!asset.wrongUrl).forEach(asset => {
-        it(`should return 404 for ${asset.mime}`, cb => {
+    describe('and the file doesn\'t exist', function () {
+      staticAsssets.filter(asset => !!asset.wrongUrl).forEach(function (asset) {
+        it(`should return 404 for ${asset.mime}`, function (cb) {
           request.get({
             url: asset.wrongUrl
-          }, (error, response) => {
+          }, function onReponse(error, response) {
             if (error) {
               return cb(error);
             }
