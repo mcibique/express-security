@@ -3,7 +3,7 @@ import io from 'socket.io-client';
 
 function initialize() {
   const socket = io.connect('/emails/', {
-    path: '/web-sockets/'
+    path: '/ws/'
   });
 
   socket

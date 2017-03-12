@@ -54,7 +54,7 @@ function attachToServer(server, port) {
   logger.info('Attaching socket.io to the server.');
 
   let sockets = io.listen(server, {
-    path: '/web-sockets/'
+    path: config.sockets.root
   });
 
   initializeRedisStore(sockets);
