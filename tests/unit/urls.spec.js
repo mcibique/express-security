@@ -1,3 +1,4 @@
+import { expect } from 'chai';
 import { isLocalUrl } from '../../server/helpers/url';
 
 describe('url helper', function () {
@@ -18,13 +19,13 @@ describe('url helper', function () {
 
   function testExternalUrl(url) {
     it(`should mark url ${url} as external.`, function () {
-      expect(isLocalUrl(url)).toBe(false);
+      expect(isLocalUrl(url)).to.be.false;
     });
   }
 
   function testLocalUrl(url) {
     it(`should mark url ${url} as local.`, function () {
-      expect(isLocalUrl(url)).toBe(true);
+      expect(isLocalUrl(url)).to.be.true;
     });
   }
 
