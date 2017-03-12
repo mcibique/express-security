@@ -1,7 +1,7 @@
 # express security playground
 My nodejs + express security and performance playground (boilerplate).
 
-## Security
+## Security [![Known Vulnerabilities](https://snyk.io/test/github/mcibique/express-security/badge.svg)](https://snyk.io/test/github/mcibique/express-security)
 
 1. Cookie auth (secure, http-only, sameSite)
 2. Signed session + sliding expiration
