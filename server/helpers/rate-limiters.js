@@ -1,6 +1,6 @@
 import config from './config';
-import { RateLimit } from 'express-rate-limit';
-import { RateLimitStore } from 'rate-limit-redis';
+import RateLimit from 'express-rate-limit';
+import RateLimitStore from 'rate-limit-redis';
 import redis from 'redis';
 
 class RateLimiters {
