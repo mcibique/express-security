@@ -23,6 +23,7 @@
     "test": "npm-run-all -s test:*",
     "test:unit": "cross-env BABEL_ENV=server jasmine JASMINE_CONFIG_PATH=tests/unit.json",
     "test:e2e": "cross-env BABEL_ENV=server jasmine JASMINE_CONFIG_PATH=tests/e2e.json",
+    "test:vulnerabilities": "nsp check",
     "watch": "npm-run-all -p watch:*",
     "watch:server": "mkdirp ./server/logs/ && nodemon ./server/start.js",
     "watch:client": "cross-env BABEL_ENV=client webpack --progress --colors --watch"
@@ -89,6 +90,7 @@
     "request": "2.81.0",
     "rimraf": "2.6.1",
     "sass-loader": "6.0.3",
+    "snyk": "1.25.2",
     "style-loader": "0.13.2",
     "webpack": "2.2.1"
   }
