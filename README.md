@@ -4,43 +4,46 @@ My nodejs + express security and performance playground (boilerplate).
 ## Security [![Known Vulnerabilities](https://snyk.io/test/github/mcibique/express-security/badge.svg)](https://snyk.io/test/github/mcibique/express-security)
 
 1. Cookie auth (secure, http-only, sameSite)
-2. Signed session + sliding expiration
-2. Cross-Site Request Forgery (CSRF)
-3. Cross-Site WebSocket Hijacking (CSWSH)
-9. Content-Security-Policy (CSP, nonce)
-5. Strict-Transport-Security (HSTS)
-10. Public-Key-Pins (HPKP)
-3. X-Frame-Options
-4. X-XSS-Protection
-6. X-Powered-By
-7. X-Download-Options
-8. X-Content-Type-Options
-9. Rate limits (number of requests per second)
+1. Signed session + sliding expiration
+1. Cross-Site Request Forgery (CSRF)
+1. Cross-Site WebSocket Hijacking (CSWSH)
+1. Content-Security-Policy (CSP, nonce)
+1. Strict-Transport-Security (HSTS)
+1. Public-Key-Pins (HPKP)
+1. X-Frame-Options
+1. X-XSS-Protection
+1. X-Powered-By
+1. X-Download-Options
+1. X-Content-Type-Options
+1. Rate limits (number of requests per second)
 
 ## Performance
 
-6. HTTP2
+1. HTTP2
 1. Client caching (cache-control, e-tags, expires, last-modified, cache busting)
-2. Client assets minification
-2. GZIP
-3. Precompressed assets (Brotli and Gzip support)
-3. Imagemin
-4. Node cluster
-5. Memory and redis caching
+1. Client assets minification
+1. GZIP, deflate
+1. Precompressed assets (Brotli and Gzip support)
+1. Imagemin
+1. Node cluster
+1. Memory and redis caching
 
 ## Others
 
 1. HTTPS
 1. Redis store (session, caching)
 1. Web sockets (socket.io, cookies authentication, shared session, redis store)
-3. Logging (winston -> Console, FileSystem)
-4. Custom errors (4XX, 5XX)
-5. Configuration + Environment (config.json + config.dev.json)
-6. Nodemon
-7. Webpack + babel + SASS + postcss + autoprefixer
-8. Unit tests
-9. E2E tests
-9. ESLint 3 (linting server, client, tests and pug templates)
-9. npm scripts (npm-run-all, client tasks, server tasks)
-9. http://realfavicongenerator.net/
-9. Pug view engine
+1. Logging (winston -> Console, FileSystem)
+1. Custom errors (4XX, 5XX)
+1. Configuration + Environment (config.json + config.dev.json)
+1. Nodemon
+1. Webpack + babel + SASS + postcss + autoprefixer
+1. ES6 modules (babel, babel-preset-env)
+1. Unit tests (ES6, mocha + chai)
+1. E2E tests (ES6, mocha + chai, supertest + superagent)
+1. ESLint 3 (linting server, client, tests and pug templates)
+1. npm scripts (npm-run-all, cross-env, client tasks, server tasks)
+1. http://realfavicongenerator.net/
+1. Pug view engine
+1. yarn
+1. nsp and snyk
