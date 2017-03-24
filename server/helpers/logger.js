@@ -2,16 +2,15 @@ import IS_DEBUG from './debug';
 import os from 'os';
 import path from 'path';
 import winston from 'winston';
+import WinstonToDebugLogger from './winston/winston-to-debug';
 
 const LOGS_FOLDER = path.join(__dirname, '..', 'logs');
 
 export default new winston.Logger({
   exitOnError: false,
   transports: [
-    new winston.transports.Console({
-      level: IS_DEBUG ? 'silly' : 'error',
-      json: false,
-      colorize: true
+    new WinstonToDebugLogger({
+      level: IS_DEBUG ? 'silly' : 'error'
     }),
     new winston.transports.File({
       name: '1',

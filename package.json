@@ -45,7 +45,7 @@
     "find": "0.2.7",
     "helmet": "3.5.0",
     "jquery": "3.2.1",
-    "mime-types": "2.1.14",
+    "mime-types": "2.1.15",
     "moment": "2.18.1",
     "morgan": "1.8.1",
     "ms": "1.0.0",

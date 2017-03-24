@@ -1,8 +1,20 @@
-export default function handle500dev(err, req, res) {
+import { isAjaxRequest } from '../../helpers/request';
+import logger from '../../helpers/logger';
+
+export default function handle500dev(err, req, res, next) {
+  if (res.headersSent) {
+    return next(err);
+  }
+
+  logger.error(err);
   res.status(err.status || 500);
-  // will print the stacktrace
-  res.render('error', {
-    message: err.message,
-    error: err
-  });
+
+  if (isAjaxRequest(req)) {
+    res.send({ error: err.message });
+  } else {
+    res.render('error', {
+      message: err.message,
+      error: err // print the stacktrace
+    });
+  }
 }

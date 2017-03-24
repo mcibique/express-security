@@ -1,3 +1,5 @@
+import { isAjaxRequest } from '../helpers/request';
+
 function allowAnonymousAccess(req) {
   let url = req.originalUrl;
   // allow /login and /logout to be accessible for users without being authenticated
@@ -20,7 +22,11 @@ export default function authenticateRequest(req, res, next) {
     if (!username) {
       // unauthenticated request
       let returnUrl = getReturnUrl(req);
-      res.redirect(303, `/login/?returnUrl=${returnUrl}`);
+      if (isAjaxRequest(req)) {
+        res.sendStatus(401);
+      } else {
+        res.redirect(303, `/login/?returnUrl=${returnUrl}`);
+      }
     } else {
       // authenticated request, continue
       return next();

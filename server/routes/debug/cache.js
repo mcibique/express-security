@@ -1,4 +1,4 @@
-import cache from '../helpers/caching';
+import cache from '../../helpers/caching';
 import express from 'express';
 
 let router = express.Router();
@@ -16,7 +16,7 @@ router.get('/', (req, res, next) => {
     if (err) {
       return next(err);
     }
-    res.render('cache', { someCachedData, pid: process.pid });
+    res.render('debug/cache', { someCachedData, pid: process.pid });
   });
 });
 
