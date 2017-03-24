@@ -14,7 +14,7 @@ export default {
     vendor: ['jquery', 'socket.io-client']
   },
   output: {
-    path: './server/public/scripts/',
+    path: path.resolve(__dirname, './server/public/scripts/'),
     filename: 'app.min.js'
   },
   plugins: [
