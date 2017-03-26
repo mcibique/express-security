@@ -1,4 +1,3 @@
-import { Forbidden } from 'http-errors';
 import { isAjaxRequest } from 'helpers/request';
 
 export default function handle403(err, req, res, next) {
@@ -18,5 +17,5 @@ export default function handle403(err, req, res, next) {
 }
 
 function isCsrfError(err) {
-  return err instanceof Forbidden && err.code === 'EBADCSRFTOKEN';
+  return err.code === 'EBADCSRFTOKEN';
 }
