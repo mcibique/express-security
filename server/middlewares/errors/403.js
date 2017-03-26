@@ -1,7 +1,8 @@
+import { Forbidden } from 'http-errors';
 import { isAjaxRequest } from 'helpers/request';
 
 export default function handle403(err, req, res, next) {
-  if (err.code !== 'EBADCSRFTOKEN') {
+  if (!isCsrfError(err)) {
     return next(err);
   } else {
     req.session.regenerate(function onSessionRegenerateFinished(error) {
@@ -14,4 +15,8 @@ export default function handle403(err, req, res, next) {
       }
     });
   }
+}
+
+function isCsrfError(err) {
+  return err instanceof Forbidden && err.code === 'EBADCSRFTOKEN';
 }

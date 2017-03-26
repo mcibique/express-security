@@ -54,7 +54,7 @@
     "normalize-scss": "6.0.0",
     "pug": "2.0.0-beta11",
     "rate-limit-redis": "1.1.0",
-    "serve-favicon": "2.4.1",
+    "serve-favicon": "2.4.2",
     "socket.io": "1.7.3",
     "socket.io-client": "1.7.3",
     "socket.io-redis": "4.0.0",
@@ -95,6 +95,6 @@
     "snyk": "1.25.2",
     "style-loader": "0.16.0",
     "supertest": "3.0.0",
-    "webpack": "2.3.1"
+    "webpack": "2.3.2"
   }
 }
