@@ -20,7 +20,7 @@ export default function staticInit(app, publicFolder) {
     if (error) {
       if (error.statusCode === 404) {
         // do not leak any file system info to user.
-        res.status(404).send('Not Found');
+        res.sendStatus(404);
       } else {
         return next(error);
       }
