@@ -21,11 +21,11 @@ export default function initializeSecurity(app) {
   // X-Content-Type-Options: https://github.com/helmetjs/dont-sniff-mimetype
   app.use(helmet.noSniff());
   // Content-Security-Policy: https://github.com/helmetjs/csp
-  /* eslint quotes: 0 */
   app.use(function nonceGenerator(req, res, next) {
     res.locals.nonce = uuid.v4();
     next();
   });
+  /* eslint-disable quotes */
   app.use(helmet.contentSecurityPolicy({
     directives: {
       defaultSrc: ["'self'"],
@@ -39,7 +39,7 @@ export default function initializeSecurity(app) {
     setAllHeaders: false,
     reportOnly: false,
     browserSniff: false
-  }));
+  })); /* eslint-enable */
   // Public-Key-Pins: https://github.com/helmetjs/hpkp
   app.use(helmet.hpkp({
     maxAge: ms(config.hpkp.maxAge) / 1000,
@@ -51,5 +51,5 @@ export default function initializeSecurity(app) {
   // X-DNS-Prefetch-Control: https://github.com/helmetjs/dns-prefetch-control
   app.use(helmet.dnsPrefetchControl({ allow: false }));
   // https://github.com/helmetjs/referrer-policy
-  app.use(helmet.referrerPolicy({ policy: 'same-origin' }));
+  app.use(helmet.referrerPolicy({ policy: 'origin' }));
 }
