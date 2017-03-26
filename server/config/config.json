@@ -23,6 +23,7 @@
   "csp": {
     "reportUri": "https://report-uri.io/report/expresssecuritytest"
   },
+  "domain": "localhost",
   "hpkp": {
     "maxAge": "90 days",
     "reportUri": "https://report-uri.io/report/expresssecuritytest",
@@ -60,7 +61,6 @@
     }
   },
   "sockets": {
-    "domain": "localhost",
     "root": "/ws/",
     "redis": {
       "host": "127.0.0.1",

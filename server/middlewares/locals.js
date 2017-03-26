@@ -1,7 +1,7 @@
 import IS_DEBUG from '../helpers/debug';
 import url from 'url';
 
-export default function initLocals(req, res, next) {
+export function viewLocals(req, res, next) {
   if (req.session) {
     // allow current user being accessible in all views.
     res.locals.user = req.session.user;
@@ -11,11 +11,16 @@ export default function initLocals(req, res, next) {
   }
   // set debug mode
   res.locals.isDebug = IS_DEBUG;
+  next();
+}
+
+export function assetLocals(req, res, next) {
   // assets fingerprint
   if (res.locals.assetFingerprint) {
     res.locals.asset = path => url.resolve('/assets/', res.locals.assetFingerprint(path));
   } else {
     res.locals.asset = path => path;
   }
+
   next();
 }

@@ -44,6 +44,7 @@
     "extend": "3.0.0",
     "find": "0.2.7",
     "helmet": "3.5.0",
+    "http-errors": "1.6.1",
     "jquery": "3.2.1",
     "mime-types": "2.1.15",
     "moment": "2.18.1",

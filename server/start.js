@@ -1,6 +1,6 @@
 import cluster from 'cluster';
 import logger from './helpers/logger';
-import { normalizePort } from './helpers/port';
+import { SERVER_PORT as PORT } from './helpers/port';
 import useCluster from './helpers/cluster';
 
 if (useCluster) {
@@ -18,8 +18,6 @@ if (useCluster) {
 function startWorker() {
   let server = require('./server').default;
   let sockets = require('./sockets');
-
-  const PORT = normalizePort(process.env.PORT || '8443');
 
   sockets.attachToServer(server, PORT);
   server.listen(PORT);

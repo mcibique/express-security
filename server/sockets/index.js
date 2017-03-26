@@ -31,7 +31,7 @@ function initializeRedisStore(sockets) {
 function initializeSecurity(sockets, port) {
   const allowedOrigin = url.format({
     protocol: 'https:',
-    hostname: config.sockets.domain,
+    hostname: config.domain,
     port
   });
   logger.info(`Sockets origins set to ${allowedOrigin}.`);
