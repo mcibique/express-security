@@ -62,7 +62,8 @@ export default {
             sourceMap: true,
             includePaths: [
               path.resolve(__dirname, './node_modules/normalize-scss/sass'),
-              path.resolve(__dirname, './node_modules/support-for/sass')
+              path.resolve(__dirname, './node_modules/support-for/sass'),
+              path.resolve(__dirname, './client/sass')
             ]
           }
         }]

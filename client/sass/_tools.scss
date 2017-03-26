@@ -1,0 +1,13 @@
+@mixin clearfix {
+  &:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
+
+%container {
+  margin: 0 auto;
+  max-width: $container-max-width;
+  padding: 0 $container-padding;
+}

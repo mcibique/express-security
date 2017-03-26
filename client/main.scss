@@ -1,6 +1,11 @@
-@import 'normalize/import-now';
-@import 'layout/variables';
-@import 'layout/general';
-@import 'layout/body';
-@import 'layout/header';
-@import 'layout/forms';
+@import 'settings';
+@import 'tools';
+@import 'generic';
+@import 'base';
+@import 'objects';
+@import 'components/app-logo';
+@import 'components/email-status';
+@import 'components/full-page-logo';
+@import 'components/header';
+@import 'components/user-info';
+@import 'utilities';

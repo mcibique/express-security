@@ -1,11 +1,18 @@
+main {
+  @extend %container;
+}
+
 form {
   p {
     font-size: 1.6rem;
+    line-height: 2rem;
   }
 
   label {
     display: block;
     font-size: 1.4rem;
+    line-height: 1.8rem;
+    font-weight: bold;
   }
 
   .error-message {

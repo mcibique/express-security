@@ -1,0 +1,13 @@
+.c-email-status {
+  &--not-loaded {
+    display: none;
+  }
+
+  &--has-new-email {
+    font-weight: bold;
+  }
+
+  &__unread {
+    margin-left: 1rem;
+  }
+}

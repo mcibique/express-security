@@ -6,11 +6,11 @@ $.fn.sampleComponent = function sampleComponent() {
     let self = $(this);
 
     self
-      .addClass('sample-component')
+      .addClass('c-sample-component')
       .off('.sample-component')
       .on('click.sample-component', function onSampleComponentClicked() {
         console.log('You clicked sample component.');
-        self.toggleClass('active');
+        self.toggleClass('c-sample-component--active');
       });
   });
 };

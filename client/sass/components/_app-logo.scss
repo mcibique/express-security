@@ -1,0 +1,25 @@
+.c-app-logo {
+  display: inline-block;
+
+  &__link {
+    display: inline-block;
+    font-size: 6rem;
+    line-height: 100%;
+    text-decoration: none;
+  }
+
+  &__img,
+  &__text {
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  &__img {
+    height: 100%;
+    text-indent: -9999rem;
+  }
+
+  &__text {
+    margin-left: 1rem;
+  }
+}

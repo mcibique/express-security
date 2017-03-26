@@ -1,0 +1,44 @@
+$header-background: #566e7f;
+$header-color: #dcff89;
+$header-link-color: #d7ffff;
+
+$header-row-height: 3rem;
+$header-rows-height: 3 * $header-row-height;
+$header-padding-top: 4rem;
+$header-padding-bottom: 2rem;
+$header-height: $header-rows-height + $header-padding-top + $header-padding-bottom;
+
+.c-header {
+  background-color: $header-background;
+  color: $header-color;
+  height: $header-height;
+  padding: $header-padding-top $header-padding-bottom;
+
+  &__container {
+    @extend %container;
+    @include clearfix;
+  }
+
+  &__logo {
+    float: left;
+    height: $header-rows-height;
+  }
+
+  &__link {
+    color: $header-link-color;
+
+    &:hover {
+      color: rgba($header-link-color, 0.8);
+    }
+  }
+
+  &__status {
+    float: right;
+  }
+
+  &__status-row {
+    text-align: right;
+    line-height: $header-row-height;
+    font-size: 1.6rem;
+  }
+}
