@@ -5,8 +5,6 @@ import ExtractTextPlugin from 'extract-text-webpack-plugin';
 import path from 'path';
 import webpack from 'webpack';
 
-const IS_DEBUG = process.argv.indexOf('-p') < 0;
-
 export default {
   cache: true,
   entry: {
@@ -18,9 +16,6 @@ export default {
     filename: 'app.min.js'
   },
   plugins: [
-    new webpack.DefinePlugin({
-      'process.env.NODE_ENV': IS_DEBUG ? '"development"' : '"production"'
-    }),
     new ExtractTextPlugin('../styles/[name].min.css'),
     new webpack.optimize.CommonsChunkPlugin({ name: 'vendor', filename: 'vendor.min.js' }),
     new CompressionPlugin({

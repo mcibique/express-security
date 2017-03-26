@@ -1,4 +1,4 @@
-import IS_DEBUG from '../helpers/debug';
+import { IS_DEBUG } from 'config';
 import url from 'url';
 
 export function viewLocals(req, res, next) {

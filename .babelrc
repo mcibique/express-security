@@ -4,6 +4,16 @@
       "presets": [
         ["env", { "targets": { "node": "current" }, "debug": true }],
         "stage-0"
+      ],
+      "plugins": [
+        ["module-resolver", {
+          "root": ["./server"],
+          "alias": {
+            "server": "./server/",
+            "config": "./server/helpers/config.js",
+            "logger": "./server/helpers/logger.js"
+          }
+        }]
       ]
     },
     "client": {

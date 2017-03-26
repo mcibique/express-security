@@ -1,8 +1,8 @@
-import IS_DEBUG from './debug';
+import { IS_DEBUG } from 'config';
 import os from 'os';
 import path from 'path';
 import winston from 'winston';
-import WinstonToDebugLogger from './winston/winston-to-debug';
+import WinstonToDebugLogger from 'helpers/winston/winston-to-debug';
 
 const LOGS_FOLDER = path.join(__dirname, '..', 'logs');
 

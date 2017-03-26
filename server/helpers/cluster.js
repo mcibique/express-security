@@ -1,5 +1,4 @@
-import config from './config';
-import IS_DEBUG from './debug';
+import config, { IS_DEBUG } from 'config';
 import os from 'os';
 
 let useCluster = false;

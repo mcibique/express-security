@@ -1,4 +1,4 @@
-import { isAjaxRequest } from '../helpers/request';
+import { isAjaxRequest } from 'helpers/request';
 
 function allowAnonymousAccess(req) {
   let url = req.originalUrl;

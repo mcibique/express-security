@@ -1,5 +1,5 @@
-import { normalizePort, SERVER_PORT as PORT } from '../helpers/port';
-import config from '../helpers/config';
+import { normalizePort, SERVER_PORT as PORT } from 'helpers/port';
+import config from 'config';
 import { Forbidden } from 'http-errors';
 import url from 'url';
 

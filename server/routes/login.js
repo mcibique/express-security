@@ -1,7 +1,7 @@
 import express from 'express';
-import { isLocalUrl } from '../helpers/url';
+import { isLocalUrl } from 'helpers/url';
 import ms from 'ms';
-import rateLimiters from '../helpers/rate-limiters';
+import rateLimiters from 'helpers/rate-limiters';
 
 let router = express.Router();
 

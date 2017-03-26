@@ -1,7 +1,7 @@
-import app from './app';
+import app from 'app';
 import fs from 'fs';
 import http from 'spdy';
-import logger from './helpers/logger';
+import logger from 'logger';
 import path from 'path';
 
 let key = fs.readFileSync(path.join(__dirname, 'certificates/server.key'), 'utf8');

@@ -1,6 +1,6 @@
 import compression from 'compression';
-import config from '../helpers/config';
-import precompressedAssets from './precompressed-assets';
+import config from 'config';
+import precompressedAssets from 'middlewares/precompressed-assets';
 
 let precompressedBrotliEnabled = config.compression.precompressedAssets.brotli;
 let precompressedGzipEnabled = config.compression.precompressedAssets.gzip;

@@ -1,14 +1,14 @@
-import auth from '../middlewares/session-io';
-import config from '../helpers/config';
+import auth from 'middlewares/session-io';
+import config from 'config';
 import { createClient } from 'redis';
-import emailSockets from './email';
+import emailSockets from 'sockets/email';
 import extend from 'extend';
 import io from 'socket.io';
-import logger from '../helpers/logger';
+import logger from 'logger';
 import redisAdapter from 'socket.io-redis';
-import session from '../middlewares/session-io';
+import session from 'middlewares/session-io';
 import url from 'url';
-import useCluster from '../helpers/cluster';
+import useCluster from 'helpers/cluster';
 
 function initializeRedisStore(sockets) {
   if (!useCluster) {

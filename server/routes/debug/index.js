@@ -1,7 +1,7 @@
-import cache from './cache';
+import cache from 'routes/debug/cache';
 import express from 'express';
-import referrerPolicy from './referrer-policy';
-import session from './session';
+import referrerPolicy from 'routes/debug/referrer-policy';
+import session from 'routes/debug/session';
 
 let router = express.Router();
 

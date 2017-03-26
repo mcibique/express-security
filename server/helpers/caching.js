@@ -1,7 +1,7 @@
 import cacheManager from 'cache-manager';
-import config from './config';
+import config from 'config';
 import extend from 'extend';
-import logger from './logger';
+import logger from 'logger';
 import redisStore from 'cache-manager-redis';
 
 // level 2 cache - redis

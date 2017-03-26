@@ -1,10 +1,10 @@
-import debug from './debug';
+import debug from 'routes/debug';
 import express from 'express';
-import home from './home';
-import IS_DEBUG from '../helpers/debug';
-import login from './login';
-import logout from './logout';
-import user from './user';
+import home from 'routes/home';
+import { IS_DEBUG } from 'config';
+import login from 'routes/login';
+import logout from 'routes/logout';
+import user from 'routes/user';
 
 let router = express.Router();
 router.use('/', home);

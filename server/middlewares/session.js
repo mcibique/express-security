@@ -1,6 +1,5 @@
-import config from '../helpers/config';
+import config, { IS_DEBUG } from 'config';
 import connectRedis from 'connect-redis';
-import IS_DEBUG from '../helpers/debug';
 import ms from 'ms';
 import session from 'express-session';
 

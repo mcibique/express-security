@@ -1,4 +1,4 @@
-import config from '../helpers/config';
+import config from 'config';
 import helmet from 'helmet';
 import ms from 'ms';
 import uuid from 'node-uuid';

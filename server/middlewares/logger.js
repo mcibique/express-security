@@ -1,5 +1,5 @@
-import IS_DEBUG from '../helpers/debug';
-import logger from '../helpers/logger';
+import { IS_DEBUG } from 'config';
+import logger from 'logger';
 import morgan from 'morgan';
 
 let stream = {

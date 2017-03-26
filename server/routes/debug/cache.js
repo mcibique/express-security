@@ -1,4 +1,4 @@
-import cache from '../../helpers/caching';
+import cache from 'helpers/caching';
 import express from 'express';
 
 let router = express.Router();

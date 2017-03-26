@@ -1,5 +1,5 @@
-import { isAjaxRequest } from '../../helpers/request';
-import logger from '../../helpers/logger';
+import { isAjaxRequest } from 'helpers/request';
+import logger from 'logger';
 
 export default function handle500dev(err, req, res, next) {
   if (res.headersSent) {

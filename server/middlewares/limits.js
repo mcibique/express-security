@@ -1,5 +1,5 @@
 import ms from 'ms';
-import rateLimiters from '../helpers/rate-limiters';
+import rateLimiters from 'helpers/rate-limiters';
 
 export default function initApiRateLimits(app) {
   // limits maximum 30 requests per 1 minute from the same IP.

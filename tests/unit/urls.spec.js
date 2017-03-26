@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { isLocalUrl } from '../../server/helpers/url';
+import { isLocalUrl } from 'helpers/url';
 
 describe('url helper', function () {
   let externalUrls = [

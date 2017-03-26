@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { isJson } from '../../server/helpers/request';
+import { isJson } from 'helpers/request';
 
 describe('request', function () {
   let requestMock;

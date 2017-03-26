@@ -1,6 +1,6 @@
-import auth from '../middlewares/auth-io';
-import logger from '../helpers/logger';
-import session from '../middlewares/session-io';
+import auth from 'middlewares/auth-io';
+import logger from 'logger';
+import session from 'middlewares/session-io';
 
 function saveClient(clients, username, clientId, socket) {
   let client = clients.get(username);

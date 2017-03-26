@@ -1,7 +1,7 @@
 import cluster from 'cluster';
-import logger from './helpers/logger';
-import { SERVER_PORT as PORT } from './helpers/port';
-import useCluster from './helpers/cluster';
+import logger from 'logger';
+import { SERVER_PORT as PORT } from 'helpers/port';
+import useCluster from 'helpers/cluster';
 
 if (useCluster) {
   if (cluster.isMaster) {

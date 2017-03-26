@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { normalizePort } from '../../server/helpers/port';
+import { normalizePort } from 'helpers/port';
 
 describe('port helper tests', function () {
   it('should accept any positive number', function () {

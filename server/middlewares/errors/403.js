@@ -1,4 +1,4 @@
-import { isAjaxRequest } from '../../helpers/request';
+import { isAjaxRequest } from 'helpers/request';
 
 export default function handle403(err, req, res, next) {
   if (err.code !== 'EBADCSRFTOKEN') {
