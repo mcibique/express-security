@@ -17,7 +17,7 @@
   "env": {
     "PORT": 5000,
     "NODE_ENV": "development",
-    "BABEL_ENV": "client",
+    "BABEL_ENV": "server",
     "DEBUG": "express:application,socket.io:server,engine:socket,cluster,server,app:*"
   },
   "ext": "js json"
