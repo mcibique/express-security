@@ -173,7 +173,7 @@ describe('headers', function () {
       return this.server.get('/')
         .redirects(1)
         .expect(200)
-        .expect('referrer-policy', 'same-origin');
+        .expect('referrer-policy', 'origin');
     });
 
     staticAsssets.forEach(function (asset) {
