@@ -2,7 +2,7 @@ import $ from 'jquery';
 import io from 'socket.io-client';
 
 function initialize() {
-  const socket = io.connect('/emails/', {
+  let socket = io.connect('/emails/', {
     path: '/ws/'
   });
 

@@ -1,7 +1,7 @@
 @import 'settings';
 
 .c-sample-component {
-  &--active {
+  &--is-active {
     background-color: $active-component-background;
   }
 }

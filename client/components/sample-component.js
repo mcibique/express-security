@@ -10,7 +10,7 @@ $.fn.sampleComponent = function sampleComponent() {
       .off('.sample-component')
       .on('click.sample-component', function onSampleComponentClicked() {
         console.log('You clicked sample component.');
-        self.toggleClass('c-sample-component--active');
+        self.toggleClass('c-sample-component--is-active');
       });
   });
 };
