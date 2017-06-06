@@ -4,7 +4,7 @@ import { Forbidden } from 'http-errors';
 import url from 'url';
 
 export default function (req, res, next) {
-  if (['GET', 'HEAD', 'OPTIONS'].includes(req.method)) {
+  if ([ 'GET', 'HEAD', 'OPTIONS' ].includes(req.method)) {
     return next();
   }
 

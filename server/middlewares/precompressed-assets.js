@@ -56,8 +56,8 @@ export default function precompressedAssets(publicFolder) {
     return cache;
   }
 
-  function setHeaders(res, url, encoding) {
-    let type = mime.lookup(url);
+  function setHeaders(res, assetUrl, encoding) {
+    let type = mime.lookup(assetUrl);
     let charset = mime.charset(type);
     if (charset) {
       charset = `; charset=${charset}`;

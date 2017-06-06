@@ -38,7 +38,7 @@ function initializeSecurity(sockets, port) {
   sockets.origins(allowedOrigin);
 }
 
-function intializeSession(sockets) {
+function initializeSession(sockets) {
   sockets.use(session);
 }
 
@@ -59,7 +59,7 @@ function attachToServer(server, port) {
 
   initializeRedisStore(sockets);
   initializeSecurity(sockets, port);
-  intializeSession(sockets);
+  initializeSession(sockets);
   initializeAuthorization(sockets);
   initializeListeners(sockets);
 }

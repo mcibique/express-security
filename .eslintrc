@@ -132,8 +132,14 @@
     "no-warning-comments": 2,
     "no-with": 2,
     "no-magic-numbers": 0,
-
-    "array-bracket-spacing": 2,
+    "array-bracket-spacing": [
+      2,
+      "always",
+      {
+        "singleValue": false,
+        "objectsInArrays": false
+      }
+    ],
     "array-callback-return": 2,
     "arrow-body-style": 2,
     "arrow-parens": [2, "as-needed"],

@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 
-let staticAsssets = [{
+let staticAssets = [{
   mime: 'text/css',
   url: '/assets/styles/app.min.css',
   wrongUrl: '/assets/styles/app1.min.css'
@@ -43,7 +43,7 @@ describe('server', function () {
 
   describe('when serving assets', function () {
     describe('and the file exists', function () {
-      staticAsssets.forEach(function (asset) {
+      staticAssets.forEach(function (asset) {
         it(`should serve ${asset.mime}`, function () {
           return this.server.get(asset.url).expect(200);
         });
@@ -51,7 +51,7 @@ describe('server', function () {
     });
 
     describe('and the file doesn\'t exist', function () {
-      staticAsssets.filter(asset => !!asset.wrongUrl).forEach(function (asset) {
+      staticAssets.filter(asset => !!asset.wrongUrl).forEach(function (asset) {
         it(`should return 404 for ${asset.mime}`, function () {
           return this.server.get(asset.wrongUrl).expect(404);
         });

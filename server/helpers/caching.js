@@ -17,5 +17,5 @@ let memoryConfig = extend({}, config.caching.memory, { store: 'memory' });
 let memoryCache = cacheManager.caching(memoryConfig);
 
 // cache hierarchy wrapper
-let multiCache = cacheManager.multiCaching([memoryCache, redisCache]);
+let multiCache = cacheManager.multiCaching([ memoryCache, redisCache ]);
 export default multiCache;

@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 import fs from 'fs';
 
-let staticAsssets = [{
+let staticAssets = [{
   mime: 'text/css',
   url: '/assets/styles/app.min.css',
   serverPath: 'server/public/styles/app.min.css'
@@ -30,7 +30,7 @@ describe('headers', function () {
         });
     });
 
-    staticAsssets.forEach(function (asset) {
+    staticAssets.forEach(function (asset) {
       it(`should not have "strict-transport-security" header set for ${asset.mime}`, function () {
         return this.server.get(asset.url)
           .expect(200)
@@ -49,7 +49,7 @@ describe('headers', function () {
         .expect('x-frame-options', 'DENY');
     });
 
-    staticAsssets.forEach(function (asset) {
+    staticAssets.forEach(function (asset) {
       it(`should not have "x-frame-options" header set for ${asset.mime}`, function () {
         return this.server.get(asset.url)
           .expect(200)
@@ -72,7 +72,7 @@ describe('headers', function () {
         });
     });
 
-    staticAsssets.forEach(function (asset) {
+    staticAssets.forEach(function (asset) {
       it(`should not have "csp" header set for ${asset.mime}`, function () {
         return this.server.get(asset.url)
           .expect(200)
@@ -106,7 +106,7 @@ describe('headers', function () {
         });
     });
 
-    staticAsssets.forEach(function (asset) {
+    staticAssets.forEach(function (asset) {
       it(`should have turned cache on for ${asset.mime}`, function () {
         return this.server.get(asset.url)
           .expect(200)
@@ -119,7 +119,7 @@ describe('headers', function () {
     });
 
     describe('last-modified', function () {
-      staticAsssets.forEach(function (asset) {
+      staticAssets.forEach(function (asset) {
         it(`should have "Last-Modified" header set for ${asset.mime}`, function () {
           let lastModifiedDate = new Date(fs.statSync(asset.serverPath).mtime).toGMTString();
           return this.server.get(asset.url)
@@ -130,7 +130,7 @@ describe('headers', function () {
     });
 
     describe('etag', function () {
-      staticAsssets.forEach(function (asset) {
+      staticAssets.forEach(function (asset) {
         it(`should have "ETag" header set for ${asset.mime}`, function () {
           return this.server.get(asset.url)
             .expect(200)
@@ -157,7 +157,7 @@ describe('headers', function () {
         });
     });
 
-    staticAsssets.forEach(function (asset) {
+    staticAssets.forEach(function (asset) {
       it(`should not have "Public-Key-Pins" header set for ${asset.mime}`, function () {
         return this.server.get(asset.url)
           .expect(200)
@@ -176,7 +176,7 @@ describe('headers', function () {
         .expect('referrer-policy', 'origin');
     });
 
-    staticAsssets.forEach(function (asset) {
+    staticAssets.forEach(function (asset) {
       it(`should not have "referrer-policy" header set for ${asset.mime}`, function () {
         return this.server.get(asset.url)
           .expect(200)

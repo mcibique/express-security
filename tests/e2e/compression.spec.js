@@ -28,7 +28,7 @@ function filterAssetsSupportingCompression(assets, compression) {
 }
 
 describe('compression', function () {
-  ['gzip', 'br', 'deflate'].forEach(function (compression) {
+  [ 'gzip', 'br', 'deflate' ].forEach(function (compression) {
     describe(compression, function () {
       describe('when is enabled', function () {
         filterAssetsSupportingCompression(assetsWithoutCompression, compression).forEach(function (asset) {
@@ -63,19 +63,19 @@ describe('compression', function () {
       });
 
       describe('when is not enabled', function () {
-        filterAssetsSupportingCompression([...assetsWithCompression, ...assetsWithoutCompression], compression)
-          .forEach(function (asset) {
-            it(`should not compress ${asset.mime} using ${compression}`, function () {
-              return this.server
-                .get(asset.url)
-                .redirects(asset.redirects)
-                .set('Accept-Encoding', '')
-                .expect(200)
-                .expect(function (response) {
-                  expect(response.header['content-encoding']).to.be.undefined;
-                });
-            });
+        filterAssetsSupportingCompression([ ...assetsWithCompression, ...assetsWithoutCompression ], compression)
+        .forEach(function (asset) {
+          it(`should not compress ${asset.mime} using ${compression}`, function () {
+            return this.server
+              .get(asset.url)
+              .redirects(asset.redirects)
+              .set('Accept-Encoding', '')
+              .expect(200)
+              .expect(function (response) {
+                expect(response.header['content-encoding']).to.be.undefined;
+              });
           });
+        });
       });
     });
   });
