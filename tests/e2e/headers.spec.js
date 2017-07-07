@@ -186,4 +186,29 @@ describe('headers', function () {
       });
     });
   });
+
+  describe('expect-ct', function () {
+    it('should have "expect-ct" header set for text/html', function () {
+      return this.server.get('/')
+        .redirects(1)
+        .expect(200)
+        .expect(function (response) {
+          let expectCtValue = response.header['expect-ct'];
+          expect(expectCtValue).not.to.be.undefined;
+          expect(expectCtValue).to.contain('enforce;');
+          expect(expectCtValue).to.contain('max-age=');
+          expect(expectCtValue).to.contain('report-uri=');
+        });
+    });
+
+    staticAssets.forEach(function (asset) {
+      it(`should not have "expect-ct" header set for ${asset.mime}`, function () {
+        return this.server.get(asset.url)
+          .expect(200)
+          .expect(function (response) {
+            expect(response.header['expect-ct']).to.be.undefined;
+          });
+      });
+    });
+  });
 });

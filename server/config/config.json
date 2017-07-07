@@ -24,6 +24,10 @@
     "reportUri": "https://report-uri.io/report/expresssecuritytest"
   },
   "domain": "localhost",
+  "expectCT": {
+    "maxAge": "1 day",
+    "reportUri": "https://report-uri.io/report/expresssecuritytest"
+  },
   "hpkp": {
     "maxAge": "90 days",
     "reportUri": "https://report-uri.io/report/expresssecuritytest",

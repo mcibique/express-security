@@ -52,4 +52,10 @@ export default function initializeSecurity(app) {
   app.use(helmet.dnsPrefetchControl({ allow: false }));
   // https://github.com/helmetjs/referrer-policy
   app.use(helmet.referrerPolicy({ policy: 'origin' }));
+  // https://helmetjs.github.io/docs/expect-ct/
+  app.use(helmet.expectCt({
+    enforce: true,
+    maxAge: ms(config.expectCT.maxAge) / 1000,
+    reportUri: config.expectCT.reportUri
+  }));
 }
