@@ -64,18 +64,18 @@ describe('compression', function () {
 
       describe('when is not enabled', function () {
         filterAssetsSupportingCompression([ ...assetsWithCompression, ...assetsWithoutCompression ], compression)
-        .forEach(function (asset) {
-          it(`should not compress ${asset.mime} using ${compression}`, function () {
-            return this.server
-              .get(asset.url)
-              .redirects(asset.redirects)
-              .set('Accept-Encoding', '')
-              .expect(200)
-              .expect(function (response) {
-                expect(response.header['content-encoding']).to.be.undefined;
-              });
+          .forEach(function (asset) {
+            it(`should not compress ${asset.mime} using ${compression}`, function () {
+              return this.server
+                .get(asset.url)
+                .redirects(asset.redirects)
+                .set('Accept-Encoding', '')
+                .expect(200)
+                .expect(function (response) {
+                  expect(response.header['content-encoding']).to.be.undefined;
+                });
+            });
           });
-        });
       });
     });
   });
