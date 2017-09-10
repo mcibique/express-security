@@ -8,6 +8,9 @@ html(lang='en')
     include ./favicons.pug
     title #{'ES - ' + title}
     link(rel='stylesheet', href=asset('styles/app.min.css'))
+    link(rel='preload', href=asset('images/express-security-logo.png'), as='image')
+    link(rel='preload', href=asset('scripts/vendor.min.js'), as='script')
+    link(rel='preload', href=asset('scripts/app.min.js'), as='script')
   body
     header.c-header
       div.c-header__container
