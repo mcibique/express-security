@@ -4,8 +4,8 @@ import http from 'spdy';
 import logger from 'logger';
 import path from 'path';
 
-let key = fs.readFileSync(path.join(__dirname, 'certificates/server.key'), 'utf8');
-let cert = fs.readFileSync(path.join(__dirname, 'certificates/server.cert'), 'utf8');
+let key = fs.readFileSync(path.join(__dirname, 'certificates/server.key'), 'utf8'); // eslint-disable-line security/detect-non-literal-fs-filename
+let cert = fs.readFileSync(path.join(__dirname, 'certificates/server.cert'), 'utf8'); // eslint-disable-line security/detect-non-literal-fs-filename
 let server = http.createServer({ key, cert }, app);
 
 server.on('error', onError);
@@ -26,11 +26,9 @@ function onError(error) {
     case 'EACCES':
       console.error(`${bind} requires elevated privileges.`);
       process.exit(1);
-      break;
     case 'EADDRINUSE':
       console.error(`${bind} is already in use.`);
       process.exit(1);
-      break;
     default:
       throw error;
   }

@@ -121,7 +121,7 @@ describe('headers', function () {
     describe('last-modified', function () {
       staticAssets.forEach(function (asset) {
         it(`should have "Last-Modified" header set for ${asset.mime}`, function () {
-          let lastModifiedDate = new Date(fs.statSync(asset.serverPath).mtime).toGMTString();
+          let lastModifiedDate = new Date(fs.statSync(asset.serverPath).mtime).toGMTString(); // eslint-disable-line security/detect-non-literal-fs-filename
           return this.server.get(asset.url)
             .expect(200)
             .expect('last-modified', lastModifiedDate);

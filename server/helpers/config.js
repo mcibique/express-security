@@ -8,10 +8,10 @@ export const DEV_CONFIG_PATH = path.resolve(__dirname, '..', 'config', 'config.d
 export const DEFAULT_CONFIG_PATH = path.resolve(__dirname, '..', 'config', 'config.json');
 
 let config;
-let defaultConfig = require(DEFAULT_CONFIG_PATH);
+let defaultConfig = require(DEFAULT_CONFIG_PATH); // eslint-disable-line security/detect-non-literal-require
 
-if (IS_DEBUG && fs.existsSync(DEV_CONFIG_PATH)) {
-  let devConfig = require(DEV_CONFIG_PATH);
+if (IS_DEBUG && fs.existsSync(DEV_CONFIG_PATH)) { // eslint-disable-line security/detect-non-literal-fs-filename
+  let devConfig = require(DEV_CONFIG_PATH); // eslint-disable-line security/detect-non-literal-require
   config = extend(true, {}, defaultConfig, devConfig);
 } else {
   config = defaultConfig;
