@@ -1,4 +1,4 @@
-import auth from 'middlewares/session-io';
+import auth from 'middlewares/auth-io';
 import config from 'config';
 import { createClient } from 'redis';
 import emailSockets from 'sockets/email';
