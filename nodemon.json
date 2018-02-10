@@ -11,7 +11,8 @@
     "server/public/*",
     "tests/*",
     "nodemon.json",
-    "package.json"
+    "package.json",
+    "yarn.lock"
   ],
   "verbose": true,
   "env": {
