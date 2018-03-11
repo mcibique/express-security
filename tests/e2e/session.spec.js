@@ -31,7 +31,7 @@ describe('session', function () {
     });
 
     it('should have turned SameSite flag on', function () {
-      expect(sessionCookie.samesite).to.be.equal('Strict');
+      expect(sessionCookie.sameSite).to.be.equal('Strict');
     });
   });
 
