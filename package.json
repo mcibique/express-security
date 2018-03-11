@@ -8,7 +8,7 @@
   "scripts": {
     "build": "npm run clean && npm-run-all -s build:*",
     "build:client": "cross-env BABEL_ENV=client webpack --progress --colors -p",
-    "build:images": "imagemin ./client/images/* ./server/public/images/",
+    "build:images": "imagemin ./client/images/* --out-dir ./server/public/images/",
     "build:server": "mkdirp build build/logs build/certificates && cross-env BABEL_ENV=server babel ./server --out-dir ./build --ignore public,views",
     "build:assets": "cp -r ./server/public ./server/config ./server/views ./server/certificates ./build",
     "clean": "npm-run-all -p clean:*",
