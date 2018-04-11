@@ -46,3 +46,48 @@ My nodejs + express security and performance playground (boilerplate).
 1. http://realfavicongenerator.net/
 1. Pug view engine
 1. nsp and snyk
+
+## How to run
+
+Disclaimer: The main purpose of this repository is to demonstrate security, caching and performance principles, it's not about DB, UI, UX.
+
+**Certificate**
+
+The application runs only on HTTPS, so a certificate is required. If you want to just try it locally, then [generate self-signed certificate online](http://www.selfsignedcertificate.com/) for domain `localhost` and save both files into the `server/certificates/` folder. Name them `server.cert` and `server.key`.
+
+**Redis**
+The application uses Redis to store sessions, caching, websockets and saving rate limits. Please follow their [installation guide](https://redis.io/topics/quickstart).
+
+### Production build
+
+1. run `yarn install` or `npm install`
+2. run `yarn run start` or `npm run start`
+3. open URL `https://localhost:8443/` in a browser (you can change the port if you re-run the previous command with `PORT=8444 yarn run start`)
+4. use any username and password to log in. There is no real DB behind the app, it's not the main purpose of the demo.
+
+### Development
+
+1. run `yarn install` or `npm install`
+2. run `yarn run build:client`
+3. run `yarn run watch:server` (runs nodemon so any change in server's code immediately restarts server)
+4. open URL `https://localhost:5000/` in a browser (you can change the port in `nodemon.json`)
+
+### Running the cluster
+
+Application can run as a [cluster of node applications](https://nodejs.org/api/cluster.html). Use `"useCluster"` option in `server/config/config.json`:
+* "auto": no cluster in dev mode, all possible cores in prod mode.
+* true: all possible cores in all modes.
+* <number>: spawn <number> of instances.
+* anything else: no cluster in any mode.
+
+### Configuring application
+You can change `server/config/config.json` file directly. If you are in development mode and you don't want to commit your config changes, then create `config.dev.json` next to the original JSON file and store your overrides there. Both config are deeply merged together, `config.dev.json` takes precedence.
+
+### Running tests
+* run `yarn run test:unit` to run unit tests only
+* run `yarn run test:vulnerabilities` to check app dependencies for vulnerabilities (using [nsp](https://www.npmjs.com/package/nsp))
+
+to run e2e tests, you have to start the server in development first
+* then run `yarn run test:e2e`
+
+If you want to run all tests, start the server in development mode and then run `yarn run test`
