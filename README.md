@@ -77,7 +77,7 @@ The application uses Redis to store sessions, caching, websockets and saving rat
 Application can run as a [cluster of node applications](https://nodejs.org/api/cluster.html). Use `"useCluster"` option in `server/config/config.json`:
 * "auto": no cluster in dev mode, all possible cores in prod mode.
 * true: all possible cores in all modes.
-* <number>: spawn <number> of instances.
+* any number: spawn given number of instances.
 * anything else: no cluster in any mode.
 
 ### Configuring application
