@@ -92,7 +92,7 @@ to run e2e tests, you have to start the server in development first
 
 If you want to run all tests, start the server in development mode and then run `yarn run test`
 
-Application uses rate limiters to prevent hundreds of request from same IP address. This protection must be turned off while running e2e tests, otherwise the tests will start to fail randomly after the limits are reached. To turn it off, create `config.dev.json` and add into it:
+Application uses rate limiters to prevent hundreds of requests from same IP address. This protection must be turned off while running e2e tests, otherwise the tests will start to fail randomly after the limits are reached. To turn it off, create `config.dev.json` and add into it:
 ```json
 {
   "rateLimiter": {
