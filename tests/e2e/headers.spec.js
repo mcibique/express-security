@@ -195,7 +195,7 @@ describe('headers', function () {
         .expect(function (response) {
           let expectCtValue = response.header['expect-ct'];
           expect(expectCtValue).not.to.be.undefined;
-          expect(expectCtValue).to.contain('enforce;');
+          expect(expectCtValue).to.contain('enforce,');
           expect(expectCtValue).to.contain('max-age=');
           expect(expectCtValue).to.contain('report-uri=');
         });
