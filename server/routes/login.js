@@ -1,7 +1,7 @@
 import express from 'express';
 import { isLocalUrl } from 'helpers/url';
 import ms from 'ms';
-import rateLimiters from 'helpers/rate-limiters';
+import { getLimiterFor } from 'helpers/rate-limiters';
 
 let router = express.Router();
 
@@ -60,7 +60,7 @@ function getUsernameRateLimiter() {
   let max = 5;
   let duration = ms('1m');
   let keyGenerator = req => req.body.username;
-  return rateLimiters.getLimiterFor('login-by-username-', max, duration, keyGenerator);
+  return getLimiterFor('login-by-username-', max, duration, keyGenerator);
 }
 
 export default router;
