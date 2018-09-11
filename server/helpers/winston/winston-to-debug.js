@@ -1,7 +1,7 @@
 import debug from 'debug';
-import winston from 'winston';
+import Transport from 'winston-transport';
 
-export default class WinstonToDebugLogger extends winston.Transport {
+export default class WinstonToDebugLogger extends Transport {
   constructor(options) {
     super(options);
     this.name = options.name || 'WinstonToDebugLogger';
@@ -9,8 +9,8 @@ export default class WinstonToDebugLogger extends winston.Transport {
     this.prefix = options.prefix || 'app';
   }
 
-  log(level, msg, meta, cb) {
-    debug(`${this.prefix}:${level}`)(msg);
+  log({ level, message }, cb) {
+    debug(`${this.prefix}:${level}`)(message);
     cb(null, true);
   }
 }
