@@ -2,26 +2,51 @@
   "env": {
     "server": {
       "presets": [
-        ["env", { "targets": { "node": "current" }, "debug": true }],
-        "stage-0"
+        [
+          "@babel/preset-env",
+          {
+            "targets": {
+              "node": "current"
+            },
+            "debug": true
+          }
+        ]
       ],
       "plugins": [
-        ["module-resolver", {
-          "root": ["./server"],
-          "alias": {
-            "server": "./server/",
-            "config": "./server/helpers/config.js",
-            "logger": "./server/helpers/logger.js"
+        [
+          "module-resolver",
+          {
+            "root": [
+              "./server"
+            ],
+            "alias": {
+              "server": "./server/",
+              "config": "./server/helpers/config.js",
+              "logger": "./server/helpers/logger.js"
+            }
           }
-        }]
+        ]
       ]
     },
     "client": {
       "presets": [
-        ["env", { "targets": { "browsers": ["last 2 versions", "ie >= 9", "ff >= 2"] }, "debug": true }],
-        "stage-0"
+        [
+          "@babel/preset-env",
+          {
+            "targets": {
+              "browsers": [
+                "last 2 versions",
+                "ie >= 9",
+                "ff >= 2"
+              ]
+            },
+            "debug": true
+          }
+        ]
       ],
-      "plugins": ["transform-runtime"]
+      "plugins": [
+        "@babel/plugin-transform-runtime"
+      ]
     }
   }
 }

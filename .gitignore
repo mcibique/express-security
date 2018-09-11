@@ -6,3 +6,4 @@ server/config/config.*.json
 server/public/images/**/*
 server/public/**/*.min.*
 server/public/**/*.map
+*.log
