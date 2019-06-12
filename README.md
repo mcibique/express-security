@@ -74,14 +74,14 @@ The application uses Redis to store sessions, caching, websockets and saving rat
 
 ### Running the cluster
 
-Application can run as a [cluster of node applications](https://nodejs.org/api/cluster.html). Use `"useCluster"` option in `server/config/config.json`:
+The application can run as a [cluster of node applications](https://nodejs.org/api/cluster.html). Use `"useCluster"` option in `server/config/config.json`:
 * "auto": no cluster in dev mode, all possible cores in prod mode.
 * true: all possible cores in all modes.
-* any number: spawn given number of instances.
+* any number: spawn a given number of instances.
 * anything else: no cluster in any mode.
 
 ### Configuring application
-You can change `server/config/config.json` file directly. If you are in development mode and you don't want to commit your config changes, then create `config.dev.json` next to the original JSON file and store your overrides there. Both config are deeply merged together, `config.dev.json` takes precedence.
+You can change `server/config/config.json` file directly. If you are in development mode and you don't want to commit your config changes, then create `config.dev.json` next to the original JSON file and store your overrides there. Both configs are deeply merged together, `config.dev.json` takes precedence.
 
 ### Running tests
 * run `yarn run test:unit` to run unit tests only
@@ -92,7 +92,7 @@ to run e2e tests, you have to start the server in development first
 
 If you want to run all tests, start the server in development mode and then run `yarn run test`
 
-Application uses rate limiters to prevent hundreds of requests from same IP address. This protection must be turned off while running e2e tests, otherwise the tests will start to fail randomly after the limits are reached. To turn it off, create `config.dev.json` and add into it:
+The application uses rate limiters to prevent hundreds of requests from the same IP address. This protection must be turned off while running e2e tests, otherwise the tests will start to fail randomly after the limits are reached. To turn it off, create `config.dev.json` and add into it:
 ```json
 {
   "rateLimiter": {
