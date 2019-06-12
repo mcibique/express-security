@@ -1,3 +1,4 @@
+import '@babel/polyfill';
 import './main.scss';
 import './components/sample-component';
 import $ from 'jquery';
