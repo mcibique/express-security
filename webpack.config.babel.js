@@ -1,9 +1,8 @@
 import autoprefixer from 'autoprefixer';
 import BrotliPlugin from 'brotli-webpack-plugin';
 import CompressionPlugin from 'compression-webpack-plugin';
-import ExtractTextPlugin from 'extract-text-webpack-plugin';
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import path from 'path';
-import webpack from 'webpack';
 
 export default {
   cache: true,
@@ -13,13 +12,15 @@ export default {
   },
   output: {
     path: path.resolve(__dirname, './server/public/scripts/'),
-    filename: 'app.min.js'
+    filename: '[name].min.js'
   },
   plugins: [
-    new ExtractTextPlugin('../styles/[name].min.css'),
-    new webpack.optimize.CommonsChunkPlugin({ name: 'vendor', filename: 'vendor.min.js' }),
+    new MiniCssExtractPlugin({
+      filename: '../styles/[name].min.css',
+      chunkFilename: '[id].css'
+    }),
     new CompressionPlugin({
-      asset: '[path].gz[query]',
+      filename: '[path].gz[query]',
       algorithm: 'gzip',
       test: /\.(js|css|html|svg)$/,
       threshold: 1024,
@@ -40,34 +41,35 @@ export default {
       loader: 'babel-loader'
     }, {
       test: /\.scss$/,
-      loader: ExtractTextPlugin.extract({
-        fallback: 'style-loader',
-        use: [{
-          loader: 'css-loader',
-          options: {
-            sourceMap: true
-          }
-        }, {
-          loader: 'postcss-loader',
-          options: {
-            sourceMap: true,
-            plugins: () => [autoprefixer({
-              browsers: ['last 2 versions', 'ie >= 9', 'ff >= 2'],
-              cascade: false
-            })]
-          }
-        }, {
-          loader: 'sass-loader',
-          options: {
-            sourceMap: true,
-            includePaths: [
-              path.resolve(__dirname, './node_modules/normalize-scss/sass'),
-              path.resolve(__dirname, './node_modules/support-for/sass'),
-              path.resolve(__dirname, './client/sass')
-            ]
-          }
-        }]
-      })
+      use: [{
+        loader: MiniCssExtractPlugin.loader,
+        options: {
+          hmr: process.env.NODE_ENV === 'development'
+        }
+      }, {
+        loader: 'css-loader',
+        options: {
+          sourceMap: true
+        }
+      }, {
+        loader: 'postcss-loader',
+        options: {
+          sourceMap: true,
+          plugins: () => [autoprefixer({
+            cascade: false
+          })]
+        }
+      }, {
+        loader: 'sass-loader',
+        options: {
+          sourceMap: true,
+          includePaths: [
+            path.resolve(__dirname, './node_modules/normalize-scss/sass'),
+            path.resolve(__dirname, './node_modules/support-for/sass'),
+            path.resolve(__dirname, './client/sass')
+          ]
+        }
+      }]
     }]
   }
 };
