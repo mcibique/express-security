@@ -60,6 +60,7 @@
     "spdy": "4.0.0",
     "static-asset": "0.6.0",
     "url": "0.11.0",
+    "url-join": "4.0.0",
     "winston": "3.2.1",
     "winston-transport": "4.3.0"
   },

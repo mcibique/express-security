@@ -1,5 +1,5 @@
 import { IS_DEBUG } from 'config';
-import url from 'url';
+import urlJoin from 'url-join';
 
 export function viewLocals(req, res, next) {
   if (req.session) {
@@ -17,7 +17,7 @@ export function viewLocals(req, res, next) {
 export function assetLocals(req, res, next) {
   // assets fingerprint
   if (res.locals.assetFingerprint) {
-    res.locals.asset = path => url.resolve('/assets/', res.locals.assetFingerprint(path));
+    res.locals.asset = path => urlJoin('/assets/', res.locals.assetFingerprint(path) || '');
   } else {
     res.locals.asset = path => path;
   }

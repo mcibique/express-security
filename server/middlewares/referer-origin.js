@@ -1,7 +1,7 @@
 import { normalizePort, SERVER_PORT as PORT } from 'helpers/port';
 import config from 'config';
 import { Forbidden } from 'http-errors';
-import url from 'url';
+import { Url } from 'url';
 
 export default function (req, res, next) {
   if ([ 'GET', 'HEAD', 'OPTIONS' ].includes(req.method)) {
@@ -21,7 +21,7 @@ export default function (req, res, next) {
 }
 
 function isValidIdentifier(identifier) {
-  let identifierParsed = url.parse(identifier);
+  let identifierParsed = new Url(identifier);
   return identifierParsed.protocol === 'https:' &&
     identifierParsed.hostname === config.domain &&
     normalizePort(identifierParsed.port) === PORT;

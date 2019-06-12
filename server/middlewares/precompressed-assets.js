@@ -3,7 +3,6 @@ import find from 'find';
 import logger from 'logger';
 import mime from 'mime-types';
 import path from 'path';
-import url from 'url';
 
 let precompressedBrotliEnabled = config.compression.precompressedAssets.brotli;
 let precompressedGzipEnabled = config.compression.precompressedAssets.gzip;
@@ -29,7 +28,7 @@ export default function precompressedAssets(publicFolder) {
     let encoding = canUseBrotli ? 'br' : 'gzip';
     let name = {};
 
-    name.orig = url.parse(req.url).pathname.replace('/assets/', '/');
+    name.orig = req.url.replace('/assets/', '/');
     if (!name.orig.match(/\.(html|js|css|svg)$/)) {
       logger.debug(`Skipping ${req.url}. Reason: regex doesn't match.`);
       return next();
