@@ -45,7 +45,6 @@ My nodejs + express security and performance playground (boilerplate).
 1. npm scripts (npm-run-all, cross-env, client tasks, server tasks)
 1. http://realfavicongenerator.net/
 1. Pug view engine
-1. nsp and snyk
 
 ## How to run
 
