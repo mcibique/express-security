@@ -44,7 +44,7 @@
     "find": "0.3.0",
     "helmet": "3.18.0",
     "http-errors": "1.7.2",
-    "jquery": "3.4.1",
+    "jquery": "3.5.0",
     "mime-types": "2.1.24",
     "moment": "2.24.0",
     "morgan": "1.9.1",
