@@ -51,7 +51,7 @@
     "ms": "2.1.2",
     "node-uuid": "1.4.8",
     "normalize-scss": "7.0.1",
-    "pug": "2.0.3",
+    "pug": "3.0.1",
     "rate-limit-redis": "1.6.0",
     "serve-favicon": "2.5.0",
     "socket.io": "2.2.0",
