@@ -46,7 +46,7 @@
     "http-errors": "1.7.2",
     "jquery": "3.4.1",
     "mime-types": "2.1.24",
-    "moment": "2.24.0",
+    "moment": "2.29.4",
     "morgan": "1.9.1",
     "ms": "2.1.2",
     "node-uuid": "1.4.8",
